@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>ストーリー漫画制作 ヒアリングノート</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FBF6F1;
+    --card: #FFFFFF;
+    --ink: #5C5049;
+    --ink-soft: #99897F;
+    --pink: #E5A9B8;
+    --pink-deep: #C97A90;
+    --lavender: #B9A7D8;
+    --cream: #F6E8D8;
+    --mint: #BCD9C8;
+    --line: #EEDFD3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", sans-serif;
+    line-height: 1.8;
+    font-size: 16px;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 16px 80px; }
+
+  /* ヘッダー */
+  .hero {
+    position: relative;
+    border-radius: 0 0 24px 24px;
+    overflow: hidden;
+    margin: 0 -16px;
+  }
+  .hero img {
+    width: 100%; display: block;
+    /* 画像端の机の写り込みを軽くトリミング */
+    transform: scale(1.06);
+  }
+  .hero .title {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 0 24px;
+  }
+  .hero h1 {
+    margin: 0; font-size: clamp(19px, 5vw, 30px); font-weight: 700;
+    color: var(--pink-deep); letter-spacing: 0.08em;
+    text-shadow: 0 1px 8px rgba(255,255,255,0.9), 0 0 24px rgba(255,255,255,0.9);
+  }
+  .hero p {
+    margin: 4px 0 0; font-size: clamp(11px, 3vw, 14px); color: var(--ink-soft);
+    text-shadow: 0 1px 6px rgba(255,255,255,0.95);
+  }
+
+  /* はじめに */
+  .intro {
+    background: var(--cream); border-radius: 16px; padding: 20px 22px; margin: 24px 0;
+    font-size: 14.5px;
+  }
+  .intro ul { margin: 8px 0 0; padding-left: 20px; }
+  .intro li { margin: 4px 0; }
+
+  /* セクションカード */
+  .card {
+    background: var(--card); border-radius: 18px; padding: 24px 22px 26px;
+    margin: 22px 0; box-shadow: 0 2px 12px rgba(160,120,100,0.08);
+    border: 1px solid var(--line);
+  }
+  .sec-head { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+  .sec-head img {
+    width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: center;
+    background: #fff; border: 2px solid var(--line); flex-shrink: 0;
+  }
+  .sec-head h2 { margin: 0; font-size: 18px; color: var(--pink-deep); letter-spacing: 0.04em; }
+  .sec-note { font-size: 13.5px; color: var(--ink-soft); margin: 0 0 14px; }
+
+  /* 入力欄 */
+  label.q { display: block; font-weight: 700; font-size: 15px; margin: 18px 0 6px; }
+  label.q .hint { font-weight: 400; font-size: 12.5px; color: var(--ink-soft); display: block; }
+  input[type="text"], textarea {
+    width: 100%; border: 1.5px solid var(--line); border-radius: 12px;
+    padding: 10px 14px; font: inherit; font-size: 15px; color: var(--ink);
+    background: #FFFDFB; outline: none;
+  }
+  input[type="text"]:focus, textarea:focus { border-color: var(--pink); }
+  textarea { min-height: 110px; resize: vertical; }
+  textarea.tall { min-height: 150px; }
+
+  /* 選択肢 */
+  .opts { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+  .opts label {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: #FFFDFB; border: 1.5px solid var(--line); border-radius: 12px;
+    padding: 10px 14px; cursor: pointer; font-size: 14.5px;
+  }
+  .opts label:has(:checked) { border-color: var(--pink); background: #FDF3F5; }
+  .opts input { margin-top: 5px; accent-color: var(--pink-deep); flex-shrink: 0; }
+  .opts .desc { font-size: 12.5px; color: var(--ink-soft); display: block; }
+
+  .photo-note {
+    background: #F5F0FA; border-radius: 12px; padding: 12px 16px;
+    font-size: 13.5px; margin-top: 14px; color: var(--ink);
+  }
+  .photo-note strong { color: #8A72B5; }
+
+  /* 保存表示・送信 */
+  .savebar {
+    position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
+    background: rgba(255,255,255,0.95); border: 1px solid var(--line);
+    border-radius: 999px; padding: 6px 18px; font-size: 12.5px; color: var(--ink-soft);
+    box-shadow: 0 2px 10px rgba(160,120,100,0.12); white-space: nowrap;
+  }
+  .finish { text-align: center; }
+  .finish img { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 2px solid var(--line); }
+  .btn {
+    display: inline-block; border: none; cursor: pointer; font: inherit; font-weight: 700;
+    background: var(--pink-deep); color: #fff; border-radius: 999px;
+    padding: 14px 36px; font-size: 16px; margin-top: 14px;
+    box-shadow: 0 3px 10px rgba(201,122,144,0.35);
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn.sub { background: #fff; color: var(--ink-soft); border: 1.5px solid var(--line); box-shadow: none; font-weight: 400; font-size: 13px; padding: 8px 20px; }
+  #copied { display: none; color: var(--pink-deep); font-weight: 700; margin-top: 10px; }
+  #output {
+    display: none; width: 100%; min-height: 200px; margin-top: 14px;
+    border: 1.5px solid var(--line); border-radius: 12px; padding: 12px; font-size: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <img src="decor/header.png" alt="">
+    <div class="title">
+      <h1>ヒアリングノート</h1>
+      <p>あなたの物語を、漫画にするために</p>
+    </div>
+  </div>
+
+  <div class="intro">
+    このノートは、あなたの物語を漫画にするための材料集めです。
+    <ul>
+      <li><strong>完璧な文章でなくて大丈夫です。</strong>箇条書き・話し言葉、大歓迎です</li>
+      <li>全部で <strong>30〜60分</strong> ほど。何日かに分けて書いてもOKです（このページは自動で下書き保存されます。<strong>同じスマホ・パソコンで開けば続きから書けます</strong>）</li>
+      <li>迷った質問は「おまかせ」と書いてください。こちらで良い形にします</li>
+      <li>ここに書かれた内容は漫画制作以外には使いません。公開前に必ずご確認いただきます</li>
+    </ul>
+  </div>
+
+  <form id="f">
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="sec-head"><img src="decor/sec1.png" alt=""><h2>1. あなたとお仕事のこと</h2></div>
+    <label class="q">お名前（漫画に載せる表記）<input type="text" name="name"></label>
+    <label class="q">肩書き<span class="hint">例: ファミリーづくり実践コーチ</span><input type="text" name="title"></label>
+    <label class="q">サービス内容<span class="hint">どんな人の、どんな悩みを解決していますか？</span><textarea name="service"></textarea></label>
+    <label class="q">Instagramアカウント名<input type="text" name="insta"></label>
+    <label class="q">この漫画を見た人に、どうなってほしいですか？（1つ選択）</label>
+    <div class="opts">
+      <label><input type="radio" name="goal" value="認知">まず自分のことを知ってほしい（認知）</label>
+      <label><input type="radio" name="goal" value="共感">「わかる…」と共感してファンになってほしい</label>
+      <label><input type="radio" name="goal" value="CTA">プロフィールのリンクから問い合わせ・登録してほしい</label>
+      <label><input type="radio" name="goal" value="おまかせ">おまかせ</label>
+    </div>
+    <label class="q">漫画はどこに載せる予定ですか？（あてはまるもの全部）</label>
+    <div class="opts">
+      <label><input type="checkbox" name="place" value="フィード">Instagramフィード投稿</label>
+      <label><input type="checkbox" name="place" value="ストーリーズ">Instagramストーリーズ・ハイライト</label>
+      <label><input type="checkbox" name="place" value="広告">Instagram広告として配信するかも</label>
+      <label><input type="checkbox" name="place" value="他媒体">note・ブログ・ホームページなど他の場所にも載せたい</label>
+      <label><input type="checkbox" name="place" value="未定">未定・おまかせ</label>
+    </div>
+    <label class="q">「他の場所」を選んだ方は、その場所を教えてください<input type="text" name="place_other"></label>
+    <p class="sec-note" style="margin-top:10px">※基本のお渡しはInstagram用サイズです。他の媒体向けのサイズ調整はご相談ください</p>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="sec-head"><img src="decor/sec2.png" alt=""><h2>2. 人生の振り返り</h2></div>
+    <p class="sec-note">各時期について、思い出せる範囲で。<strong>カッコ内の質問に全部答えなくてOK</strong>、書きやすいところだけで大丈夫です。</p>
+    <label class="q">幼少期<span class="hint">どんな子どもでしたか？ 家はどんな雰囲気でしたか？ 親や先生によく言われた言葉は？</span><textarea class="tall" name="life_child"></textarea></label>
+    <label class="q">学生時代<span class="hint">夢中になったこと・我慢したことは？ 進路はどう決めましたか？</span><textarea class="tall" name="life_student"></textarea></label>
+    <label class="q">社会人になってから<span class="hint">最初の仕事は？ うまくいったこと・すり減ったことは？</span><textarea class="tall" name="life_work"></textarea></label>
+    <label class="q">転機<span class="hint">今の仕事につながる「きっかけの出来事」は？ 何歳ごろ、どんな状況でしたか？</span><textarea class="tall" name="life_turning"></textarea></label>
+    <label class="q">現在<span class="hint">今の仕事のどんな瞬間が好きですか？ どんなお客様に喜ばれていますか？</span><textarea class="tall" name="life_now"></textarea></label>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="sec-head"><img src="decor/sec3.png" alt=""><h2>3. 心が動いた場面</h2></div>
+    <p class="sec-note">漫画の山場になります。それぞれ<strong>1つの場面</strong>を、「いつ・どこで・誰が・何と言ったか」まで思い出せる範囲で。</p>
+    <label class="q">一番つらかった・悔しかった瞬間<textarea name="scene_hard"></textarea></label>
+    <label class="q">今も忘れられない、誰かの一言<span class="hint">良いものでも痛いものでも</span><textarea name="scene_words"></textarea></label>
+    <label class="q">「これだ」「やりたい」と気づいた瞬間<textarea name="scene_aha"></textarea></label>
+    <label class="q">今の仕事をしていて、一番嬉しかった瞬間<textarea name="scene_joy"></textarea></label>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="sec-head"><img src="decor/sec4.png" alt=""><h2>4. 漫画に入れたいこと・入れたくないこと</h2></div>
+    <label class="q">必ず描いてほしい場面・エピソード ①<input type="text" name="must1"></label>
+    <label class="q">② <span class="hint">（あれば）</span><input type="text" name="must2"></label>
+    <label class="q">③ <span class="hint">（あれば）</span><input type="text" name="must3"></label>
+    <label class="q">触れてほしくない話題があれば教えてください<span class="hint">家族のこと、病気のこと、前職のことなど。遠慮なくどうぞ</span><textarea name="ng"></textarea></label>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="sec-head"><img src="decor/sec5.png" alt=""><h2>5. 見た目・絵柄について</h2></div>
+    <label class="q">絵柄は、サンプル3種からお選びください（1つ選択）<span class="hint">サンプル画像は別途お送りしています</span></label>
+    <div class="opts">
+      <label><input type="radio" name="style" value="A">A: ゆるふわ・ほんわかエッセイ調<span class="desc">やわらかい線のデフォルメキャラ。親しみ・共感を大切にしたい方に（エッセイ漫画で一番人気の系統です）</span></label>
+      <label><input type="radio" name="style" value="B">B: 大人かわいい少女漫画風<span class="desc">細めの線とやさしい色合い。きれい・憧れの雰囲気を出したい方に</span></label>
+      <label><input type="radio" name="style" value="C">C: シンプル・ポップなカラー漫画調<span class="desc">はっきりした線と明るい色。どなたにも読みやすい王道スタイル</span></label>
+      <label><input type="radio" name="style" value="おまかせ">おまかせ</label>
+    </div>
+    <label class="q">好きな漫画・漫画家があれば（任意）<span class="hint">コマ割りや雰囲気づくりの参考にします。「少女漫画で育った」「ジャンプ派」くらいでもOKです</span><input type="text" name="fav_manga"></label>
+    <label class="q">髪型・髪色<input type="text" name="hair"></label>
+    <label class="q">普段の服装の雰囲気<span class="hint">例: 白シャツ＋パンツ、ワンピース</span><input type="text" name="fashion"></label>
+    <label class="q">メガネ・アクセサリーなど特徴<input type="text" name="accessory"></label>
+    <label class="q">顔の再現度はどうしますか？（1つ選択）</label>
+    <div class="opts">
+      <label><input type="radio" name="face" value="寄せる">本人に寄せてほしい（お写真を1〜2枚、下記の方法でお送りください）</label>
+      <label><input type="radio" name="face" value="雰囲気">雰囲気が合っていれば似ていなくてよい</label>
+      <label><input type="radio" name="face" value="おまかせ">おまかせ</label>
+    </div>
+    <div class="photo-note">
+      <strong>お写真について:</strong> このフォームには写真を添付できません。顔写真・よく着る服の写真（任意・2〜3枚）は、<strong>LINEまたはメールで別途お送りください</strong>。普段の雰囲気がわかるもので、スマホの自撮りで十分です。場面ごとに服装を変えて描くので、普段の服装がわかると仕上がりがぐっとあなたらしくなります。
+    </div>
+    <label class="q">お写真を送っていただく場合の確認</label>
+    <div class="opts">
+      <label><input type="checkbox" name="photo_consent" value="同意">送った写真を、漫画キャラクター作成の参考としてAIツールに読み込ませることに同意します（写真そのものが漫画に載ることはありません。イラスト化のための参照のみに使います）</label>
+    </div>
+    <label class="q">納品後の写真の扱い（1つ選択）</label>
+    <div class="opts">
+      <label><input type="radio" name="photo_after" value="削除">削除してほしい</label>
+      <label><input type="radio" name="photo_after" value="保管">次回制作に備えて保管OK</label>
+    </div>
+  </div>
+
+  <!-- 5-2 -->
+  <div class="card">
+    <div class="sec-head"><img src="decor/sec52.png" alt=""><h2>5-2. あなた以外の登場人物</h2></div>
+    <p class="sec-note">物語に登場しそうな方（ご家族、恩師、お客様など）がいれば教えてください（3人まで）。</p>
+    <label class="q">1人目: 呼び名・あなたとの関係<span class="hint">例: 夫、双子の弟</span><input type="text" name="chara1_rel"></label>
+    <label class="q">1人目: 特徴<span class="hint">年齢感・髪型・雰囲気</span><input type="text" name="chara1_desc"></label>
+    <label class="q">2人目: 呼び名・関係<input type="text" name="chara2_rel"></label>
+    <label class="q">2人目: 特徴<input type="text" name="chara2_desc"></label>
+    <label class="q">3人目: 呼び名・関係<input type="text" name="chara3_rel"></label>
+    <label class="q">3人目: 特徴<input type="text" name="chara3_desc"></label>
+    <label class="q">その方たちの描き方（1つ選択）</label>
+    <div class="opts">
+      <label><input type="radio" name="chara_how" value="おまかせ">おまかせでイラスト化してほしい（特徴の文章だけでこちらでお作りします。これまでの作品もこの方式です）</label>
+      <label><input type="radio" name="chara_how" value="写真">写真を参考にしてほしい（必ずご本人の了承を得た写真のみ、LINE等で別送してください）</label>
+    </div>
+    <p class="sec-note" style="margin-top:10px">※お子さんは、写真がなくても特徴の文章だけで十分かわいく描けます<br>※物語上必要な人物（例: お医者さん、当時の上司）は、こちらの判断で創作キャラとして登場させることがあります</p>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="sec-head"><img src="decor/sec6.png" alt=""><h2>6. 仕上げについて</h2></div>
+    <label class="q">漫画の最後に入れる誘導文<span class="hint">例:「詳しくはプロフィールのリンクから」。希望があれば</span><input type="text" name="cta"></label>
+    <label class="q">公開したい時期・期日があれば<input type="text" name="deadline"></label>
+    <label class="q">修正の進め方の確認</label>
+    <div class="opts">
+      <label><input type="checkbox" name="kakunin" value="確認済み">あらすじ・構成の段階でしっかり確認し、完成ページの修正は2ラウンドまで（1ラウンド内は全ページ・何箇所でもOK）、納品後の文字の微修正は自分でできる — を確認しました</label>
+    </div>
+  </div>
+
+  <!-- 送信 -->
+  <div class="card finish">
+    <img src="decor/sec6.png" alt="">
+    <h2 style="color:var(--pink-deep); margin:12px 0 4px">ご記入ありがとうございました！</h2>
+    <p style="font-size:14px; margin:0">下のボタンで回答をコピーして、<strong>LINEまたはメールに貼り付けて送信</strong>してください。<br>内容を拝見して、確認したいことが出てきた場合のみ、2〜3個の質問をお送りすることがあります。</p>
+    <button type="button" class="btn" id="copyBtn">回答をコピーする</button>
+    <div id="copied">コピーしました！ そのままLINE・メールに貼り付けて送ってください</div>
+    <textarea id="output" readonly></textarea>
+    <div style="margin-top:18px"><button type="button" class="btn sub" id="clearBtn">下書きを消して最初からやり直す</button></div>
+  </div>
+
+  </form>
+</div>
+
+<div class="savebar" id="savebar">自動保存はまだありません</div>
+
+<script>
+(function () {
+  var KEY = "hearing-draft-v1";
+  var form = document.getElementById("f");
+  var savebar = document.getElementById("savebar");
+
+  function collect() {
+    var data = {};
+    form.querySelectorAll("input, textarea").forEach(function (el) {
+      if (!el.name) return;
+      if (el.type === "radio") { if (el.checked) data[el.name] = el.value; }
+      else if (el.type === "checkbox") {
+        if (!data[el.name]) data[el.name] = [];
+        if (el.checked) data[el.name].push(el.value);
+      } else { data[el.name] = el.value; }
+    });
+    return data;
+  }
+
+  function save() {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(collect()));
+      var t = new Date();
+      savebar.textContent = "下書きを自動保存しました（" + t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0") + "）";
+    } catch (e) { savebar.textContent = "自動保存できませんでした"; }
+  }
+
+  function restore() {
+    var raw = localStorage.getItem(KEY);
+    if (!raw) return;
+    try {
+      var data = JSON.parse(raw);
+      form.querySelectorAll("input, textarea").forEach(function (el) {
+        if (!el.name || !(el.name in data)) return;
+        if (el.type === "radio") el.checked = (data[el.name] === el.value);
+        else if (el.type === "checkbox") el.checked = (data[el.name] || []).indexOf(el.value) >= 0;
+        else el.value = data[el.name];
+      });
+      savebar.textContent = "前回の下書きを読み込みました";
+    } catch (e) {}
+  }
+
+  var timer = null;
+  form.addEventListener("input", function () {
+    clearTimeout(timer);
+    timer = setTimeout(save, 600);
+  });
+
+  // 回答テキスト生成
+  var LABELS = [
+    ["■ 1. あなたとお仕事のこと", null],
+    ["お名前（漫画に載せる表記）", "name"], ["肩書き", "title"], ["サービス内容", "service"],
+    ["Instagramアカウント名", "insta"], ["漫画を見た人にどうなってほしいか", "goal"],
+    ["掲載先", "place"], ["他媒体の場所", "place_other"],
+    ["■ 2. 人生の振り返り", null],
+    ["幼少期", "life_child"], ["学生時代", "life_student"], ["社会人になってから", "life_work"],
+    ["転機", "life_turning"], ["現在", "life_now"],
+    ["■ 3. 心が動いた場面", null],
+    ["一番つらかった・悔しかった瞬間", "scene_hard"], ["忘れられない誰かの一言", "scene_words"],
+    ["「これだ」と気づいた瞬間", "scene_aha"], ["一番嬉しかった瞬間", "scene_joy"],
+    ["■ 4. 入れたいこと・入れたくないこと", null],
+    ["必ず描いてほしい場面①", "must1"], ["必ず描いてほしい場面②", "must2"], ["必ず描いてほしい場面③", "must3"],
+    ["触れてほしくない話題", "ng"],
+    ["■ 5. 見た目・絵柄", null],
+    ["絵柄", "style"], ["好きな漫画・漫画家", "fav_manga"], ["髪型・髪色", "hair"], ["普段の服装", "fashion"], ["特徴（メガネ等）", "accessory"],
+    ["顔の再現度", "face"], ["写真のAI参照同意", "photo_consent"], ["納品後の写真の扱い", "photo_after"],
+    ["■ 5-2. あなた以外の登場人物", null],
+    ["1人目 関係", "chara1_rel"], ["1人目 特徴", "chara1_desc"],
+    ["2人目 関係", "chara2_rel"], ["2人目 特徴", "chara2_desc"],
+    ["3人目 関係", "chara3_rel"], ["3人目 特徴", "chara3_desc"],
+    ["登場人物の描き方", "chara_how"],
+    ["■ 6. 仕上げについて", null],
+    ["誘導文の希望", "cta"], ["公開したい時期", "deadline"], ["修正の進め方", "kakunin"]
+  ];
+
+  function buildText() {
+    var data = collect();
+    var lines = ["【ストーリー漫画 ヒアリングノート回答】", ""];
+    LABELS.forEach(function (row) {
+      var label = row[0], key = row[1];
+      if (!key) { lines.push("", label); return; }
+      var v = data[key];
+      if (Array.isArray(v)) v = v.join("、");
+      if (!v) v = "（未記入）";
+      if (String(v).indexOf("\n") >= 0) lines.push("・" + label + ":", v);
+      else lines.push("・" + label + ": " + v);
+    });
+    return lines.join("\n");
+  }
+
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    save();
+    var text = buildText();
+    var done = function () { document.getElementById("copied").style.display = "block"; };
+    var fallback = function () {
+      var out = document.getElementById("output");
+      out.style.display = "block"; out.value = text; out.select();
+      try { document.execCommand("copy"); done(); } catch (e) {}
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else { fallback(); }
+  });
+
+  document.getElementById("clearBtn").addEventListener("click", function () {
+    if (!confirm("下書きをすべて消します。よろしいですか？")) return;
+    localStorage.removeItem(KEY);
+    form.reset();
+    savebar.textContent = "下書きを消しました";
+    window.scrollTo(0, 0);
+  });
+
+  restore();
+})();
+</script>
+</body>
+</html>
