@@ -81,6 +81,16 @@
   .sec-head h2 { margin: 0; font-size: 18px; color: var(--pink-deep); letter-spacing: 0.04em; }
   .sec-note { font-size: 13.5px; color: var(--ink-soft); margin: 0 0 14px; }
 
+  /* 「→ 漫画のどこに使うか」 */
+  .why {
+    display: block; font-size: 12.5px; font-weight: 400; color: var(--pink-deep);
+    margin: 2px 0 0;
+  }
+
+  /* §3の小見出し */
+  .q3-head { font-weight: 700; font-size: 16px; color: var(--pink-deep); margin: 22px 0 0; }
+  .q3-head .why { margin-top: 0; }
+
   /* 入力欄 */
   label.q { display: block; font-weight: 700; font-size: 15px; margin: 18px 0 6px; }
   label.q .hint { font-weight: 400; font-size: 12.5px; color: var(--ink-soft); display: block; }
@@ -92,6 +102,7 @@
   input[type="text"]:focus, textarea:focus { border-color: var(--pink); }
   textarea { min-height: 110px; resize: vertical; }
   textarea.tall { min-height: 150px; }
+  textarea.short { min-height: 76px; }
 
   /* 選択肢 */
   .opts { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
@@ -109,6 +120,11 @@
     font-size: 13.5px; margin-top: 14px; color: var(--ink);
   }
   .photo-note strong { color: #8A72B5; }
+
+  .soft-note {
+    background: #F2F7F3; border-radius: 12px; padding: 10px 16px;
+    font-size: 13px; margin: 10px 0 0; color: var(--ink);
+  }
 
   /* 保存表示・送信 */
   .savebar {
@@ -146,29 +162,42 @@
   </div>
 
   <div class="intro">
-    このノートは、あなたの物語を漫画にするための材料集めです。
+    <strong>このノートは、あなたの「これまで」を1本のストーリー漫画にするための材料集めです。</strong><br>
+    仕上がりのイメージは、別途お送りしたサンプル漫画（2作品）をご覧ください——あなたの回答が、こういう物語になります。
     <ul>
-      <li><strong>完璧な文章でなくて大丈夫です。</strong>箇条書き・話し言葉、大歓迎です</li>
-      <li>全部で <strong>30〜60分</strong> ほど。何日かに分けて書いてもOKです（このページは自動で下書き保存されます。<strong>同じスマホ・パソコンで開けば続きから書けます</strong>）</li>
-      <li>迷った質問は「おまかせ」と書いてください。こちらで良い形にします</li>
+      <li><strong>全部の質問に答えなくて大丈夫です。</strong>拝見したあと、足りないところだけこちらからLINEで2〜3個質問してお伺いします</li>
+      <li>完璧な文章でなくてOK。箇条書き・話し言葉、大歓迎です</li>
+      <li>各質問には「→ 漫画のどこに使うか」を添えてあります。迷ったら『おまかせ』と書いて飛ばしてください</li>
+      <li>目安は <strong>1日15分×2〜3日</strong>。一気に書かなくて大丈夫です（このページは自動で下書き保存されます。<strong>同じスマホ・パソコンで開けば続きから書けます</strong>）</li>
       <li>ここに書かれた内容は漫画制作以外には使いません。公開前に必ずご確認いただきます</li>
     </ul>
   </div>
 
   <form id="f">
 
-  <!-- 1 -->
+  <!-- 1 完成形のイメージ -->
   <div class="card">
-    <div class="sec-head"><img src="decor/sec1.png" alt=""><h2>1. あなたとお仕事のこと</h2></div>
-    <label class="q">お名前（漫画に載せる表記）<input type="text" name="name"></label>
-    <label class="q">肩書き<span class="hint">例: ファミリーづくり実践コーチ</span><input type="text" name="title"></label>
-    <label class="q">サービス内容<span class="hint">どんな人の、どんな悩みを解決していますか？</span><textarea name="service"></textarea></label>
-    <label class="q">Instagramアカウント名<input type="text" name="insta"></label>
-    <label class="q">この漫画を見た人に、どうなってほしいですか？（1つ選択）</label>
+    <div class="sec-head"><img src="decor/sec1.png" alt=""><h2>1. まず、完成形のイメージから</h2></div>
+    <p class="sec-note">ここでは「どんな漫画にしたいか」のゴールを先に決めます。<strong>このあとの質問はすべて、ここで決めた完成形を作るための材料集めです。</strong></p>
+    <label class="q">サンプル2作品のうち、「こうなってほしい」に近いのはどちらですか？<span class="hint">サンプル漫画は別途お送りしています</span></label>
     <div class="opts">
-      <label><input type="radio" name="goal" value="認知">まず自分のことを知ってほしい（認知）</label>
+      <label><input type="radio" name="sample_pref" value="A">サンプルA</label>
+      <label><input type="radio" name="sample_pref" value="B">サンプルB</label>
+      <label><input type="radio" name="sample_pref" value="どちらとも違う">どちらとも違う</label>
+    </div>
+    <label class="q">「どちらとも違う」方は、ひとことでどうぞ<input type="text" name="sample_pref_note"></label>
+    <label class="q">漫画全体の雰囲気（1つ選択）<span class="why">→ 脚本のトーンを決める基準になります</span></label>
+    <div class="opts">
+      <label><input type="radio" name="tone" value="感動系">泣ける・感動系</label>
+      <label><input type="radio" name="tone" value="共感系">「わかる…」の共感系</label>
+      <label><input type="radio" name="tone" value="前向き系">明るく前向き系</label>
+      <label><input type="radio" name="tone" value="おまかせ">おまかせ</label>
+    </div>
+    <label class="q">この漫画を見た人に、どうなってほしいですか？（1つ選択）<span class="why">→ 物語のラストの着地点を決めます</span></label>
+    <div class="opts">
+      <label><input type="radio" name="goal" value="知ってほしい">まず自分のことを知ってほしい</label>
       <label><input type="radio" name="goal" value="共感">「わかる…」と共感してファンになってほしい</label>
-      <label><input type="radio" name="goal" value="CTA">プロフィールのリンクから問い合わせ・登録してほしい</label>
+      <label><input type="radio" name="goal" value="問い合わせ">プロフィールのリンクから問い合わせ・登録してほしい</label>
       <label><input type="radio" name="goal" value="おまかせ">おまかせ</label>
     </div>
     <label class="q">漫画はどこに載せる予定ですか？（あてはまるもの全部）</label>
@@ -181,33 +210,47 @@
     </div>
     <label class="q">「他の場所」を選んだ方は、その場所を教えてください<input type="text" name="place_other"></label>
     <p class="sec-note" style="margin-top:10px">※基本のお渡しはInstagram用サイズです。他の媒体向けのサイズ調整はご相談ください</p>
+    <label class="q">参考にしたい漫画・好きな漫画家があれば（任意）<span class="hint">「少女漫画で育った」「ジャンプ派」くらいでもOKです</span><span class="why">→ 世界観とコマ割りの参考にします</span><input type="text" name="fav_manga"></label>
   </div>
 
-  <!-- 2 -->
+  <!-- 2 お仕事のこと -->
   <div class="card">
-    <div class="sec-head"><img src="decor/sec2.png" alt=""><h2>2. 人生の振り返り</h2></div>
-    <p class="sec-note">各時期について、思い出せる範囲で。<strong>カッコ内の質問に全部答えなくてOK</strong>、書きやすいところだけで大丈夫です。</p>
-    <label class="q">幼少期<span class="hint">どんな子どもでしたか？ 家はどんな雰囲気でしたか？ 親や先生によく言われた言葉は？</span><textarea class="tall" name="life_child"></textarea></label>
-    <label class="q">学生時代<span class="hint">夢中になったこと・我慢したことは？ 進路はどう決めましたか？</span><textarea class="tall" name="life_student"></textarea></label>
-    <label class="q">社会人になってから<span class="hint">最初の仕事は？ うまくいったこと・すり減ったことは？</span><textarea class="tall" name="life_work"></textarea></label>
-    <label class="q">転機<span class="hint">今の仕事につながる「きっかけの出来事」は？ 何歳ごろ、どんな状況でしたか？</span><textarea class="tall" name="life_turning"></textarea></label>
-    <label class="q">現在<span class="hint">今の仕事のどんな瞬間が好きですか？ どんなお客様に喜ばれていますか？</span><textarea class="tall" name="life_now"></textarea></label>
+    <div class="sec-head"><img src="decor/sec2.png" alt=""><h2>2. あなたとお仕事のこと</h2></div>
+    <p class="sec-note"><strong>ここは「お仕事」の話です。</strong>漫画のラストシーン（今のあなた）と、読者への誘導の材料になります。</p>
+    <label class="q">お名前（漫画に載せる表記）<input type="text" name="name"></label>
+    <label class="q">肩書き<span class="hint">例: ファミリーづくり実践コーチ</span><span class="why">→ ラストで「今のあなた」を紹介するコマに使います</span><input type="text" name="title"></label>
+    <label class="q">サービス内容はどんなお仕事ですか？<span class="hint">例: 忙しい経営者の「事務作業に手が回らない」悩みを解決するオンライン秘書</span><textarea class="short" name="service"></textarea></label>
+    <label class="q">あなたのお客様は、あなたに出会う前、どんなことに困っていますか？<span class="hint">例: 発信をがんばっているのに問い合わせが来ない</span><span class="why">→ 読者が「これ私だ」と自分を重ねる冒頭シーンの材料になります</span><textarea class="short" name="customer_pain"></textarea></label>
+    <label class="q">Instagramアカウント名<input type="text" name="insta"></label>
   </div>
 
-  <!-- 3 -->
+  <!-- 3 あなたの物語 -->
   <div class="card">
-    <div class="sec-head"><img src="decor/sec3.png" alt=""><h2>3. 心が動いた場面</h2></div>
-    <p class="sec-note">漫画の山場になります。それぞれ<strong>1つの場面</strong>を、「いつ・どこで・誰が・何と言ったか」まで思い出せる範囲で。</p>
-    <label class="q">一番つらかった・悔しかった瞬間<textarea name="scene_hard"></textarea></label>
-    <label class="q">今も忘れられない、誰かの一言<span class="hint">良いものでも痛いものでも</span><textarea name="scene_words"></textarea></label>
-    <label class="q">「これだ」「やりたい」と気づいた瞬間<textarea name="scene_aha"></textarea></label>
-    <label class="q">今の仕事をしていて、一番嬉しかった瞬間<textarea name="scene_joy"></textarea></label>
+    <div class="sec-head"><img src="decor/sec3.png" alt=""><h2>3. あなたの物語</h2></div>
+    <p class="sec-note"><strong>ここからは「人生」の話です。</strong>年表のように全部書く必要はありません。漫画の背骨になる<strong>3つの場面だけ</strong>伺います。1つの欄に1〜2行ずつで大丈夫です。</p>
+
+    <p class="q3-head">① 転機になった出来事<span class="why">→ 漫画のいちばんの見せ場になります</span></p>
+    <label class="q">今の仕事を始める「きっかけ」になった出来事は何ですか？（1つだけ）<textarea class="short" name="turning_what"></textarea></label>
+    <label class="q">それはいつ頃ですか？<span class="hint">ざっくりでOK。例: 5年前、下の子が生まれた頃</span><input type="text" name="turning_when"></label>
+    <label class="q">そのとき、誰かに言われて覚えている言葉があれば<input type="text" name="turning_words"></label>
+
+    <p class="q3-head">② 転機の前のこと<span class="why">→ 読者が「私も同じだ」と自分を重ねるシーンになります</span></p>
+    <div class="soft-note">つらい話を無理に書く必要はありません。書けるところだけどうぞ。</div>
+    <label class="q">①の出来事の前、悩んでいたこと・うまくいっていなかったことは？<textarea class="short" name="before_pain"></textarea></label>
+    <label class="q">その頃の毎日は、どんな感じでしたか？<span class="hint">例: 仕事と家事に追われて自分の時間ゼロ</span><textarea class="short" name="before_days"></textarea></label>
+    <label class="q">言われてつらかった・悔しかった一言があれば<span class="hint">誰に・何と</span><input type="text" name="before_words"></label>
+
+    <p class="q3-head">③ 今のうれしい瞬間<span class="why">→ ラストシーンの材料になります</span></p>
+    <label class="q">今の仕事をしていて「この仕事にしてよかった」と思った瞬間は？<textarea class="short" name="joy_moment"></textarea></label>
+    <label class="q">お客様に言われてうれしかった言葉があれば<input type="text" name="joy_words"></label>
+
+    <label class="q">（任意）子どもの頃のことで、今のあなたにつながっていそうな思い出があれば<textarea class="short" name="childhood"></textarea></label>
   </div>
 
   <!-- 4 -->
   <div class="card">
     <div class="sec-head"><img src="decor/sec4.png" alt=""><h2>4. 漫画に入れたいこと・入れたくないこと</h2></div>
-    <label class="q">必ず描いてほしい場面・エピソード ①<input type="text" name="must1"></label>
+    <label class="q">必ず描いてほしい場面・エピソード ①<span class="why">→ 構成の優先順位に反映します</span><input type="text" name="must1"></label>
     <label class="q">② <span class="hint">（あれば）</span><input type="text" name="must2"></label>
     <label class="q">③ <span class="hint">（あれば）</span><input type="text" name="must3"></label>
     <label class="q">触れてほしくない話題があれば教えてください<span class="hint">家族のこと、病気のこと、前職のことなど。遠慮なくどうぞ</span><textarea name="ng"></textarea></label>
@@ -216,14 +259,13 @@
   <!-- 5 -->
   <div class="card">
     <div class="sec-head"><img src="decor/sec5.png" alt=""><h2>5. 見た目・絵柄について</h2></div>
-    <label class="q">絵柄は、サンプル3種からお選びください（1つ選択）<span class="hint">サンプル画像は別途お送りしています</span></label>
+    <label class="q">絵柄は、サンプル3種からお選びください（1つ選択）<span class="hint">絵柄サンプル画像は別途お送りしています</span></label>
     <div class="opts">
       <label><input type="radio" name="style" value="A">A: ゆるふわ・ほんわかエッセイ調<span class="desc">やわらかい線のデフォルメキャラ。親しみ・共感を大切にしたい方に（エッセイ漫画で一番人気の系統です）</span></label>
       <label><input type="radio" name="style" value="B">B: 大人かわいい少女漫画風<span class="desc">細めの線とやさしい色合い。きれい・憧れの雰囲気を出したい方に</span></label>
       <label><input type="radio" name="style" value="C">C: シンプル・ポップなカラー漫画調<span class="desc">はっきりした線と明るい色。どなたにも読みやすい王道スタイル</span></label>
       <label><input type="radio" name="style" value="おまかせ">おまかせ</label>
     </div>
-    <label class="q">好きな漫画・漫画家があれば（任意）<span class="hint">コマ割りや雰囲気づくりの参考にします。「少女漫画で育った」「ジャンプ派」くらいでもOKです</span><input type="text" name="fav_manga"></label>
     <label class="q">髪型・髪色<input type="text" name="hair"></label>
     <label class="q">普段の服装の雰囲気<span class="hint">例: 白シャツ＋パンツ、ワンピース</span><input type="text" name="fashion"></label>
     <label class="q">メガネ・アクセサリーなど特徴<input type="text" name="accessory"></label>
@@ -280,7 +322,7 @@
   <div class="card finish">
     <img src="decor/sec6.png" alt="">
     <h2 style="color:var(--pink-deep); margin:12px 0 4px">ご記入ありがとうございました！</h2>
-    <p style="font-size:14px; margin:0">下のボタンで回答をコピーして、<strong>LINEまたはメールに貼り付けて送信</strong>してください。<br>内容を拝見して、確認したいことが出てきた場合のみ、2〜3個の質問をお送りすることがあります。</p>
+    <p style="font-size:14px; margin:0">下のボタンで回答をコピーして、<strong>LINEまたはメールに貼り付けて送信</strong>してください。<br>このあと内容を拝見して、<strong>LINEで2〜3個だけ深掘りの質問</strong>をお送りします。書ききれなかったところは、そこで一緒に埋めていきましょう。</p>
     <button type="button" class="btn" id="copyBtn">回答をコピーする</button>
     <div id="copied">コピーしました！ そのままLINE・メールに貼り付けて送ってください</div>
     <textarea id="output" readonly></textarea>
@@ -294,7 +336,7 @@
 
 <script>
 (function () {
-  var KEY = "hearing-draft-v1";
+  var KEY = "hearing-draft-v2";
   var form = document.getElementById("f");
   var savebar = document.getElementById("savebar");
 
@@ -342,21 +384,23 @@
 
   // 回答テキスト生成
   var LABELS = [
-    ["■ 1. あなたとお仕事のこと", null],
+    ["■ 1. 完成形のイメージ", null],
+    ["近いサンプル", "sample_pref"], ["どちらとも違う場合のひとこと", "sample_pref_note"],
+    ["漫画全体の雰囲気", "tone"], ["漫画を見た人にどうなってほしいか", "goal"],
+    ["掲載先", "place"], ["他媒体の場所", "place_other"], ["参考にしたい漫画・漫画家", "fav_manga"],
+    ["■ 2. あなたとお仕事のこと", null],
     ["お名前（漫画に載せる表記）", "name"], ["肩書き", "title"], ["サービス内容", "service"],
-    ["Instagramアカウント名", "insta"], ["漫画を見た人にどうなってほしいか", "goal"],
-    ["掲載先", "place"], ["他媒体の場所", "place_other"],
-    ["■ 2. 人生の振り返り", null],
-    ["幼少期", "life_child"], ["学生時代", "life_student"], ["社会人になってから", "life_work"],
-    ["転機", "life_turning"], ["現在", "life_now"],
-    ["■ 3. 心が動いた場面", null],
-    ["一番つらかった・悔しかった瞬間", "scene_hard"], ["忘れられない誰かの一言", "scene_words"],
-    ["「これだ」と気づいた瞬間", "scene_aha"], ["一番嬉しかった瞬間", "scene_joy"],
+    ["お客様が出会う前に困っていること", "customer_pain"], ["Instagramアカウント名", "insta"],
+    ["■ 3. あなたの物語", null],
+    ["①転機: きっかけになった出来事", "turning_what"], ["①転機: いつ頃", "turning_when"], ["①転機: 言われた言葉", "turning_words"],
+    ["②転機の前: 悩んでいたこと", "before_pain"], ["②転機の前: その頃の毎日", "before_days"], ["②転機の前: つらかった一言", "before_words"],
+    ["③今: うれしかった瞬間", "joy_moment"], ["③今: お客様に言われた言葉", "joy_words"],
+    ["（任意）子どもの頃の思い出", "childhood"],
     ["■ 4. 入れたいこと・入れたくないこと", null],
     ["必ず描いてほしい場面①", "must1"], ["必ず描いてほしい場面②", "must2"], ["必ず描いてほしい場面③", "must3"],
     ["触れてほしくない話題", "ng"],
     ["■ 5. 見た目・絵柄", null],
-    ["絵柄", "style"], ["好きな漫画・漫画家", "fav_manga"], ["髪型・髪色", "hair"], ["普段の服装", "fashion"], ["特徴（メガネ等）", "accessory"],
+    ["絵柄", "style"], ["髪型・髪色", "hair"], ["普段の服装", "fashion"], ["特徴（メガネ等）", "accessory"],
     ["顔の再現度", "face"], ["写真のAI参照同意", "photo_consent"], ["納品後の写真の扱い", "photo_after"],
     ["■ 5-2. あなた以外の登場人物", null],
     ["1人目 関係", "chara1_rel"], ["1人目 特徴", "chara1_desc"],
