@@ -4,102 +4,190 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
-<title>ストーリー漫画制作 ヒアリングノート</title>
+<script>document.documentElement.classList.add("motion-ready");</script>
+<title>集客用ストーリー漫画｜制作ヒアリング</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@500;700&amp;family=Noto+Sans+JP:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #FBF6F1;
-    --card: #FFFFFF;
-    --ink: #5C5049;
-    --ink-soft: #99897F;
-    --pink: #E5A9B8;
-    --pink-deep: #C97A90;
-    --lavender: #B9A7D8;
-    --cream: #F6E8D8;
-    --mint: #BCD9C8;
-    --line: #EEDFD3;
+    --bg: #F4EFE5;
+    --card: #FFFDF8;
+    --ink: #26343B;
+    --ink-soft: #5F6C70;
+    --accent: #2D7C78;
+    --accent-deep: #185B58;
+    --accent-soft: #DDEDE9;
+    --orange: #C96F45;
+    --mustard: #D7A43B;
+    --navy: #263B46;
+    --sand: #EAE0D1;
+    --line: #CFC5B8;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    background: var(--bg);
+    background-color: var(--bg);
+    background-image: radial-gradient(rgba(38,52,59,0.055) 0.8px, transparent 0.8px);
+    background-size: 10px 10px;
     color: var(--ink);
-    font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", sans-serif;
-    line-height: 1.8;
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+    line-height: 1.75;
     font-size: 16px;
   }
-  .wrap { max-width: 680px; margin: 0 auto; padding: 0 16px 80px; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 16px 96px; }
 
   /* ヘッダー */
   .hero {
     position: relative;
-    border-radius: 0 0 24px 24px;
+    border-radius: 22px;
     overflow: hidden;
-    margin: 0 -16px;
+    margin: 18px 0 0;
+    min-height: 276px;
+    border: 2px solid var(--ink);
+    background: #F7F0E3;
+    box-shadow: 7px 7px 0 rgba(38,52,59,0.14);
   }
-  .hero img {
-    width: 100%; display: block;
-    /* 画像端の机の写り込みを軽くトリミング */
-    transform: scale(1.06);
-  }
+  .hero img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,250,240,0.96) 0%, rgba(255,250,240,0.84) 39%, rgba(255,250,240,0.10) 70%); }
   .hero .title {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    text-align: center; padding: 0 24px;
+    position: relative; z-index: 2; min-height: 276px;
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    text-align: left; padding: 34px 38px; max-width: 520px;
+  }
+  .hero .kicker {
+    margin-bottom: 10px; color: var(--accent-deep); font-size: 11px;
+    font-weight: 700; letter-spacing: 0.12em; background: #FFFDF8;
+    border: 1.5px solid var(--ink); padding: 4px 9px; transform: rotate(-1deg);
   }
   .hero h1 {
-    margin: 0; font-size: clamp(19px, 5vw, 30px); font-weight: 700;
-    color: var(--pink-deep); letter-spacing: 0.08em;
-    text-shadow: 0 1px 8px rgba(255,255,255,0.9), 0 0 24px rgba(255,255,255,0.9);
+    margin: 0; font-family: "Kaisei Decol", serif; font-size: clamp(25px, 5vw, 38px); font-weight: 700;
+    color: var(--navy); letter-spacing: 0.04em; line-height: 1.42;
   }
   .hero p {
-    margin: 4px 0 0; font-size: clamp(11px, 3vw, 14px); color: var(--ink-soft);
-    text-shadow: 0 1px 6px rgba(255,255,255,0.95);
+    margin: 10px 0 0; font-size: clamp(13px, 3vw, 15px); color: var(--ink-soft);
   }
 
   /* はじめに */
   .intro {
-    background: var(--cream); border-radius: 16px; padding: 20px 22px; margin: 24px 0;
+    position: relative; background: #FFFDF8; border-radius: 18px; padding: 22px 24px; margin: 28px 0 24px;
+    border: 2px solid var(--ink); box-shadow: 5px 5px 0 var(--accent-soft);
     font-size: 14.5px;
   }
   .intro ul { margin: 8px 0 0; padding-left: 20px; }
   .intro li { margin: 4px 0; }
+  .intro::before {
+    content: ""; position: absolute; width: 18px; height: 18px; left: 42px; top: -11px;
+    background: #FFFDF8; border-left: 2px solid var(--ink); border-top: 2px solid var(--ink); transform: rotate(45deg);
+  }
+
+  /* 漫画ができるまでの3コマ */
+  .story-flow { display: grid; grid-template-columns: 1fr 24px 1fr 24px 1fr; align-items: center; gap: 7px; margin: 26px 0 8px; }
+  .story-flow .panel { min-height: 82px; display: flex; flex-direction: column; justify-content: center; padding: 13px 14px; background: #FFFDF8; border: 2px solid var(--ink); box-shadow: 4px 4px 0 rgba(38,52,59,0.12); }
+  .story-flow .panel.middle { transform: rotate(-1deg); background: #EFF6F4; }
+  .story-flow .panel.last { transform: rotate(1deg); background: #FFF2E9; }
+  .story-flow .num { color: var(--orange); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
+  .story-flow strong { font-family: "Kaisei Decol", serif; font-size: 14px; color: var(--ink); }
+  .story-flow .arrow { color: var(--ink); text-align: center; font-size: 18px; font-weight: 700; }
+
+  /* 現在位置 */
+  .progress-card {
+    position: sticky; top: 8px; z-index: 10;
+    background: rgba(255,253,248,0.96); border: 1.5px solid var(--ink);
+    border-radius: 14px; padding: 10px 14px; margin: 18px 0 20px;
+    box-shadow: 0 4px 18px rgba(35,62,69,0.09); backdrop-filter: blur(8px);
+  }
+  .progress-meta { display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; color: var(--ink-soft); margin-bottom: 6px; }
+  .progress-meta strong { color: var(--accent-deep); }
+  .progress-track { height: 7px; border-radius: 999px; background: var(--accent-soft); overflow: hidden; }
+  .progress-fill {
+    width: 14.28%; height: 100%; position: relative;
+    background: linear-gradient(90deg, #4C9B95, var(--accent-deep));
+    transition: width .45s cubic-bezier(.2,.8,.2,1);
+  }
+  .progress-fill::after {
+    content: ""; position: absolute; inset: 0; opacity: 0;
+    background: linear-gradient(105deg, transparent 25%, rgba(255,255,255,.72) 48%, transparent 72%);
+    transform: translateX(-100%);
+  }
 
   /* セクションカード */
   .card {
-    background: var(--card); border-radius: 18px; padding: 24px 22px 26px;
-    margin: 22px 0; box-shadow: 0 2px 12px rgba(160,120,100,0.08);
-    border: 1px solid var(--line);
+    position: relative; background: var(--card); border-radius: 14px; padding: 52px 22px 28px;
+    margin: 30px 0; box-shadow: 6px 6px 0 rgba(38,52,59,0.10);
+    border: 2px solid var(--ink);
   }
-  .sec-head { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
-  .sec-head img {
-    width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: center;
-    background: #fff; border: 2px solid var(--line); flex-shrink: 0;
+  .card[data-step]::before {
+    content: "CHAPTER " attr(data-step); position: absolute; top: 14px; left: 20px;
+    color: #fff; background: var(--ink); padding: 3px 10px; font-size: 10px; font-weight: 700;
+    letter-spacing: .12em; transform: rotate(-1deg);
   }
-  .sec-head h2 { margin: 0; font-size: 18px; color: var(--pink-deep); letter-spacing: 0.04em; }
+  .card[data-step]::after {
+    content: ""; position: absolute; width: 78px; height: 42px; right: 12px; top: 10px;
+    background-image: radial-gradient(rgba(38,52,59,.34) 1.2px, transparent 1.2px);
+    background-size: 7px 7px; clip-path: polygon(34% 0, 100% 0, 100% 100%, 0 100%);
+    opacity: .46; pointer-events: none;
+  }
+  .sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .sec-head::before { content: ""; width: 7px; height: 30px; background: var(--orange); transform: skew(-9deg); flex-shrink: 0; }
+  .sec-head img { display: none; }
+  .sec-head h2 { margin: 0; font-family: "Kaisei Decol", serif; font-size: 20px; color: var(--navy); letter-spacing: 0.03em; }
   .sec-note { font-size: 13.5px; color: var(--ink-soft); margin: 0 0 14px; }
 
+  /* 章タイトル・予告文・挿絵を一枚の「扉コマ」にまとめる */
+  .chapter-opening {
+    display: grid; grid-template-columns: minmax(0, 1fr) 164px; gap: 22px; align-items: start;
+    margin: 0 0 22px; padding: 0 0 20px; border-bottom: 1.5px solid var(--line);
+  }
+  .chapter-copy { min-width: 0; }
+  .chapter-teaser {
+    margin: 10px 0 0; max-width: 33em; color: var(--ink-soft);
+    font-size: 13px; font-weight: 500; line-height: 1.75;
+  }
+  .chapter-visual {
+    width: 100%; margin: 0; padding: 0; position: relative; z-index: 1;
+    transform: rotate(.55deg);
+  }
+  .chapter-visual img {
+    display: block; width: 100%; aspect-ratio: 1; object-fit: cover;
+    border: 2px solid var(--ink); background: #F8F0E3;
+    box-shadow: 5px 5px 0 rgba(45,124,120,.24);
+    transition: transform .22s ease, box-shadow .22s ease;
+  }
+  .chapter-caption {
+    width: fit-content; margin: 14px 0 0; padding: 7px 10px 7px 12px; color: var(--ink);
+    font-family: "Kaisei Decol", serif; font-size: 12px; font-weight: 700; line-height: 1.55;
+    border-left: 4px solid var(--orange); background: #FFF7E9;
+  }
   /* 「→ 漫画のどこに使うか」 */
   .why {
-    display: block; font-size: 12.5px; font-weight: 400; color: var(--pink-deep);
-    margin: 2px 0 0;
+    display: block; position: relative; width: fit-content; font-size: 12.5px; font-weight: 500; color: #714626;
+    margin: 6px 0 9px 6px; padding: 4px 9px; background: #FFF0C8;
+    border: 1px solid #E2C97D; border-radius: 6px; transform: rotate(-.2deg);
+  }
+  .why::after {
+    content: ""; position: absolute; left: 14px; bottom: -5px; width: 8px; height: 8px;
+    background: #FFF0C8; border-right: 1px solid #E2C97D; border-bottom: 1px solid #E2C97D;
+    transform: rotate(45deg);
   }
 
   /* §3の小見出し */
-  .q3-head { font-weight: 700; font-size: 16px; color: var(--pink-deep); margin: 22px 0 0; }
+  .q3-head { font-weight: 700; font-size: 16px; color: var(--accent-deep); margin: 22px 0 0; }
   .q3-head .why { margin-top: 0; }
 
   /* 入力欄 */
   label.q { display: block; font-weight: 700; font-size: 15px; margin: 18px 0 6px; }
   label.q .hint { font-weight: 400; font-size: 12.5px; color: var(--ink-soft); display: block; }
   input[type="text"], textarea {
-    width: 100%; border: 1.5px solid var(--line); border-radius: 12px;
+    width: 100%; border: 1.5px solid #AFA79C; border-radius: 8px;
     padding: 10px 14px; font: inherit; font-size: 15px; color: var(--ink);
-    background: #FFFDFB; outline: none;
+    background: #FFFEFB; outline: none;
+    transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
   }
-  input[type="text"]:focus, textarea:focus { border-color: var(--pink); }
+  input[type="text"]:focus, textarea:focus {
+    border-color: var(--accent); box-shadow: 0 0 0 3px rgba(43,122,120,0.10);
+    transform: translateY(-1px);
+  }
   textarea { min-height: 110px; resize: vertical; }
   textarea.tall { min-height: 150px; }
   textarea.short { min-height: 76px; }
@@ -107,24 +195,64 @@
   /* 選択肢 */
   .opts { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
   .opts label {
-    display: flex; align-items: flex-start; gap: 10px;
-    background: #FFFDFB; border: 1.5px solid var(--line); border-radius: 12px;
+    display: flex; align-items: flex-start; gap: 10px; position: relative;
+    background: #FFFEFB; border: 1.5px solid #B8B0A5; border-radius: 8px;
     padding: 10px 14px; cursor: pointer; font-size: 14.5px;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
   }
-  .opts label:has(:checked) { border-color: var(--pink); background: #FDF3F5; }
-  .opts input { margin-top: 5px; accent-color: var(--pink-deep); flex-shrink: 0; }
+  .opts label:hover { transform: translateY(-1px); }
+  .opts label:has(:checked) { border-color: var(--ink); background: #EAF4F1; box-shadow: 3px 3px 0 var(--mustard); }
+  .opts label:has(:checked)::after {
+    content: "✓"; display: grid; place-items: center; flex: 0 0 22px; width: 22px; height: 22px;
+    margin-left: auto; border: 1.5px solid var(--ink); border-radius: 50%;
+    color: #fff; background: var(--accent-deep); font-size: 13px; font-weight: 700; line-height: 1;
+  }
+  .opts input { margin-top: 5px; accent-color: var(--accent-deep); flex-shrink: 0; }
   .opts .desc { font-size: 12.5px; color: var(--ink-soft); display: block; }
 
   .photo-note {
-    background: #F5F0FA; border-radius: 12px; padding: 12px 16px;
+    background: #EDF1F6; border-radius: 12px; padding: 12px 16px;
     font-size: 13.5px; margin-top: 14px; color: var(--ink);
   }
-  .photo-note strong { color: #8A72B5; }
+  .photo-note strong { color: #3E6072; }
 
   .soft-note {
     background: #F2F7F3; border-radius: 12px; padding: 10px 16px;
     font-size: 13px; margin: 10px 0 0; color: var(--ink);
   }
+
+  .art-note {
+    position: relative; margin: 16px 0 22px; padding: 13px 16px 13px 46px;
+    border: 1.5px solid var(--ink); border-radius: 10px; background: #FFF8E9;
+    color: var(--ink); font-size: 13px; box-shadow: 3px 3px 0 rgba(201,111,69,.18);
+  }
+  .art-note::before {
+    content: "✦"; position: absolute; left: 16px; top: 12px;
+    color: var(--orange); font-size: 19px; line-height: 1;
+  }
+  .art-note strong { color: var(--accent-deep); }
+
+  .field-guide {
+    margin: 0 0 18px; padding: 10px 14px; border-left: 4px solid var(--mustard);
+    background: #FFF8E9; color: var(--ink-soft); font-size: 12.5px;
+  }
+  .badge {
+    display: inline-block; margin-left: 7px; padding: 1px 7px;
+    border-radius: 999px; vertical-align: 1px; font-size: 10px; font-weight: 700;
+    letter-spacing: .04em;
+  }
+  .badge.needed { color: #fff; background: var(--orange); }
+  .badge.if-needed { color: var(--accent-deep); background: var(--accent-soft); }
+  [hidden] { display: none !important; }
+
+  details.monitor {
+    margin-top: 18px; border: 1.5px dashed var(--accent); border-radius: 14px;
+    background: #F4F9F8; padding: 12px 14px;
+  }
+  details.monitor summary { cursor: pointer; color: var(--accent-deep); font-weight: 700; }
+  .send-steps { text-align: left; max-width: 510px; margin: 12px auto; font-size: 14px; }
+  .send-steps li { margin: 4px 0; }
+  .btn-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 
   /* 保存表示・送信 */
   .savebar {
@@ -133,20 +261,135 @@
     border-radius: 999px; padding: 6px 18px; font-size: 12.5px; color: var(--ink-soft);
     box-shadow: 0 2px 10px rgba(160,120,100,0.12); white-space: nowrap;
   }
-  .finish { text-align: center; }
-  .finish img { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 2px solid var(--line); }
+  .finish { text-align: center; padding-top: 28px; }
+  .finish-mark {
+    width: 56px; height: 56px; margin: 0 auto 10px; border-radius: 50%;
+    display: grid; place-items: center; color: #fff; background: var(--accent-deep);
+    font-size: 27px; font-weight: 700; box-shadow: 0 6px 18px rgba(24,89,87,0.18);
+  }
+
+  /* 回答の流れを楽しくする、短い漫画的モーション */
+  @keyframes hero-enter {
+    from { opacity: 0; transform: translate(-14px, 6px); }
+    to { opacity: 1; transform: translate(0, 0); }
+  }
+  @keyframes panel-enter {
+    from { opacity: 0; translate: 0 12px; }
+    to { opacity: 1; translate: 0 0; }
+  }
+  @keyframes chapter-title-reveal {
+    0% { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateY(4px); }
+    100% { opacity: 1; clip-path: inset(0 0 0 0); transform: translateY(0); }
+  }
+  @keyframes chapter-art-reveal {
+    0% { opacity: 0; clip-path: inset(0 100% 0 0); transform: scale(.98); }
+    100% { opacity: 1; clip-path: inset(0 0 0 0); transform: scale(1); }
+  }
+  @keyframes chapter-text-reveal {
+    0% { opacity: 0; transform: translateY(7px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes chapter-slash-reveal {
+    0% { opacity: 0; transform: skew(-9deg) scaleY(0); }
+    100% { opacity: 1; transform: skew(-9deg) scaleY(1); }
+  }
+  @keyframes choice-pop {
+    0% { transform: scale(1); }
+    48% { transform: translateY(-2px) scale(1.012); }
+    100% { transform: scale(1); }
+  }
+  @keyframes stamp-in {
+    0% { opacity: 0; transform: scale(1.7) rotate(-16deg); }
+    70% { opacity: 1; transform: scale(.92) rotate(3deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0); }
+  }
+  @keyframes save-pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.035); }
+  }
+  @keyframes progress-shine {
+    from { opacity: .15; transform: translateX(-100%); }
+    45% { opacity: .85; }
+    to { opacity: 0; transform: translateX(100%); }
+  }
+  @keyframes finish-pop {
+    0% { opacity: 0; transform: scale(.55) rotate(-12deg); }
+    70% { opacity: 1; transform: scale(1.1) rotate(3deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0); }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero .title { animation: hero-enter .7s cubic-bezier(.2,.8,.2,1) both; }
+    .story-flow .panel { animation: panel-enter .48s cubic-bezier(.2,.8,.2,1) both; }
+    .story-flow .panel.middle { animation-delay: .1s; }
+    .story-flow .panel.last { animation-delay: .2s; }
+    .motion-ready .card[data-step]:not(.is-revealed) .sec-head::before,
+    .motion-ready .card[data-step]:not(.is-revealed) .sec-head h2,
+    .motion-ready .card[data-step]:not(.is-revealed) .chapter-teaser,
+    .motion-ready .card[data-step]:not(.is-revealed) .chapter-caption,
+    .motion-ready .card[data-step]:not(.is-revealed) .chapter-visual img { opacity: 0; }
+    .card.is-revealed .sec-head h2 {
+      animation: chapter-title-reveal .62s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .card.is-revealed .sec-head::before {
+      transform-origin: center bottom;
+      animation: chapter-slash-reveal .34s ease-out both;
+    }
+    .card.is-revealed .chapter-teaser {
+      animation: chapter-text-reveal .38s ease-out .22s both;
+    }
+    .card.is-revealed .chapter-caption {
+      animation: chapter-text-reveal .4s ease-out .36s both;
+    }
+    .card.is-revealed .chapter-visual img {
+      animation: chapter-art-reveal .72s cubic-bezier(.2,.8,.2,1) .12s both;
+    }
+    .opts label.choice-pop { animation: choice-pop .28s ease-out; }
+    .opts label:has(:checked)::after { animation: stamp-in .28s cubic-bezier(.2,.9,.25,1.2) both; }
+    .savebar.is-saving, .savebar.is-saved { animation: save-pulse .34s ease-out; }
+    .progress-fill.is-moving::after { animation: progress-shine .58s ease-out; }
+    .finish.is-revealed .finish-mark { animation: finish-pop .5s cubic-bezier(.2,.9,.25,1.2) both; }
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .chapter-visual img:hover { transform: translateY(-2px) rotate(-.4deg); box-shadow: 7px 7px 0 rgba(45,124,120,.26); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  }
   .btn {
     display: inline-block; border: none; cursor: pointer; font: inherit; font-weight: 700;
-    background: var(--pink-deep); color: #fff; border-radius: 999px;
+    background: var(--ink); color: #fff; border-radius: 8px; border: 2px solid var(--ink);
     padding: 14px 36px; font-size: 16px; margin-top: 14px;
-    box-shadow: 0 3px 10px rgba(201,122,144,0.35);
+    box-shadow: 5px 5px 0 var(--orange);
   }
-  .btn:active { transform: translateY(1px); }
+  .btn:active { transform: translate(3px,3px); box-shadow: 2px 2px 0 var(--orange); }
   .btn.sub { background: #fff; color: var(--ink-soft); border: 1.5px solid var(--line); box-shadow: none; font-weight: 400; font-size: 13px; padding: 8px 20px; }
-  #copied { display: none; color: var(--pink-deep); font-weight: 700; margin-top: 10px; }
+  .btn.share { background: #6C9B78; box-shadow: 0 3px 10px rgba(75,130,90,0.25); display: none; }
+  #copied { display: none; color: var(--accent-deep); font-weight: 700; margin-top: 10px; }
   #output {
     display: none; width: 100%; min-height: 200px; margin-top: 14px;
     border: 1.5px solid var(--line); border-radius: 12px; padding: 12px; font-size: 12px;
+  }
+  @media (max-width: 520px) {
+    body { font-size: 15px; }
+    .card { padding: 50px 17px 24px; box-shadow: 4px 4px 0 rgba(38,52,59,0.10); }
+    .sec-head { gap: 10px; }
+    .sec-head h2 { font-size: 17px; }
+    .hero { min-height: 245px; box-shadow: 4px 4px 0 rgba(38,52,59,0.14); }
+    .hero img { object-position: 58% center; }
+    .hero::after { background: linear-gradient(90deg, rgba(255,250,240,0.97) 0%, rgba(255,250,240,0.87) 58%, rgba(255,250,240,0.24) 100%); }
+    .hero .title { min-height: 245px; padding: 24px 20px; max-width: 92%; }
+    .story-flow { grid-template-columns: 1fr; gap: 8px; }
+    .story-flow .arrow { transform: rotate(90deg); line-height: 1; }
+    .story-flow .panel { min-height: 64px; }
+    .chapter-opening { grid-template-columns: 1fr; gap: 14px; padding-bottom: 18px; }
+    .chapter-visual { width: min(100%, 240px); margin: 0 auto; transform: rotate(.5deg); }
+    .chapter-visual img { box-shadow: 4px 4px 0 rgba(45,124,120,.24); }
+    .opts label { padding: 11px 12px; }
+    .btn { width: 100%; margin-top: 8px; }
+    .progress-card { top: 5px; }
   }
 </style>
 </head>
@@ -154,127 +397,231 @@
 <div class="wrap">
 
   <div class="hero">
-    <img src="decor/header.png" alt="">
+    <img src="decor/hero-hybrid-studio-v3.jpg" alt="紙のラフ、デジタル作画画面、スマートフォンを使った漫画制作の流れ">
     <div class="title">
-      <h1>ヒアリングノート</h1>
-      <p>あなたの物語を、漫画にするために</p>
+      <span class="kicker">YOUR STORY STARTS HERE</span>
+      <h1>ストーリー漫画<br>制作ヒアリング</h1>
+      <p>まだ言葉になっていない経験から、物語のネームをつくります。</p>
     </div>
   </div>
 
+  <div class="story-flow" aria-label="ヒアリングから漫画になるまで">
+    <div class="panel"><span class="num">SCENE 01</span><strong>物語の素材を書く</strong></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="panel middle"><span class="num">SCENE 02</span><strong>一緒に構成をつくる</strong></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="panel last"><span class="num">SCENE 03</span><strong>あなたの漫画になる</strong></div>
+  </div>
+
+  <div class="art-note"><strong>このページの挿絵は、制作工程のイメージです。</strong>完成漫画の絵柄や主人公は、回答・普段の発信・お写真から、お一人ずつ個別に設計します。</div>
+
   <div class="intro">
-    <strong>このノートは、あなたの「これまで」を1本のストーリー漫画にするための材料集めです。</strong><br>
-    仕上がりのイメージは、別途お送りしたサンプル漫画（2作品）をご覧ください——あなたの回答が、こういう物語になります。
+    <strong>これは、正解を当てるアンケートではありません。</strong><br>
+    あなたの経験を「集客に使えるストーリー漫画」へ変えるための、最初のネームづくりです。思い出せる場面や言葉を材料として預かり、物語と申込みへの流れはこちらで一緒に組み立てます。
     <ul>
-      <li><strong>全部の質問に答えなくて大丈夫です。</strong>拝見したあと、足りないところだけこちらからLINEで2〜3個質問してお伺いします</li>
+      <li><strong>全部の質問に答えなくて大丈夫です。</strong>拝見したあと、制作に必要なところだけこちらからLINEで追加質問します</li>
       <li>完璧な文章でなくてOK。箇条書き・話し言葉、大歓迎です</li>
       <li>各質問には「→ 漫画のどこに使うか」を添えてあります。迷ったら『おまかせ』と書いて飛ばしてください</li>
-      <li>目安は <strong>1日15分×2〜3日</strong>。一気に書かなくて大丈夫です（このページは自動で下書き保存されます。<strong>同じスマホ・パソコンで開けば続きから書けます</strong>）</li>
+      <li>目安は <strong>合計30〜45分ほど</strong>。15分ずつ分けても大丈夫です（このページは自動で下書き保存されます。<strong>同じスマホ・パソコンで開けば続きから書けます</strong>）</li>
       <li>ここに書かれた内容は漫画制作以外には使いません。公開前に必ずご確認いただきます</li>
     </ul>
   </div>
 
+  <div class="progress-card" aria-label="フォームの現在位置">
+    <div class="progress-meta"><span>現在の章・下書き自動保存</span><strong id="stepText">1 / 7</strong></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
   <form id="f">
 
-  <!-- 1 完成形のイメージ -->
-  <div class="card">
-    <div class="sec-head"><img src="decor/sec1.png" alt=""><h2>1. まず、完成形のイメージから</h2></div>
-    <p class="sec-note">ここでは「どんな漫画にしたいか」のゴールを先に決めます。<strong>このあとの質問はすべて、ここで決めた完成形を作るための材料集めです。</strong></p>
-    <label class="q">サンプル2作品のうち、「こうなってほしい」に近いのはどちらですか？<span class="hint">サンプル漫画は別途お送りしています</span></label>
-    <div class="opts">
-      <label><input type="radio" name="sample_pref" value="A">サンプルA</label>
-      <label><input type="radio" name="sample_pref" value="B">サンプルB</label>
-      <label><input type="radio" name="sample_pref" value="どちらとも違う">どちらとも違う</label>
+  <!-- 1 届けたい相手とゴール -->
+  <div class="card" data-step="1">
+    <div class="chapter-opening">
+      <div class="chapter-copy">
+        <div class="sec-head"><img src="decor/sec1.png" alt=""><h2>1. 届けたい相手とゴール</h2></div>
+        <p class="chapter-teaser">誰に何を届ける物語か、ラストシーンから逆算します。</p>
+        <p class="chapter-caption">届けたい相手が、物語の向こうに見えてくる。</p>
+      </div>
+      <figure class="chapter-visual">
+        <img src="decor/chapter-1-audience-v2.jpg" alt="白紙の漫画からさまざまな読者へ物語が届くイメージ" loading="lazy">
+      </figure>
     </div>
-    <label class="q">「どちらとも違う」方は、ひとことでどうぞ<input type="text" name="sample_pref_note"></label>
-    <label class="q">漫画全体の雰囲気（1つ選択）<span class="why">→ 脚本のトーンを決める基準になります</span></label>
+    <p class="sec-note">白紙からマーケティングを考える必要はありません。近いものを選んでください。<strong>回答をもとに、誰へどう届けるかはこちらからご提案します。</strong></p>
+    <p class="field-guide">「制作に必要」は、漫画の軸を決める項目です。今すぐ答えにくい場合は「おまかせ」「提案希望」を選べます。</p>
+    <label class="q">今回の漫画で、一番かなえたいことはどれですか？（1つ選択）<span class="badge needed">制作に必要</span><span class="why">→ 物語のラストと、読者への語りかけ方を決めます</span></label>
+    <div class="opts">
+      <label><input type="radio" name="goal_type" value="人柄・背景を知ってほしい">自分の人柄や、今の仕事を始めた背景を知ってほしい</label>
+      <label><input type="radio" name="goal_type" value="共感・信頼につなげたい">「わかる」と共感して、信頼してほしい</label>
+      <label><input type="radio" name="goal_type" value="相談・申込につなげたい">サービスの相談・申込みにつなげたい</label>
+      <label><input type="radio" name="goal_type" value="採用・仲間集めにつなげたい">採用・コミュニティなど、仲間集めにつなげたい</label>
+      <label><input type="radio" name="goal_type" value="提案希望">まだ決められないので提案してほしい</label>
+    </div>
+    <label class="q">読んでほしい相手として、実際に思い浮かぶ人はいますか？<span class="badge needed">制作に必要</span><span class="hint">名前は不要です。「最近相談に来た40代の小規模事業者」のような書き方で大丈夫です。思い浮かばなければ「おまかせ」とご記入ください</span><span class="why">→ 架空の人物像ではなく、実際のお客様に届く言葉を選ぶ材料になります</span><input type="text" name="reader_anchor"></label>
+    <label class="q">今思い浮かべたその方は、どんな言葉で悩みを話していましたか？<span class="hint">ここでは「一人の実際の言葉」を伺います。正確な文章でなくて大丈夫です。なければ「特になし」で構いません</span><textarea class="short" name="customer_problem_scene"></textarea></label>
+
+    <details class="monitor" id="offerDetails">
+      <summary>相談・登録・仲間集めにつなげたい方へ</summary>
+      <p class="sec-note" style="margin-top:10px">案内先がまだない場合は、無理に埋めなくて大丈夫です。制作開始前に一緒に整理します。</p>
+      <label class="q">漫画で案内したい商品・サービス・活動<span class="badge if-needed">該当する方</span><textarea class="short" name="featured_offer"></textarea></label>
+      <label class="q">読んだ直後に、最初にしてほしい行動<span class="badge if-needed">該当する方</span><span class="hint">例: プロフィールを見る、LINEに登録する、相談を申し込む。「何をしてほしいか」を伺う項目です</span><input type="text" name="desired_action"></label>
+      <label class="q">実際の案内先URL<span class="badge if-needed">該当する方</span><span class="hint">URLがまだない場合は「準備中」とご記入ください</span><input type="text" name="destination_url"></label>
+    </details>
+    <label class="q">読み終えた人に、どんな気持ちが一番残ってほしいですか？（1つ選択）<span class="why">→ 脚本の感情の着地点を決める基準になります</span></label>
     <div class="opts">
       <label><input type="radio" name="tone" value="感動系">泣ける・感動系</label>
       <label><input type="radio" name="tone" value="共感系">「わかる…」の共感系</label>
       <label><input type="radio" name="tone" value="前向き系">明るく前向き系</label>
       <label><input type="radio" name="tone" value="おまかせ">おまかせ</label>
     </div>
-    <label class="q">この漫画を見た人に、どうなってほしいですか？（1つ選択）<span class="why">→ 物語のラストの着地点を決めます</span></label>
+    <label class="q">この漫画を最初に置く場所はどこですか？（1つ選択）<span class="badge needed">制作に必要</span><span class="hint">ここでは「最初に読まれる場所」を伺います。画面の見え方や、1ページ目のつかみを考える材料になります</span></label>
     <div class="opts">
-      <label><input type="radio" name="goal" value="知ってほしい">まず自分のことを知ってほしい</label>
-      <label><input type="radio" name="goal" value="共感">「わかる…」と共感してファンになってほしい</label>
-      <label><input type="radio" name="goal" value="問い合わせ">プロフィールのリンクから問い合わせ・登録してほしい</label>
-      <label><input type="radio" name="goal" value="おまかせ">おまかせ</label>
+      <label><input type="radio" name="primary_channel" value="Instagramフィード">Instagramフィード</label>
+      <label><input type="radio" name="primary_channel" value="Instagramストーリーズ・ハイライト">Instagramストーリーズ・ハイライト</label>
+      <label><input type="radio" name="primary_channel" value="Threads">Threads</label>
+      <label><input type="radio" name="primary_channel" value="公式LINE">公式LINE</label>
+      <label><input type="radio" name="primary_channel" value="ホームページ・ブログ">ホームページ・ブログ</label>
+      <label><input type="radio" name="primary_channel" value="未定・提案希望">未定・提案してほしい</label>
     </div>
-    <label class="q">漫画はどこに載せる予定ですか？（あてはまるもの全部）</label>
-    <div class="opts">
-      <label><input type="checkbox" name="place" value="フィード">Instagramフィード投稿</label>
-      <label><input type="checkbox" name="place" value="ストーリーズ">Instagramストーリーズ・ハイライト</label>
-      <label><input type="checkbox" name="place" value="広告">Instagram広告として配信するかも</label>
-      <label><input type="checkbox" name="place" value="他媒体">note・ブログ・ホームページなど他の場所にも載せたい</label>
-      <label><input type="checkbox" name="place" value="未定">未定・おまかせ</label>
-    </div>
-    <label class="q">「他の場所」を選んだ方は、その場所を教えてください<input type="text" name="place_other"></label>
-    <p class="sec-note" style="margin-top:10px">※基本のお渡しはInstagram用サイズです。他の媒体向けのサイズ調整はご相談ください</p>
-    <label class="q">参考にしたい漫画・好きな漫画家があれば（任意）<span class="hint">「少女漫画で育った」「ジャンプ派」くらいでもOKです</span><span class="why">→ 世界観とコマ割りの参考にします</span><input type="text" name="fav_manga"></label>
+    <label class="q">そのほかにも掲載したい場所があれば（任意）<input type="text" name="secondary_channels"></label>
+    <p class="sec-note" style="margin-top:10px">※標準納品はInstagramフィード向け4:5・1セットです。別サイズや内容違いの追加版は、制作前に対応可否と追加料金をご案内します。</p>
+    <label class="q">物語のテンポや読み心地の好みがあれば（任意）<span class="hint">例: 日常エッセイのように自然、テンポよく明るい、余韻を残して静かに読ませたい</span><span class="why">→ コマ運びや演出の参考にします。特定作品・漫画家の画風そのものをまねる制作は行いません</span><input type="text" name="reading_preference"></label>
   </div>
 
   <!-- 2 お仕事のこと -->
-  <div class="card">
-    <div class="sec-head"><img src="decor/sec2.png" alt=""><h2>2. あなたとお仕事のこと</h2></div>
+  <div class="card" data-step="2">
+    <div class="chapter-opening">
+      <div class="chapter-copy">
+        <div class="sec-head"><img src="decor/sec2.png" alt=""><h2>2. あなたとお仕事のこと</h2></div>
+        <p class="chapter-teaser">仕事の価値が伝わる会話と場面を探します。</p>
+        <p class="chapter-caption">仕事の価値は、会話や手元の場面になる。</p>
+      </div>
+      <figure class="chapter-visual">
+        <img src="decor/chapter-2-work-v1.jpg" alt="仕事の会話や手元が漫画の場面になるイメージ" loading="lazy">
+      </figure>
+    </div>
     <p class="sec-note"><strong>ここは「お仕事」の話です。</strong>漫画のラストシーン（今のあなた）と、読者への誘導の材料になります。</p>
-    <label class="q">お名前（漫画に載せる表記）<input type="text" name="name"></label>
-    <label class="q">肩書き<span class="hint">例: ファミリーづくり実践コーチ</span><span class="why">→ ラストで「今のあなた」を紹介するコマに使います</span><input type="text" name="title"></label>
-    <label class="q">サービス内容はどんなお仕事ですか？<span class="hint">例: 忙しい経営者の「事務作業に手が回らない」悩みを解決するオンライン秘書</span><textarea class="short" name="service"></textarea></label>
-    <label class="q">あなたのお客様は、あなたに出会う前、どんなことに困っていますか？<span class="hint">例: 発信をがんばっているのに問い合わせが来ない</span><span class="why">→ 読者が「これ私だ」と自分を重ねる冒頭シーンの材料になります</span><textarea class="short" name="customer_pain"></textarea></label>
-    <label class="q">Instagramアカウント名<input type="text" name="insta"></label>
+    <label class="q">お名前（漫画に載せる表記）<span class="hint">本名・屋号・活動名など、漫画内で使いたい表記をご記入ください</span><input type="text" name="name"></label>
+    <label class="q">肩書き<span class="hint">例: Webコンサルタント、整体師、キャリア支援者</span><span class="why">→ ラストで「今のあなた」を紹介するコマに使います</span><input type="text" name="title"></label>
+    <label class="q">サービス内容はどんなお仕事ですか？<span class="hint">例: 中小企業向けの採用支援、発信が苦手な個人事業主向けのSNSサポート</span><textarea class="short" name="service"></textarea></label>
+    <label class="q">同じようなお客様に共通する、あなたに出会う前の状態は？<span class="hint">ここでは「多くのお客様に共通する傾向」を伺います。うまく整理できなければ、よく受ける相談を一つ教えてください</span><span class="why">→ 読者が「これ、私のことだ」と感じる冒頭の材料になります</span><textarea class="short" name="customer_before_problem"></textarea></label>
+    <label class="q">サービスを受けたあと、お客様に起きた変化があれば（任意）<span class="hint">数字がなくても「安心して任せられるようになった」などで大丈夫です。まだ事例がなければ「まだない」とご記入ください</span><textarea class="short" name="customer_after_result"></textarea></label>
+    <label class="q">お客様に実際に言われて、印象に残っている言葉があれば（任意）<span class="hint">まだなければ「まだない」で大丈夫です</span><input type="text" name="actual_customer_quote"></label>
+    <label class="q">その成果や言葉を、漫画に使ってもよいですか？</label>
+    <div class="opts">
+      <label><input type="radio" name="quote_publish_permission" value="実名を伏せれば使用可">お客様の実名・特定情報を伏せれば使ってよい</label>
+      <label><input type="radio" name="quote_publish_permission" value="本人確認後に使用可">そのお客様本人に確認できた場合のみ使ってよい</label>
+      <label><input type="radio" name="quote_publish_permission" value="使用不可">漫画には使わないでほしい</label>
+      <label><input type="radio" name="quote_publish_permission" value="該当なし・提案希望">該当する実績がない・提案してほしい</label>
+    </div>
+    <label class="q">InstagramアカウントまたはURL<input type="text" name="insta"></label>
+    <label class="q">ThreadsアカウントまたはURL<input type="text" name="threads"></label>
+    <label class="q">そのほか、普段使っている発信ページのURL<input type="text" name="main_profile_url"></label>
   </div>
 
   <!-- 3 あなたの物語 -->
-  <div class="card">
-    <div class="sec-head"><img src="decor/sec3.png" alt=""><h2>3. あなたの物語</h2></div>
-    <p class="sec-note"><strong>ここからは「人生」の話です。</strong>年表のように全部書く必要はありません。漫画の背骨になる<strong>3つの場面だけ</strong>伺います。1つの欄に1〜2行ずつで大丈夫です。</p>
+  <div class="card" data-step="3">
+    <div class="chapter-opening">
+      <div class="chapter-copy">
+        <div class="sec-head"><img src="decor/sec3.png" alt=""><h2>3. あなたの物語</h2></div>
+        <p class="chapter-teaser">感情が動いた瞬間が、物語の山になります。</p>
+        <p class="chapter-caption">転機が、漫画の感情の山になる。</p>
+      </div>
+      <figure class="chapter-visual">
+        <img src="decor/chapter-3-story-v2.jpg" alt="暗い場面から扉を開き、明るい未来へ進む転機のイメージ" loading="lazy">
+      </figure>
+    </div>
+    <p class="sec-note"><strong>ここからは「人生」の話です。</strong>年表のように全部書く必要はありません。漫画の背骨になる場面だけ伺います。1つの欄に1〜2行ずつで大丈夫です。</p>
 
     <p class="q3-head">① 転機になった出来事<span class="why">→ 漫画のいちばんの見せ場になります</span></p>
-    <label class="q">今の仕事を始める「きっかけ」になった出来事は何ですか？（1つだけ）<textarea class="short" name="turning_what"></textarea></label>
+    <label class="q">今の仕事を始める「きっかけ」になった出来事は何ですか？（1つだけ）<span class="badge needed">制作に必要</span><textarea class="short" name="turning_what"></textarea></label>
     <label class="q">それはいつ頃ですか？<span class="hint">ざっくりでOK。例: 5年前、下の子が生まれた頃</span><input type="text" name="turning_when"></label>
-    <label class="q">そのとき、誰かに言われて覚えている言葉があれば<input type="text" name="turning_words"></label>
+    <label class="q">その出来事のあと、心に残った言葉や、自分で決めて最初に行動したことは？<span class="hint">誰かの言葉・自分で決めたこと・最初の一歩のうち、書けるもの一つで大丈夫です</span><textarea class="short" name="turning_words"></textarea></label>
 
-    <p class="q3-head">② 転機の前のこと<span class="why">→ 読者が「私も同じだ」と自分を重ねるシーンになります</span></p>
+    <p class="q3-head">② 転機の前のこと<span class="badge needed">どちらか1つ</span><span class="why">→ 読者が「私も同じだ」と自分を重ねるシーンになります</span></p>
     <div class="soft-note">つらい話を無理に書く必要はありません。書けるところだけどうぞ。</div>
     <label class="q">①の出来事の前、悩んでいたこと・うまくいっていなかったことは？<textarea class="short" name="before_pain"></textarea></label>
-    <label class="q">その頃の毎日は、どんな感じでしたか？<span class="hint">例: 仕事と家事に追われて自分の時間ゼロ</span><textarea class="short" name="before_days"></textarea></label>
+    <label class="q">その頃の毎日は、どんな感じでしたか？<span class="hint">例: 目の前の業務に追われ、発信や営業まで手が回らなかった</span><textarea class="short" name="before_days"></textarea></label>
     <label class="q">言われてつらかった・悔しかった一言があれば<span class="hint">誰に・何と</span><input type="text" name="before_words"></label>
 
-    <p class="q3-head">③ 今のうれしい瞬間<span class="why">→ ラストシーンの材料になります</span></p>
-    <label class="q">今の仕事をしていて「この仕事にしてよかった」と思った瞬間は？<textarea class="short" name="joy_moment"></textarea></label>
-    <label class="q">お客様に言われてうれしかった言葉があれば<input type="text" name="joy_words"></label>
+    <details class="monitor">
+      <summary>③ 仕事を始めたあとにも、大きな転機があった方へ（任意）</summary>
+      <div class="soft-note">失敗を大きく見せる必要はありません。考え方や働き方を変えた、小さな出来事でも十分です。</div>
+      <label class="q">特につらかったこと・うまくいかなかったことは？<textarea class="short" name="setback"></textarea></label>
+      <label class="q">そこから、考え方や行動をどう変えましたか？<textarea class="short" name="change_action"></textarea></label>
+    </details>
+
+    <p class="q3-head">④ 今とこれから<span class="why">→ ラストシーンの材料になります</span></p>
+    <label class="q">今の仕事をしていて「この仕事にしてよかった」と思った瞬間は？<span class="badge needed">制作に必要</span><textarea class="short" name="joy_moment"></textarea></label>
+    <label class="q">これから実現したい働き方や、届けたい未来はありますか？<textarea class="short" name="future"></textarea></label>
 
     <label class="q">（任意）子どもの頃のことで、今のあなたにつながっていそうな思い出があれば<textarea class="short" name="childhood"></textarea></label>
   </div>
 
   <!-- 4 -->
-  <div class="card">
-    <div class="sec-head"><img src="decor/sec4.png" alt=""><h2>4. 漫画に入れたいこと・入れたくないこと</h2></div>
+  <div class="card" data-step="4">
+    <div class="chapter-opening">
+      <div class="chapter-copy">
+        <div class="sec-head"><img src="decor/sec4.png" alt=""><h2>4. 漫画に入れたいこと・入れたくないこと</h2></div>
+        <p class="chapter-teaser">大切な事実を守りながら、描く範囲を決めます。</p>
+        <p class="chapter-caption">描くこと・伏せることを、一緒に選ぶ。</p>
+      </div>
+      <figure class="chapter-visual">
+        <img src="decor/chapter-4-editing-v1.jpg" alt="漫画に描く場面と伏せる場面を選ぶイメージ" loading="lazy">
+      </figure>
+    </div>
     <label class="q">必ず描いてほしい場面・エピソード ①<span class="why">→ 構成の優先順位に反映します</span><input type="text" name="must1"></label>
     <label class="q">② <span class="hint">（あれば）</span><input type="text" name="must2"></label>
     <label class="q">③ <span class="hint">（あれば）</span><input type="text" name="must3"></label>
-    <label class="q">触れてほしくない話題があれば教えてください<span class="hint">家族のこと、病気のこと、前職のことなど。遠慮なくどうぞ</span><textarea name="ng"></textarea></label>
+    <label class="q">触れてほしくない話題があれば教えてください<span class="badge needed">制作に必要</span><span class="hint">家族のこと、病気のこと、前職のことなど。なければ必ず「なし」とご記入ください</span><textarea name="ng"></textarea></label>
+    <label class="q">会社名・学校名・地域・人物など、伏せたい情報はありますか？<span class="hint">「すべて架空名に」「前職の会社が分からないように」など。なければ「なし」で大丈夫です</span><textarea class="short" name="anonymize_notes"></textarea></label>
+    <label class="q">健康・美容・お金・法律など、表現に注意が必要な内容があれば教えてください<span class="hint">該当しなければ「なし」で大丈夫です</span><textarea class="short" name="regulated_expression_notes"></textarea></label>
   </div>
 
   <!-- 5 -->
-  <div class="card">
-    <div class="sec-head"><img src="decor/sec5.png" alt=""><h2>5. 見た目・絵柄について</h2></div>
-    <label class="q">絵柄は、サンプル3種からお選びください（1つ選択）<span class="hint">絵柄サンプル画像は別途お送りしています</span></label>
-    <div class="opts">
-      <label><input type="radio" name="style" value="A">A: ゆるふわ・ほんわかエッセイ調<span class="desc">やわらかい線のデフォルメキャラ。親しみ・共感を大切にしたい方に（エッセイ漫画で一番人気の系統です）</span></label>
-      <label><input type="radio" name="style" value="B">B: 大人かわいい少女漫画風<span class="desc">細めの線とやさしい色合い。きれい・憧れの雰囲気を出したい方に</span></label>
-      <label><input type="radio" name="style" value="C">C: シンプル・ポップなカラー漫画調<span class="desc">はっきりした線と明るい色。どなたにも読みやすい王道スタイル</span></label>
-      <label><input type="radio" name="style" value="おまかせ">おまかせ</label>
+  <div class="card" data-step="5">
+    <div class="chapter-opening">
+      <div class="chapter-copy">
+        <div class="sec-head"><img src="decor/sec5.png" alt=""><h2>5. 見た目・絵柄について</h2></div>
+        <p class="chapter-teaser">回答と写真から、あなた専用の主人公を設計します。</p>
+        <p class="chapter-caption">あなたらしさが、主人公の表情になる。</p>
+      </div>
+      <figure class="chapter-visual">
+        <img src="decor/chapter-5-character-v2.jpg" alt="写真や希望からデジタルで漫画キャラクターを個別設計するイメージ" loading="lazy">
+      </figure>
     </div>
-    <label class="q">髪型・髪色<input type="text" name="hair"></label>
-    <label class="q">普段の服装の雰囲気<span class="hint">例: 白シャツ＋パンツ、ワンピース</span><input type="text" name="fashion"></label>
-    <label class="q">メガネ・アクセサリーなど特徴<input type="text" name="accessory"></label>
-    <label class="q">顔の再現度はどうしますか？（1つ選択）</label>
+    <label class="q">絵を見た瞬間、どんな印象を持ってほしいですか？（最優先を1つ）<span class="badge needed">制作に必要</span></label>
+    <div class="soft-note"><strong>絵柄サンプルから選ぶ方式ではありません。</strong>この回答、普段の発信、ご本人の写真をもとに専用の絵柄設計と生成プロンプトを作ります。制作前にキャラクター設計図と代表コマをお見せし、顔・服装・絵柄をご承認いただくまでは本編へ進みません。</div>
     <div class="opts">
-      <label><input type="radio" name="face" value="寄せる">本人に寄せてほしい（お写真を1〜2枚、下記の方法でお送りください）</label>
+      <label><input type="radio" name="style" value="温かい・自然体">温かく、自然体で親しみやすい<span class="desc">落ち着いた色、手描き感、日常の空気を大切にした方向</span></label>
+      <label><input type="radio" name="style" value="信頼感・プロフェッショナル">信頼感があり、プロフェッショナル<span class="desc">落ち着いた構図と色で、専門性や仕事への姿勢が伝わる方向</span></label>
+      <label><input type="radio" name="style" value="洗練・上質">洗練され、少し憧れを感じる<span class="desc">清潔感と余白があり、上質に整った方向</span></label>
+      <label><input type="radio" name="style" value="明快・読みやすい">明快で、内容がすっと伝わる<span class="desc">表情と場面が分かりやすく、スマホで読みやすい方向</span></label>
+      <label><input type="radio" name="style" value="提案希望">内容と普段の発信を見て提案してほしい</label>
+    </div>
+    <label class="q">避けたい見た目があればお選びください（複数可）<span class="why">→ 専用プロンプトの「避ける表現」に反映します</span></label>
+    <div class="opts">
+      <label><input type="checkbox" name="style_avoid" value="幼く見える">子どもっぽい・幼く見える</label>
+      <label><input type="checkbox" name="style_avoid" value="目が大きい・キラキラが強い">目が大きい・キラキラが強い</label>
+      <label><input type="checkbox" name="style_avoid" value="写真のようにリアル">写真のようにリアル</label>
+      <label><input type="checkbox" name="style_avoid" value="デフォルメが強い">デフォルメが強い</label>
+      <label><input type="checkbox" name="style_avoid" value="色が暗い・重い">色が暗い・重い</label>
+      <label><input type="checkbox" name="style_avoid" value="特になし・提案希望">特になし・提案してほしい</label>
+    </div>
+    <label class="q">普段の発信でよく使う色や、避けたい色があれば<span class="hint">例: ネイビーとベージュ／原色は避けたい。なければ「おまかせ」で大丈夫です</span><input type="text" name="brand_colors"></label>
+    <div class="opts" style="margin-top:12px">
+      <label><input type="checkbox" name="style_direction_ack" value="確認済み">回答と写真から絵柄提案を作り、個別のキャラクター設計図と代表コマを見てから正式決定することを確認しました</label>
+    </div>
+    <div class="soft-note">次の3項目は任意です。写真を送らない場合や、写真と変えて描いてほしい点がある場合にご記入ください。</div>
+    <label class="q">髪型・髪色（任意）<input type="text" name="hair"></label>
+    <label class="q">普段の服装の雰囲気（任意）<span class="hint">例: ジャケット、シャツ＋デニム、ニット、ワンピース</span><input type="text" name="fashion"></label>
+    <label class="q">メガネ・アクセサリーなど特徴（任意）<input type="text" name="accessory"></label>
+    <label class="q">ご本人らしさを、どの程度取り入れますか？（1つ選択）</label>
+    <div class="opts">
+      <label><input type="radio" name="face" value="特徴を取り入れる">髪型・輪郭・表情など、本人らしい特徴を取り入れてほしい（写真を2〜3枚お送りください）</label>
       <label><input type="radio" name="face" value="雰囲気">雰囲気が合っていれば似ていなくてよい</label>
       <label><input type="radio" name="face" value="おまかせ">おまかせ</label>
     </div>
+    <p class="sec-note" style="margin-top:10px">※写真の特徴を参考にしたイラスト化です。似顔絵のような完全な再現を保証するものではありません。</p>
     <div class="photo-note">
       <strong>お写真について:</strong> このフォームには写真を添付できません。顔写真・よく着る服の写真（任意・2〜3枚）は、<strong>LINEまたはメールで別途お送りください</strong>。普段の雰囲気がわかるもので、スマホの自撮りで十分です。場面ごとに服装を変えて描くので、普段の服装がわかると仕上がりがぐっとあなたらしくなります。
     </div>
@@ -286,32 +633,87 @@
     <div class="opts">
       <label><input type="radio" name="photo_after" value="削除">削除してほしい</label>
       <label><input type="radio" name="photo_after" value="保管">次回制作に備えて保管OK</label>
+      <label><input type="radio" name="photo_after" value="写真を送らない">写真は送らない</label>
     </div>
-  </div>
-
-  <!-- 5-2 -->
-  <div class="card">
-    <div class="sec-head"><img src="decor/sec52.png" alt=""><h2>5-2. あなた以外の登場人物</h2></div>
-    <p class="sec-note">物語に登場しそうな方（ご家族、恩師、お客様など）がいれば教えてください（3人まで）。</p>
-    <label class="q">1人目: 呼び名・あなたとの関係<span class="hint">例: 夫、双子の弟</span><input type="text" name="chara1_rel"></label>
-    <label class="q">1人目: 特徴<span class="hint">年齢感・髪型・雰囲気</span><input type="text" name="chara1_desc"></label>
-    <label class="q">2人目: 呼び名・関係<input type="text" name="chara2_rel"></label>
-    <label class="q">2人目: 特徴<input type="text" name="chara2_desc"></label>
-    <label class="q">3人目: 呼び名・関係<input type="text" name="chara3_rel"></label>
-    <label class="q">3人目: 特徴<input type="text" name="chara3_desc"></label>
-    <label class="q">その方たちの描き方（1つ選択）</label>
-    <div class="opts">
-      <label><input type="radio" name="chara_how" value="おまかせ">おまかせでイラスト化してほしい（特徴の文章だけでこちらでお作りします。これまでの作品もこの方式です）</label>
-      <label><input type="radio" name="chara_how" value="写真">写真を参考にしてほしい（必ずご本人の了承を得た写真のみ、LINE等で別送してください）</label>
-    </div>
-    <p class="sec-note" style="margin-top:10px">※お子さんは、写真がなくても特徴の文章だけで十分かわいく描けます<br>※物語上必要な人物（例: お医者さん、当時の上司）は、こちらの判断で創作キャラとして登場させることがあります</p>
+    <p class="sec-note" style="margin-top:10px">※「削除」は制作側で保管している写真データが対象です。AIツール提供会社側でのデータ処理・保持は、利用時点の各社規約に従います。</p>
   </div>
 
   <!-- 6 -->
-  <div class="card">
-    <div class="sec-head"><img src="decor/sec6.png" alt=""><h2>6. 仕上げについて</h2></div>
-    <label class="q">漫画の最後に入れる誘導文<span class="hint">例:「詳しくはプロフィールのリンクから」。希望があれば</span><input type="text" name="cta"></label>
+  <div class="card" data-step="6">
+    <div class="chapter-opening">
+      <div class="chapter-copy">
+        <div class="sec-head"><img src="decor/sec52.png" alt=""><h2>6. あなた以外の登場人物</h2></div>
+        <p class="chapter-teaser">関係性が見えると、物語に奥行きが生まれます。</p>
+        <p class="chapter-caption">大切な人が、物語の登場人物になる。</p>
+      </div>
+      <figure class="chapter-visual">
+        <img src="decor/chapter-6-people-v1.jpg" alt="周囲の人々が漫画の登場人物になるイメージ" loading="lazy">
+      </figure>
+    </div>
+    <p class="sec-note">本人以外を登場させるか、最初に選んでください。登場させる場合だけ、ご家族・恩師・お客様などを3人まで伺います。</p>
+    <label class="q">本人以外の登場人物を、どのように描きますか？（1つ選択）</label>
+    <div class="opts">
+      <label><input type="radio" name="chara_how" value="おまかせ">おまかせでイラスト化してほしい（特徴の文章だけでこちらでお作りします。これまでの作品もこの方式です）</label>
+      <label><input type="radio" name="chara_how" value="写真">写真を参考にしてほしい（必ずご本人の了承を得た写真のみ、LINE等で別送してください）</label>
+      <label><input type="radio" name="chara_how" value="登場人物なし">本人以外は登場させない</label>
+    </div>
+    <div id="peopleDetails">
+      <label class="q">1人目: 呼び名・あなたとの関係<span class="hint">例: 配偶者、共同経営者、上司、お客様</span><input type="text" name="chara1_rel"></label>
+      <label class="q">1人目: 特徴<span class="hint">年齢感・髪型・雰囲気</span><input type="text" name="chara1_desc"></label>
+      <label class="q">2人目: 呼び名・関係<input type="text" name="chara2_rel"></label>
+      <label class="q">2人目: 特徴<input type="text" name="chara2_desc"></label>
+      <label class="q">3人目: 呼び名・関係<input type="text" name="chara3_rel"></label>
+      <label class="q">3人目: 特徴<input type="text" name="chara3_desc"></label>
+      <label class="q">登場する方の公開について</label>
+      <div class="opts">
+        <label><input type="radio" name="people_permission" value="了承済み・必要に応じ匿名化">登場について了承を得ている（必要に応じて匿名化する）</label>
+        <label><input type="radio" name="people_permission" value="本人に似せない匿名キャラなら可">本人に似せない匿名の人物としてなら描いてよい</label>
+        <label><input type="radio" name="people_permission" value="要相談">まだ確認していないので相談したい</label>
+        <label><input type="radio" name="people_permission" value="登場人物なし">本人以外は登場させない</label>
+      </div>
+      <p class="sec-note" style="margin-top:10px">※未成年を公開作品に登場させる場合は、保護者の確認が必要です。<br>※実際の出来事に必要な脇役は、本人に似せない匿名キャラクターとして描けます。事実にない人物や出来事を追加することはありません。</p>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card" data-step="7">
+    <div class="chapter-opening">
+      <div class="chapter-copy">
+        <div class="sec-head"><img src="decor/sec6.png" alt=""><h2>7. 公開と仕上げについて</h2></div>
+        <p class="chapter-teaser">読後に取ってほしい行動まで、一つの物語にします。</p>
+        <p class="chapter-caption">完成した物語が、必要な人へ届く。</p>
+      </div>
+      <figure class="chapter-visual">
+        <img src="decor/chapter-7-publish-v1.jpg" alt="完成した漫画がスマートフォンを通して読者へ届くイメージ" loading="lazy">
+      </figure>
+    </div>
+    <label class="q">最後の案内文に、入れたい言葉があれば（任意）<span class="hint">例:「無料相談・サービス詳細はプロフィールから」。空欄の場合は、1章の「してほしい行動」と案内先URLからこちらでご提案します</span><input type="text" name="cta"></label>
+    <p class="sec-note" style="margin-top:10px">※標準の漫画では、主な読者と案内先をそれぞれ一つに絞ります。読者や案内先が異なる追加版は、別構成・別見積りになる場合があります。</p>
+    <label class="q">納品サイズについて<span class="hint">1章の「最初に置く場所」は物語の見せ方、ここでは画像サイズの希望を確認します</span></label>
+    <div class="opts">
+      <label><input type="radio" name="format_option" value="標準4:5・1セット">標準のInstagramフィード向け4:5・1セット</label>
+      <label><input type="radio" name="format_option" value="別媒体も相談">ほかのサイズ・媒体向けも相談したい</label>
+      <label><input type="radio" name="format_option" value="提案希望">よく分からないので提案してほしい</label>
+    </div>
     <label class="q">公開したい時期・期日があれば<input type="text" name="deadline"></label>
+    <label class="q">連絡時のお名前・LINE表示名（漫画に載せるお名前と違う場合のみ）<span class="hint">回答と別送写真を同じ方のものとして確認するために使います。同じ場合は空欄で大丈夫です</span><input type="text" name="contact_name"></label>
+
+    <details class="monitor">
+      <summary>無料モニターとして参加する方へ</summary>
+      <p class="sec-note" style="margin-top:10px">該当する内容を確認してください。公開範囲は、制作前にもう一度相談して決めます。</p>
+      <div class="opts">
+        <label><input type="radio" name="monitor_social_permission" value="協力できる">完成した漫画をご自身のSNSで掲載することに協力できる</label>
+        <label><input type="radio" name="monitor_social_permission" value="相談したい">SNS掲載は相談したい</label>
+        <label><input type="radio" name="monitor_portfolio_permission" value="許可する">制作者の実績・ポートフォリオへの掲載を許可する</label>
+        <label><input type="radio" name="monitor_portfolio_permission" value="条件を相談したい">実績掲載の範囲を相談したい</label>
+        <label><input type="radio" name="monitor_feedback_permission" value="協力できる">制作後の感想・アンケートに協力できる</label>
+        <label><input type="radio" name="monitor_feedback_permission" value="難しい">感想・アンケートへの協力は難しい</label>
+        <label><input type="radio" name="monitor_metrics_permission" value="共有できる">可能な範囲で投稿後の閲覧数・保存・問い合わせなどを共有できる</label>
+        <label><input type="radio" name="monitor_metrics_permission" value="難しい">投稿後の反応共有は難しい</label>
+      </div>
+      <label class="q">公開について不安なこと、相談したいことがあれば<textarea class="short" name="monitor_note"></textarea></label>
+    </details>
+
     <label class="q">修正の進め方の確認</label>
     <div class="opts">
       <label><input type="checkbox" name="kakunin" value="確認済み">あらすじ・構成の段階でしっかり確認し、完成ページの修正は2ラウンドまで（1ラウンド内は全ページ・何箇所でもOK）、納品後の文字の微修正は自分でできる — を確認しました</label>
@@ -320,11 +722,15 @@
 
   <!-- 送信 -->
   <div class="card finish">
-    <img src="decor/sec6.png" alt="">
-    <h2 style="color:var(--pink-deep); margin:12px 0 4px">ご記入ありがとうございました！</h2>
-    <p style="font-size:14px; margin:0">下のボタンで回答をコピーして、<strong>LINEまたはメールに貼り付けて送信</strong>してください。<br>このあと内容を拝見して、<strong>LINEで2〜3個だけ深掘りの質問</strong>をお送りします。書ききれなかったところは、そこで一緒に埋めていきましょう。</p>
-    <button type="button" class="btn" id="copyBtn">回答をコピーする</button>
-    <div id="copied">コピーしました！ そのままLINE・メールに貼り付けて送ってください</div>
+    <div class="finish-mark" aria-hidden="true">✓</div>
+    <h2 style="color:var(--accent-deep); margin:12px 0 4px">ご記入ありがとうございました！</h2>
+    <p style="font-size:14px; margin:0">このページだけでは回答は送信されません。次の手順で、担当者へお送りください。</p>
+    <ol class="send-steps"><li>回答をコピーする</li><li>LINEまたはメールを開く</li><li>貼り付けて送信する</li></ol>
+    <div class="btn-row">
+      <button type="button" class="btn" id="copyBtn">回答をコピーする</button>
+      <button type="button" class="btn share" id="shareBtn">スマホで送信先を選ぶ</button>
+    </div>
+    <div id="copied">コピーしました！ LINE・メールを開いて貼り付け、送信してください</div>
     <textarea id="output" readonly></textarea>
     <div style="margin-top:18px"><button type="button" class="btn sub" id="clearBtn">下書きを消して最初からやり直す</button></div>
   </div>
@@ -332,13 +738,40 @@
   </form>
 </div>
 
-<div class="savebar" id="savebar">自動保存はまだありません</div>
+<div class="savebar" id="savebar">下書き自動保存 ON</div>
 
 <script>
 (function () {
-  var KEY = "hearing-draft-v2";
+  var KEY = "hearing-draft-v8";
   var form = document.getElementById("f");
   var savebar = document.getElementById("savebar");
+  var saveMotionTimer = null;
+  var offerDetails = document.getElementById("offerDetails");
+  var peopleDetails = document.getElementById("peopleDetails");
+
+  function updateConditionalSections() {
+    var goal = form.querySelector('input[name="goal_type"]:checked');
+    if (offerDetails) {
+      offerDetails.open = !!goal && (goal.value === "相談・申込につなげたい" || goal.value === "採用・仲間集めにつなげたい");
+    }
+
+    var charaHow = form.querySelector('input[name="chara_how"]:checked');
+    var noOtherPeople = !!charaHow && charaHow.value === "登場人物なし";
+    if (peopleDetails) peopleDetails.hidden = noOtherPeople;
+    var noPeoplePermission = form.querySelector('input[name="people_permission"][value="登場人物なし"]');
+    if (noPeoplePermission) {
+      if (noOtherPeople) noPeoplePermission.checked = true;
+      else if (noPeoplePermission.checked) noPeoplePermission.checked = false;
+    }
+  }
+
+  function pulseClass(element, className, duration) {
+    if (!element) return;
+    element.classList.remove(className);
+    void element.offsetWidth;
+    element.classList.add(className);
+    window.setTimeout(function () { element.classList.remove(className); }, duration || 500);
+  }
 
   function collect() {
     var data = {};
@@ -358,6 +791,8 @@
       localStorage.setItem(KEY, JSON.stringify(collect()));
       var t = new Date();
       savebar.textContent = "下書きを自動保存しました（" + t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0") + "）";
+      savebar.classList.remove("is-saving");
+      pulseClass(savebar, "is-saved", 420);
     } catch (e) { savebar.textContent = "自動保存できませんでした"; }
   }
 
@@ -379,41 +814,105 @@
   var timer = null;
   form.addEventListener("input", function () {
     clearTimeout(timer);
+    clearTimeout(saveMotionTimer);
+    savebar.textContent = "下書きを保存中…";
+    savebar.classList.remove("is-saved");
+    savebar.classList.add("is-saving");
+    saveMotionTimer = window.setTimeout(function () { savebar.classList.remove("is-saving"); }, 380);
     timer = setTimeout(save, 600);
   });
 
+  form.addEventListener("change", function (event) {
+    var target = event.target;
+    if (!target || (target.type !== "radio" && target.type !== "checkbox")) return;
+    var option = target.closest(".opts label");
+    if (option) pulseClass(option, "choice-pop", 340);
+    if (target.name === "goal_type" || target.name === "chara_how") updateConditionalSections();
+  });
+
+  // スクロール位置に合わせて現在の項目を表示
+  var stepCards = Array.prototype.slice.call(document.querySelectorAll(".card[data-step]"));
+  var stepText = document.getElementById("stepText");
+  var progressFill = document.getElementById("progressFill");
+  var currentStep = 0;
+  function showStep(step) {
+    stepText.textContent = step + " / " + stepCards.length;
+    progressFill.style.width = ((step / stepCards.length) * 100) + "%";
+    if (step !== currentStep) {
+      currentStep = step;
+      pulseClass(progressFill, "is-moving", 650);
+    }
+  }
+  if ("IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) showStep(Number(entry.target.getAttribute("data-step")));
+      });
+    }, { rootMargin: "-20% 0px -65% 0px", threshold: 0 });
+    stepCards.forEach(function (card) { observer.observe(card); });
+  }
+
+  // 章が画面に入ったときだけ、一度だけ扉コマを動かす
+  var revealTargets = Array.prototype.slice.call(document.querySelectorAll(".card"));
+  if ("IntersectionObserver" in window) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-revealed");
+        revealObserver.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px 0px -25% 0px", threshold: 0.01 });
+    revealTargets.forEach(function (card) { revealObserver.observe(card); });
+  } else {
+    revealTargets.forEach(function (card) { card.classList.add("is-revealed"); });
+  }
+
   // 回答テキスト生成
   var LABELS = [
-    ["■ 1. 完成形のイメージ", null],
-    ["近いサンプル", "sample_pref"], ["どちらとも違う場合のひとこと", "sample_pref_note"],
-    ["漫画全体の雰囲気", "tone"], ["漫画を見た人にどうなってほしいか", "goal"],
-    ["掲載先", "place"], ["他媒体の場所", "place_other"], ["参考にしたい漫画・漫画家", "fav_manga"],
+    ["■ 1. 届けたい相手とゴール", null],
+    ["今回の主目的", "goal_type"], ["実際に思い浮かぶ読者", "reader_anchor"],
+    ["思い浮かべた一人が話した悩みの言葉", "customer_problem_scene"],
+    ["案内したい商品・サービス・活動", "featured_offer"], ["読後に取ってほしい行動", "desired_action"],
+    ["実際の案内先URL", "destination_url"], ["読後に残したい気持ち", "tone"],
+    ["最初に置く場所", "primary_channel"], ["その他の掲載先", "secondary_channels"],
+    ["物語のテンポ・読み心地", "reading_preference"],
     ["■ 2. あなたとお仕事のこと", null],
     ["お名前（漫画に載せる表記）", "name"], ["肩書き", "title"], ["サービス内容", "service"],
-    ["お客様が出会う前に困っていること", "customer_pain"], ["Instagramアカウント名", "insta"],
+    ["お客様に共通する、出会う前の状態", "customer_before_problem"],
+    ["サービス後のお客様の変化", "customer_after_result"], ["実際のお客様の言葉", "actual_customer_quote"],
+    ["成果・お客様の言葉の掲載許可", "quote_publish_permission"], ["Instagram", "insta"],
+    ["Threads", "threads"], ["その他の発信ページ", "main_profile_url"],
     ["■ 3. あなたの物語", null],
-    ["①転機: きっかけになった出来事", "turning_what"], ["①転機: いつ頃", "turning_when"], ["①転機: 言われた言葉", "turning_words"],
+    ["①転機: きっかけになった出来事", "turning_what"], ["①転機: いつ頃", "turning_when"], ["①転機: 言葉・決めたこと／最初の行動", "turning_words"],
     ["②転機の前: 悩んでいたこと", "before_pain"], ["②転機の前: その頃の毎日", "before_days"], ["②転機の前: つらかった一言", "before_words"],
-    ["③今: うれしかった瞬間", "joy_moment"], ["③今: お客様に言われた言葉", "joy_words"],
+    ["③うまくいかなかったこと", "setback"], ["③変えた考え方・行動", "change_action"],
+    ["④今: うれしかった瞬間", "joy_moment"], ["④これから実現したい未来", "future"],
     ["（任意）子どもの頃の思い出", "childhood"],
     ["■ 4. 入れたいこと・入れたくないこと", null],
     ["必ず描いてほしい場面①", "must1"], ["必ず描いてほしい場面②", "must2"], ["必ず描いてほしい場面③", "must3"],
-    ["触れてほしくない話題", "ng"],
+    ["触れてほしくない話題", "ng"], ["伏せたい情報", "anonymize_notes"], ["表現に注意が必要な内容", "regulated_expression_notes"],
     ["■ 5. 見た目・絵柄", null],
-    ["絵柄", "style"], ["髪型・髪色", "hair"], ["普段の服装", "fashion"], ["特徴（メガネ等）", "accessory"],
-    ["顔の再現度", "face"], ["写真のAI参照同意", "photo_consent"], ["納品後の写真の扱い", "photo_after"],
-    ["■ 5-2. あなた以外の登場人物", null],
+    ["絵を見た瞬間に持ってほしい印象", "style"], ["避けたい見た目", "style_avoid"], ["使用色・避けたい色", "brand_colors"],
+    ["絵柄決定フローの確認", "style_direction_ack"],
+    ["髪型・髪色", "hair"], ["普段の服装", "fashion"], ["特徴（メガネ等）", "accessory"],
+    ["本人らしさの取り入れ方", "face"], ["写真のAI参照同意", "photo_consent"], ["納品後の写真の扱い", "photo_after"],
+    ["■ 6. あなた以外の登場人物", null],
+    ["登場人物の描き方", "chara_how"],
     ["1人目 関係", "chara1_rel"], ["1人目 特徴", "chara1_desc"],
     ["2人目 関係", "chara2_rel"], ["2人目 特徴", "chara2_desc"],
     ["3人目 関係", "chara3_rel"], ["3人目 特徴", "chara3_desc"],
-    ["登場人物の描き方", "chara_how"],
-    ["■ 6. 仕上げについて", null],
-    ["誘導文の希望", "cta"], ["公開したい時期", "deadline"], ["修正の進め方", "kakunin"]
+    ["登場人物の公開確認", "people_permission"],
+    ["■ 7. 公開と仕上げについて", null],
+    ["最後の案内文に入れたい言葉", "cta"], ["納品サイズ", "format_option"],
+    ["公開したい時期", "deadline"], ["連絡時のお名前・LINE表示名", "contact_name"],
+    ["モニター: SNS掲載", "monitor_social_permission"], ["モニター: 実績掲載", "monitor_portfolio_permission"],
+    ["モニター: 感想", "monitor_feedback_permission"], ["モニター: 反応共有", "monitor_metrics_permission"],
+    ["公開についての相談", "monitor_note"], ["修正の進め方", "kakunin"]
   ];
 
   function buildText() {
     var data = collect();
-    var lines = ["【ストーリー漫画 ヒアリングノート回答】", ""];
+    var lines = ["【ストーリー漫画 制作ヒアリング回答】", "schema_version: 8.0", ""];
     LABELS.forEach(function (row) {
       var label = row[0], key = row[1];
       if (!key) { lines.push("", label); return; }
@@ -440,15 +939,29 @@
     } else { fallback(); }
   });
 
+  var shareBtn = document.getElementById("shareBtn");
+  if (navigator.share) {
+    shareBtn.style.display = "inline-block";
+    shareBtn.addEventListener("click", function () {
+      save();
+      navigator.share({
+        title: "ストーリー漫画 制作ヒアリング回答",
+        text: buildText()
+      }).catch(function () {});
+    });
+  }
+
   document.getElementById("clearBtn").addEventListener("click", function () {
     if (!confirm("下書きをすべて消します。よろしいですか？")) return;
     localStorage.removeItem(KEY);
     form.reset();
+    updateConditionalSections();
     savebar.textContent = "下書きを消しました";
     window.scrollTo(0, 0);
   });
 
   restore();
+  updateConditionalSections();
 })();
 </script>
 </body>
