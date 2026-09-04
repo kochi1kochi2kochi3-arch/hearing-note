@@ -269,9 +269,17 @@
   }
 
   /* 回答の流れを楽しくする、短い漫画的モーション */
-  @keyframes hero-enter {
-    from { opacity: 0; transform: translate(-14px, 6px); }
-    to { opacity: 1; transform: translate(0, 0); }
+  @keyframes hero-title-slide {
+    from { opacity: 0; transform: translateX(-24px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes hero-kicker-enter {
+    from { opacity: 0; transform: translateY(-5px) rotate(-1deg); }
+    to { opacity: 1; transform: translateY(0) rotate(-1deg); }
+  }
+  @keyframes hero-copy-enter {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
   }
   @keyframes panel-enter {
     from { opacity: 0; translate: 0 12px; }
@@ -319,7 +327,9 @@
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .hero .title { animation: hero-enter .7s cubic-bezier(.2,.8,.2,1) both; }
+    .hero .kicker { animation: hero-kicker-enter .32s ease-out .04s both; }
+    .hero h1 { animation: hero-title-slide .68s cubic-bezier(.2,.8,.2,1) .1s both; }
+    .hero p { animation: hero-copy-enter .38s ease-out .38s both; }
     .story-flow .panel { animation: panel-enter .48s cubic-bezier(.2,.8,.2,1) both; }
     .story-flow .panel.middle { animation-delay: .1s; }
     .story-flow .panel.last { animation-delay: .2s; }
