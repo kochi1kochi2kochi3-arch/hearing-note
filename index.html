@@ -154,6 +154,10 @@
     box-shadow: 5px 5px 0 rgba(45,124,120,.24);
     transition: transform .22s ease, box-shadow .22s ease;
   }
+  .chapter-art-note {
+    display: block; margin: 9px 1px 0; color: var(--ink-soft);
+    font-size: 10.5px; font-weight: 500; line-height: 1.55; text-align: left;
+  }
   .chapter-caption {
     width: fit-content; margin: 14px 0 0; padding: 7px 10px 7px 12px; color: var(--ink);
     font-family: "Kaisei Decol", serif; font-size: 12px; font-weight: 700; line-height: 1.55;
@@ -269,18 +273,6 @@
   }
 
   /* 回答の流れを楽しくする、短い漫画的モーション */
-  @keyframes hero-title-slide {
-    from { opacity: 0; transform: translateX(-24px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  @keyframes hero-kicker-enter {
-    from { opacity: 0; transform: translateY(-5px) rotate(-1deg); }
-    to { opacity: 1; transform: translateY(0) rotate(-1deg); }
-  }
-  @keyframes hero-copy-enter {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
   @keyframes panel-enter {
     from { opacity: 0; translate: 0 12px; }
     to { opacity: 1; translate: 0 0; }
@@ -327,9 +319,6 @@
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .hero .kicker { animation: hero-kicker-enter .32s ease-out .04s both; }
-    .hero h1 { animation: hero-title-slide .68s cubic-bezier(.2,.8,.2,1) .1s both; }
-    .hero p { animation: hero-copy-enter .38s ease-out .38s both; }
     .story-flow .panel { animation: panel-enter .48s cubic-bezier(.2,.8,.2,1) both; }
     .story-flow .panel.middle { animation-delay: .1s; }
     .story-flow .panel.last { animation-delay: .2s; }
@@ -337,6 +326,7 @@
     .motion-ready .card[data-step]:not(.is-revealed) .sec-head h2,
     .motion-ready .card[data-step]:not(.is-revealed) .chapter-teaser,
     .motion-ready .card[data-step]:not(.is-revealed) .chapter-caption,
+    .motion-ready .card[data-step]:not(.is-revealed) .chapter-art-note,
     .motion-ready .card[data-step]:not(.is-revealed) .chapter-visual img { opacity: 0; }
     .card.is-revealed .sec-head h2 {
       animation: chapter-title-reveal .62s cubic-bezier(.2,.8,.2,1) both;
@@ -350,6 +340,9 @@
     }
     .card.is-revealed .chapter-caption {
       animation: chapter-text-reveal .4s ease-out .36s both;
+    }
+    .card.is-revealed .chapter-art-note {
+      animation: chapter-text-reveal .38s ease-out .46s both;
     }
     .card.is-revealed .chapter-visual img {
       animation: chapter-art-reveal .72s cubic-bezier(.2,.8,.2,1) .12s both;
@@ -431,8 +424,8 @@
     <ul>
       <li><strong>全部の質問に答えなくて大丈夫です。</strong>拝見したあと、制作に必要なところだけこちらからLINEで追加質問します</li>
       <li>完璧な文章でなくてOK。箇条書き・話し言葉、大歓迎です</li>
-      <li>各質問には「→ 漫画のどこに使うか」を添えてあります。迷ったら『おまかせ』と書いて飛ばしてください</li>
-      <li>目安は <strong>合計30〜45分ほど</strong>。15分ずつ分けても大丈夫です（このページは自動で下書き保存されます。<strong>同じスマホ・パソコンで開けば続きから書けます</strong>）</li>
+      <li>各パートには「→ 漫画のどこに使うか」を添えてあります。迷ったら『おまかせ』と書いて飛ばしてください</li>
+      <li><strong>「制作に必要」の7項目だけなら約15分</strong>。すべての任意項目までじっくり書く場合は<strong>50〜70分ほど</strong>です。分けて回答しても大丈夫です（このページは自動で下書き保存されます。<strong>同じスマホ・パソコンで開けば続きから書けます</strong>）</li>
       <li>ここに書かれた内容は漫画制作以外には使いません。公開前に必ずご確認いただきます</li>
     </ul>
   </div>
@@ -476,7 +469,7 @@
       <label class="q">読んだ直後に、最初にしてほしい行動<span class="badge if-needed">該当する方</span><span class="hint">例: プロフィールを見る、LINEに登録する、相談を申し込む。「何をしてほしいか」を伺う項目です</span><input type="text" name="desired_action"></label>
       <label class="q">実際の案内先URL<span class="badge if-needed">該当する方</span><span class="hint">URLがまだない場合は「準備中」とご記入ください</span><input type="text" name="destination_url"></label>
     </details>
-    <label class="q">読み終えた人に、どんな気持ちが一番残ってほしいですか？（1つ選択）<span class="why">→ 脚本の感情の着地点を決める基準になります</span></label>
+    <label class="q">読み終えた人に、どんな気持ちが一番残ってほしいですか？（1つ選択）<span class="hint">ここでは「読後に残す感情」を伺います。物語のテンポや絵の見た目は、別の質問で確認します</span><span class="why">→ 脚本の感情の着地点を決める基準になります</span></label>
     <div class="opts">
       <label><input type="radio" name="tone" value="感動系">泣ける・感動系</label>
       <label><input type="radio" name="tone" value="共感系">「わかる…」の共感系</label>
@@ -494,7 +487,7 @@
     </div>
     <label class="q">そのほかにも掲載したい場所があれば（任意）<input type="text" name="secondary_channels"></label>
     <p class="sec-note" style="margin-top:10px">※標準納品はInstagramフィード向け4:5・1セットです。別サイズや内容違いの追加版は、制作前に対応可否と追加料金をご案内します。</p>
-    <label class="q">物語のテンポや読み心地の好みがあれば（任意）<span class="hint">例: 日常エッセイのように自然、テンポよく明るい、余韻を残して静かに読ませたい</span><span class="why">→ コマ運びや演出の参考にします。特定作品・漫画家の画風そのものをまねる制作は行いません</span><input type="text" name="reading_preference"></label>
+    <label class="q">物語の進む速さや「間」の好みがあれば（任意）<span class="hint">ここでは「コマ運び・間・スピード感」を伺います。例: 日常エッセイのように自然、テンポよく進む、余韻を残して静かに読ませたい</span><span class="why">→ コマ運びや演出の参考にします。特定作品・漫画家の画風そのものをまねる制作は行いません</span><input type="text" name="reading_preference"></label>
   </div>
 
   <!-- 2 お仕事のこと -->
@@ -596,10 +589,11 @@
         <p class="chapter-caption">あなたらしさが、主人公の表情になる。</p>
       </div>
       <figure class="chapter-visual">
-        <img src="decor/chapter-5-character-v2.jpg" alt="写真や希望からデジタルで漫画キャラクターを個別設計するイメージ" loading="lazy">
+        <img src="decor/chapter-5-character-v3.jpg" alt="回答や写真、配色をもとにデジタルで漫画キャラクターを設計している途中のイメージ" loading="lazy">
+        <figcaption class="chapter-art-note">※制作工程のイメージです。完成漫画の絵柄サンプルではありません。</figcaption>
       </figure>
     </div>
-    <label class="q">絵を見た瞬間、どんな印象を持ってほしいですか？（最優先を1つ）<span class="badge needed">制作に必要</span></label>
+    <label class="q">絵そのものを見た瞬間、どんな印象を持ってほしいですか？（最優先を1つ）<span class="badge needed">制作に必要</span><span class="hint">ここでは「見た目の第一印象」を伺います。読後の気持ちや物語のテンポとは別の項目です</span></label>
     <div class="soft-note"><strong>絵柄サンプルから選ぶ方式ではありません。</strong>この回答、普段の発信、ご本人の写真をもとに専用の絵柄設計と生成プロンプトを作ります。制作前にキャラクター設計図と代表コマをお見せし、顔・服装・絵柄をご承認いただくまでは本編へ進みません。</div>
     <div class="opts">
       <label><input type="radio" name="style" value="温かい・自然体">温かく、自然体で親しみやすい<span class="desc">落ち着いた色、手描き感、日常の空気を大切にした方向</span></label>
@@ -922,10 +916,17 @@
 
   function buildText() {
     var data = collect();
+    var omittedKeys = {};
+    if (data.chara_how === "登場人物なし") {
+      ["chara1_rel", "chara1_desc", "chara2_rel", "chara2_desc", "chara3_rel", "chara3_desc"].forEach(function (key) {
+        omittedKeys[key] = true;
+      });
+    }
     var lines = ["【ストーリー漫画 制作ヒアリング回答】", "schema_version: 8.0", ""];
     LABELS.forEach(function (row) {
       var label = row[0], key = row[1];
       if (!key) { lines.push("", label); return; }
+      if (omittedKeys[key]) return;
       var v = data[key];
       if (Array.isArray(v)) v = v.join("、");
       if (!v) v = "（未記入）";
