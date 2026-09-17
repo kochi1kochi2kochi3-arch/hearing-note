@@ -425,7 +425,7 @@
       <li><strong>全部の質問に答えなくて大丈夫です。</strong>拝見したあと、制作に必要なところだけこちらからLINEで追加質問します</li>
       <li>完璧な文章でなくてOK。箇条書き・話し言葉、大歓迎です</li>
       <li>各パートには「→ 漫画のどこに使うか」を添えてあります。迷ったら『おまかせ』と書いて飛ばしてください</li>
-      <li><strong>「制作に必要」の7項目だけなら約15分</strong>。すべての任意項目までじっくり書く場合は<strong>50〜70分ほど</strong>です。分けて回答しても大丈夫です（このページは自動で下書き保存されます。<strong>同じスマホ・パソコンで開けば続きから書けます</strong>）</li>
+      <li><strong>「制作に必要」の7項目だけなら約15分</strong>。すべての任意項目までじっくり書く場合は<strong>50〜75分ほど</strong>です。分けて回答しても大丈夫です（このページは自動で下書き保存されます。<strong>同じスマホ・パソコンで開けば続きから書けます</strong>）</li>
       <li>ここに書かれた内容は漫画制作以外には使いません。公開前に必ずご確認いただきます</li>
     </ul>
   </div>
@@ -474,6 +474,8 @@
       <label><input type="radio" name="tone" value="感動系">泣ける・感動系</label>
       <label><input type="radio" name="tone" value="共感系">「わかる…」の共感系</label>
       <label><input type="radio" name="tone" value="前向き系">明るく前向き系</label>
+      <label><input type="radio" name="tone" value="安心・信頼系">安心できる・信頼が残る</label>
+      <label><input type="radio" name="tone" value="行動喚起系">自分も一歩動いてみようと思える</label>
       <label><input type="radio" name="tone" value="おまかせ">おまかせ</label>
     </div>
     <label class="q">この漫画を最初に置く場所はどこですか？（1つ選択）<span class="badge needed">制作に必要</span><span class="hint">ここでは「最初に読まれる場所」を伺います。画面の見え方や、1ページ目のつかみを考える材料になります</span></label>
@@ -487,7 +489,14 @@
     </div>
     <label class="q">そのほかにも掲載したい場所があれば（任意）<input type="text" name="secondary_channels"></label>
     <p class="sec-note" style="margin-top:10px">※標準納品はInstagramフィード向け4:5・1セットです。別サイズや内容違いの追加版は、制作前に対応可否と追加料金をご案内します。</p>
-    <label class="q">物語の進む速さや「間」の好みがあれば（任意）<span class="hint">ここでは「コマ運び・間・スピード感」を伺います。例: 日常エッセイのように自然、テンポよく進む、余韻を残して静かに読ませたい</span><span class="why">→ コマ運びや演出の参考にします。特定作品・漫画家の画風そのものをまねる制作は行いません</span><input type="text" name="reading_preference"></label>
+    <label class="q">物語の進む速さや「間」の好みがあれば（任意）<span class="hint">入力欄を押すと候補が出ます。自由に書き換えても、「おまかせ」でも大丈夫です</span><span class="why">→ コマ数やカメラを直接選んでいただくのではなく、この回答からこちらで読み心地を設計します。特定作品・漫画家の画風そのものをまねる制作は行いません</span><input type="text" name="reading_preference" list="readingPreferenceOptions"></label>
+    <datalist id="readingPreferenceOptions">
+      <option value="余韻を残して静かに読ませたい"></option>
+      <option value="日常会話のように自然に進めたい"></option>
+      <option value="テンポよく読み進められる形にしたい"></option>
+      <option value="力強くドラマチックに見せたい"></option>
+      <option value="内容に合わせて提案してほしい"></option>
+    </datalist>
   </div>
 
   <!-- 2 お仕事のこと -->
@@ -584,9 +593,9 @@
   <div class="card" data-step="5">
     <div class="chapter-opening">
       <div class="chapter-copy">
-        <div class="sec-head"><img src="decor/sec5.png" alt=""><h2>5. 見た目・絵柄について</h2></div>
-        <p class="chapter-teaser">回答と写真から、あなた専用の主人公を設計します。</p>
-        <p class="chapter-caption">あなたらしさが、主人公の表情になる。</p>
+        <div class="sec-head"><img src="decor/sec5.png" alt=""><h2>5. 見た目・画面づくりについて</h2></div>
+        <p class="chapter-teaser">回答と写真から、主人公と作品全体の見せ方を設計します。</p>
+        <p class="chapter-caption">あなたらしさを、絵・コマ・文字まで一つに揃える。</p>
       </div>
       <figure class="chapter-visual">
         <img src="decor/chapter-5-character-v3.jpg" alt="回答や写真、配色をもとにデジタルで漫画キャラクターを設計している途中のイメージ" loading="lazy">
@@ -594,7 +603,7 @@
       </figure>
     </div>
     <label class="q">絵そのものを見た瞬間、どんな印象を持ってほしいですか？（最優先を1つ）<span class="badge needed">制作に必要</span><span class="hint">ここでは「見た目の第一印象」を伺います。読後の気持ちや物語のテンポとは別の項目です</span></label>
-    <div class="soft-note"><strong>絵柄サンプルから選ぶ方式ではありません。</strong>この回答、普段の発信、ご本人の写真をもとに専用の絵柄設計と生成プロンプトを作ります。制作前にキャラクター設計図と代表コマをお見せし、顔・服装・絵柄をご承認いただくまでは本編へ進みません。</div>
+    <div class="soft-note"><strong>絵柄サンプルから選ぶ方式ではありません。</strong>この回答、普段の発信、ご本人の写真をもとに、絵柄だけでなく色・コマ割り・カメラ・文字・吹き出し・最後の案内まで案件専用に設計します。制作前にキャラクター設計図と代表コマ、最初の完成ページをお見せし、方向性をご承認いただいてから本編へ進みます。</div>
     <div class="opts">
       <label><input type="radio" name="style" value="温かい・自然体">温かく、自然体で親しみやすい<span class="desc">落ち着いた色、手描き感、日常の空気を大切にした方向</span></label>
       <label><input type="radio" name="style" value="信頼感・プロフェッショナル">信頼感があり、プロフェッショナル<span class="desc">落ち着いた構図と色で、専門性や仕事への姿勢が伝わる方向</span></label>
@@ -602,18 +611,33 @@
       <label><input type="radio" name="style" value="明快・読みやすい">明快で、内容がすっと伝わる<span class="desc">表情と場面が分かりやすく、スマホで読みやすい方向</span></label>
       <label><input type="radio" name="style" value="提案希望">内容と普段の発信を見て提案してほしい</label>
     </div>
-    <label class="q">避けたい見た目があればお選びください（複数可）<span class="why">→ 専用プロンプトの「避ける表現」に反映します</span></label>
+    <label class="q">絵柄や雰囲気について、補足したい希望があれば（任意）<span class="hint">例: 力強い、漫画らしい勢い、線は柔らかく、かわいすぎない。特定の漫画家・作品そのものの模倣はできません</span><input type="text" name="style_notes"></label>
+    <label class="q">避けたい見た目・演出があればお選びください（複数可）<span class="why">→ 絵柄、コマ割り、文字、最後の案内で避ける表現に反映します</span></label>
     <div class="opts">
       <label><input type="checkbox" name="style_avoid" value="幼く見える">子どもっぽい・幼く見える</label>
       <label><input type="checkbox" name="style_avoid" value="目が大きい・キラキラが強い">目が大きい・キラキラが強い</label>
       <label><input type="checkbox" name="style_avoid" value="写真のようにリアル">写真のようにリアル</label>
       <label><input type="checkbox" name="style_avoid" value="デフォルメが強い">デフォルメが強い</label>
       <label><input type="checkbox" name="style_avoid" value="色が暗い・重い">色が暗い・重い</label>
+      <label><input type="checkbox" name="style_avoid" value="演出が大げさ・ドラマチックすぎる">演出が大げさ・ドラマチックすぎる</label>
+      <label><input type="checkbox" name="style_avoid" value="ポップ・コミカルすぎる">ポップ・コミカルすぎる</label>
+      <label><input type="checkbox" name="style_avoid" value="堅く企業資料のように見える">堅く企業資料のように見える</label>
+      <label><input type="checkbox" name="style_avoid" value="売り込み感が強い">売り込み感が強い</label>
+      <label><input type="checkbox" name="style_avoid" value="コマや文字が詰まって見える">コマや文字が詰まって見える</label>
       <label><input type="checkbox" name="style_avoid" value="特になし・提案希望">特になし・提案してほしい</label>
     </div>
     <label class="q">普段の発信でよく使う色や、避けたい色があれば<span class="hint">例: ネイビーとベージュ／原色は避けたい。なければ「おまかせ」で大丈夫です</span><input type="text" name="brand_colors"></label>
+    <label class="q">あなたらしさが伝わる場所・仕事道具・持ち物・ブランド資料があれば（任意）<span class="hint">例: 相談室の窓、愛用のノート、施術ベッド、店舗の木製カウンター、普段のCanva投稿。URLや「特になし」でも大丈夫です</span><span class="why">→ 背景や小物を、誰にでも当てはまる素材ではなく、この作品らしい視覚モチーフにします</span><textarea class="short" name="visual_identity_cues"></textarea></label>
+    <label class="q">文字や吹き出しは、どんな印象が近いですか？（1つ選択）<span class="why">→ フォント名を選ぶ質問ではありません。完成ページの文字の太さ・形・余白を決めます</span></label>
+    <div class="opts">
+      <label><input type="radio" name="lettering_mood" value="柔らかく親しみやすい">柔らかく親しみやすい</label>
+      <label><input type="radio" name="lettering_mood" value="すっきり信頼感がある">すっきりして信頼感がある</label>
+      <label><input type="radio" name="lettering_mood" value="元気で力強い">元気で力強い</label>
+      <label><input type="radio" name="lettering_mood" value="上質でシンプル">上質でシンプル</label>
+      <label><input type="radio" name="lettering_mood" value="提案希望">内容に合わせて提案してほしい</label>
+    </div>
     <div class="opts" style="margin-top:12px">
-      <label><input type="checkbox" name="style_direction_ack" value="確認済み">回答と写真から絵柄提案を作り、個別のキャラクター設計図と代表コマを見てから正式決定することを確認しました</label>
+      <label><input type="checkbox" name="style_direction_ack" value="確認済み">回答と写真から、絵柄・キャラクター・コマ割り・文字を含む専用の見せ方を提案し、キャラクター設計図・代表コマ・最初の完成ページを見てから正式決定することを確認しました</label>
     </div>
     <div class="soft-note">次の3項目は任意です。写真を送らない場合や、写真と変えて描いてほしい点がある場合にご記入ください。</div>
     <label class="q">髪型・髪色（任意）<input type="text" name="hair"></label>
@@ -692,12 +716,25 @@
       </figure>
     </div>
     <label class="q">最後の案内文に、入れたい言葉があれば（任意）<span class="hint">例:「無料相談・サービス詳細はプロフィールから」。空欄の場合は、1章の「してほしい行動」と案内先URLからこちらでご提案します</span><input type="text" name="cta"></label>
+    <label class="q">最後の案内は、どのくらいの強さが合いそうですか？（1つ選択）<span class="why">→ 同じ案内内容でも、やさしく誘うか、次の行動を明確に示すかでページの印象が変わります</span></label>
+    <div class="opts">
+      <label><input type="radio" name="cta_tone" value="やさしく案内する">やさしく、無理のない形で案内したい</label>
+      <label><input type="radio" name="cta_tone" value="行動を明確に促す">次にしてほしい行動を、はっきり伝えたい</label>
+      <label><input type="radio" name="cta_tone" value="力強く募集する">募集・参加を、力強く呼びかけたい</label>
+      <label><input type="radio" name="cta_tone" value="提案希望">内容と読者に合わせて提案してほしい</label>
+    </div>
     <p class="sec-note" style="margin-top:10px">※標準の漫画では、主な読者と案内先をそれぞれ一つに絞ります。読者や案内先が異なる追加版は、別構成・別見積りになる場合があります。</p>
     <label class="q">納品サイズについて<span class="hint">1章の「最初に置く場所」は物語の見せ方、ここでは画像サイズの希望を確認します</span></label>
     <div class="opts">
       <label><input type="radio" name="format_option" value="標準4:5・1セット">標準のInstagramフィード向け4:5・1セット</label>
       <label><input type="radio" name="format_option" value="別媒体も相談">ほかのサイズ・媒体向けも相談したい</label>
       <label><input type="radio" name="format_option" value="提案希望">よく分からないので提案してほしい</label>
+    </div>
+    <label class="q">納品後に、ご自身で文字を変更できるCanva編集リンクは必要ですか？<span class="hint">完成PNGは全員に納品します。編集リンクが必要な場合だけ、対応方法と範囲を制作前に確認します</span></label>
+    <div class="opts">
+      <label><input type="radio" name="editable_link_needed" value="必要">Canva編集リンクが必要</label>
+      <label><input type="radio" name="editable_link_needed" value="不要">完成PNGだけでよい</label>
+      <label><input type="radio" name="editable_link_needed" value="相談したい">よく分からないので相談したい</label>
     </div>
     <label class="q">公開したい時期・期日があれば<input type="text" name="deadline"></label>
     <label class="q">連絡時のお名前・LINE表示名（漫画に載せるお名前と違う場合のみ）<span class="hint">回答と別送写真を同じ方のものとして確認するために使います。同じ場合は空欄で大丈夫です</span><input type="text" name="contact_name"></label>
@@ -720,7 +757,7 @@
 
     <label class="q">修正の進め方の確認</label>
     <div class="opts">
-      <label><input type="checkbox" name="kakunin" value="確認済み">あらすじ・構成の段階でしっかり確認し、完成ページの修正は2ラウンドまで（1ラウンド内は全ページ・何箇所でもOK）、納品後の文字の微修正は自分でできる — を確認しました</label>
+      <label><input type="checkbox" name="kakunin" value="確認済み">あらすじ・構成・最初の完成ページの段階で方向性を確認し、完成ページの修正は2ラウンドまで（1ラウンド内は全ページ・何箇所でもOK）、納品後に自分で文字を変更できる編集リンクは希望者のみ事前相談となることを確認しました</label>
     </div>
   </div>
 
@@ -746,7 +783,7 @@
 
 <script>
 (function () {
-  var KEY = "hearing-draft-v8";
+  var KEY = "hearing-draft-v8"; // v8.1でも旧v8下書きを引き継ぐ
   var form = document.getElementById("f");
   var savebar = document.getElementById("savebar");
   var saveMotionTimer = null;
@@ -895,8 +932,10 @@
     ["■ 4. 入れたいこと・入れたくないこと", null],
     ["必ず描いてほしい場面①", "must1"], ["必ず描いてほしい場面②", "must2"], ["必ず描いてほしい場面③", "must3"],
     ["触れてほしくない話題", "ng"], ["伏せたい情報", "anonymize_notes"], ["表現に注意が必要な内容", "regulated_expression_notes"],
-    ["■ 5. 見た目・絵柄", null],
-    ["絵を見た瞬間に持ってほしい印象", "style"], ["避けたい見た目", "style_avoid"], ["使用色・避けたい色", "brand_colors"],
+    ["■ 5. 見た目・画面づくり", null],
+    ["絵を見た瞬間に持ってほしい印象", "style"], ["絵柄・雰囲気の補足希望", "style_notes"],
+    ["避けたい見た目・演出", "style_avoid"], ["使用色・避けたい色", "brand_colors"],
+    ["あなたらしさが伝わる場所・道具・資料", "visual_identity_cues"], ["文字・吹き出しの印象", "lettering_mood"],
     ["絵柄決定フローの確認", "style_direction_ack"],
     ["髪型・髪色", "hair"], ["普段の服装", "fashion"], ["特徴（メガネ等）", "accessory"],
     ["本人らしさの取り入れ方", "face"], ["写真のAI参照同意", "photo_consent"], ["納品後の写真の扱い", "photo_after"],
@@ -907,7 +946,8 @@
     ["3人目 関係", "chara3_rel"], ["3人目 特徴", "chara3_desc"],
     ["登場人物の公開確認", "people_permission"],
     ["■ 7. 公開と仕上げについて", null],
-    ["最後の案内文に入れたい言葉", "cta"], ["納品サイズ", "format_option"],
+    ["最後の案内文に入れたい言葉", "cta"], ["最後の案内の強さ", "cta_tone"], ["納品サイズ", "format_option"],
+    ["Canva編集リンクの希望", "editable_link_needed"],
     ["公開したい時期", "deadline"], ["連絡時のお名前・LINE表示名", "contact_name"],
     ["モニター: SNS掲載", "monitor_social_permission"], ["モニター: 実績掲載", "monitor_portfolio_permission"],
     ["モニター: 感想", "monitor_feedback_permission"], ["モニター: 反応共有", "monitor_metrics_permission"],
@@ -922,7 +962,7 @@
         omittedKeys[key] = true;
       });
     }
-    var lines = ["【ストーリー漫画 制作ヒアリング回答】", "schema_version: 8.0", ""];
+    var lines = ["【ストーリー漫画 制作ヒアリング回答】", "schema_version: 8.1", ""];
     LABELS.forEach(function (row) {
       var label = row[0], key = row[1];
       if (!key) { lines.push("", label); return; }
