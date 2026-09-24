@@ -354,6 +354,14 @@
     box-shadow: 5px 5px 0 var(--orange);
   }
   .btn:active { transform: translate(3px,3px); box-shadow: 2px 2px 0 var(--orange); }
+  /* LINEで送る（LINEのブランド色） */
+  .btn.line { background: #06C755; border-color: #06C755; box-shadow: 5px 5px 0 var(--ink); font-size: 17px; padding: 15px 44px; }
+  .btn.line:active { box-shadow: 2px 2px 0 var(--ink); }
+  .btn.sub-strong { background: #fff; color: var(--ink); box-shadow: 4px 4px 0 var(--line); }
+  .send-main { margin: 16px auto 6px; max-width: 420px; }
+  .send-how { font-size: 12.5px; color: var(--ink-soft); margin: 10px 0 0; }
+  details.send-other { max-width: 510px; margin: 14px auto 0; text-align: left; border-top: 1.5px dashed var(--line); padding-top: 10px; }
+  details.send-other summary { cursor: pointer; color: var(--accent-deep); font-weight: 700; font-size: 13.5px; text-align: center; }
   .btn.sub { background: #fff; color: var(--ink-soft); border: 1.5px solid var(--line); box-shadow: none; font-weight: 400; font-size: 13px; padding: 8px 20px; }
   .btn.share { background: #6C9B78; box-shadow: 0 3px 10px rgba(75,130,90,0.25); display: none; }
   #copied { display: none; color: var(--accent-deep); font-weight: 700; margin-top: 10px; }
@@ -998,13 +1006,20 @@
   <div class="card finish">
     <div class="finish-mark" aria-hidden="true">✓</div>
     <h2 style="color:var(--accent-deep); margin:12px 0 4px">ご記入ありがとうございました！</h2>
-    <p style="font-size:14px; margin:0">このページだけでは回答は送信されません。次の手順で、担当者へお送りください。</p>
-    <ol class="send-steps"><li>回答をコピーする</li><li>LINEまたはメールを開く</li><li>貼り付けて送信する</li></ol>
-    <div class="btn-row">
-      <button type="button" class="btn" id="copyBtn">回答をコピーする</button>
-      <button type="button" class="btn share" id="shareBtn">スマホで送信先を選ぶ</button>
+    <p style="font-size:14px; margin:0">このページだけでは回答は送信されません。下のボタンから、担当者へお送りください。</p>
+    <div class="send-main">
+      <button type="button" class="btn line" id="lineBtn">LINEで送る</button>
+      <p class="send-how">LINEが開き、回答が入力された状態になります。送り先に担当者を選んで、送信してください</p>
     </div>
-    <div id="copied">コピーしました！ LINE・メールを開いて貼り付け、送信してください</div>
+    <details class="send-other">
+      <summary>LINEがうまく開かないとき・メールで送るとき</summary>
+      <ol class="send-steps"><li>「回答をコピーする」を押す</li><li>LINEまたはメールを開く</li><li>貼り付けて送信する</li></ol>
+      <div class="btn-row">
+        <button type="button" class="btn sub-strong" id="copyBtn">回答をコピーする</button>
+        <button type="button" class="btn share" id="shareBtn">ほかのアプリで送る</button>
+      </div>
+      <div id="copied">コピーしました！ LINE・メールを開いて貼り付け、送信してください</div>
+    </details>
     <textarea id="output" readonly></textarea>
     <div style="margin-top:18px"><button type="button" class="btn sub" id="clearBtn">下書きを消して最初からやり直す</button></div>
   </div>
@@ -1596,6 +1611,7 @@
       if (String(v).indexOf("\n") >= 0) lines.push("・" + label + ":", v);
       else lines.push("・" + label + ": " + v);
     });
+    lines.push("", "【回答ここまで】");
     return lines.join("\n");
   }
 
@@ -1611,6 +1627,16 @@
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(done, fallback);
     } else { fallback(); }
+  });
+
+  // LINEで送る。公式アカウントのIDを入れると、その宛先へ直接送る画面になる（空なら送り先を選ぶ画面）
+  var LINE_OA_ID = "";
+  document.getElementById("lineBtn").addEventListener("click", function () {
+    save();
+    var text = encodeURIComponent(buildText());
+    location.href = LINE_OA_ID
+      ? "https://line.me/R/oaMessage/" + encodeURIComponent(LINE_OA_ID) + "/?" + text
+      : "https://line.me/R/msg/text/?" + text;
   });
 
   var shareBtn = document.getElementById("shareBtn");
