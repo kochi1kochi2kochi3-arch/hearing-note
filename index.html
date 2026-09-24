@@ -380,11 +380,132 @@
     .btn { width: 100%; margin-top: 8px; }
     .progress-card { top: 5px; }
   }
+
+  /* ===== 1章ずつ見せる（2026-09-24）=====
+     JSが動いたときだけ html.paged を付ける。JSが無ければ従来どおり全章を縦に並べる */
+  .paged .card[data-step]:not(.is-current),
+  .paged .card.finish:not(.is-current),
+  .paged .card.rest:not(.is-current),
+  .paged #landing.is-away { display: none; }
+  .card { scroll-margin-top: 118px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .paged .card.is-current.is-entering { animation: page-in .38s cubic-bezier(.2,.8,.2,1) both; }
+    .paged .card.is-current.is-entering.from-prev { animation-name: page-in-prev; }
+  }
+  @keyframes page-in { from { opacity: 0; transform: translateX(26px) rotate(.4deg); } to { opacity: 1; transform: none; } }
+  @keyframes page-in-prev { from { opacity: 0; transform: translateX(-26px) rotate(-.4deg); } to { opacity: 1; transform: none; } }
+
+  .chapter-time {
+    display: inline-block; margin: 10px 0 0; padding: 2px 10px; border-radius: 999px;
+    font-size: 12px; font-weight: 700; color: var(--accent-deep); background: var(--accent-soft);
+  }
+  .step-nav { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 30px; padding-top: 18px; border-top: 1.5px dashed var(--line); }
+  .step-nav .btn { margin-top: 0; width: auto; }
+  .step-nav .btn.sub { padding: 10px 16px; }
+  .step-nav .spacer { flex: 1; }
+  @media (max-width: 520px) {
+    .step-nav { flex-direction: column-reverse; align-items: stretch; }
+    .step-nav .btn { width: 100%; }
+  }
+
+  /* ===== あなたのネーム（7コマの進み具合）===== */
+  .progress-meta { align-items: baseline; }
+  .progress-meta #stepLabel { font-weight: 700; color: var(--ink); font-size: 13px; }
+  .name-strip { display: flex; gap: 4px; height: 44px; }
+  .name-strip button {
+    flex: var(--w, 1); min-width: 0; padding: 0; position: relative; overflow: hidden; cursor: pointer;
+    border: 1.5px solid var(--ink); background: #FFFEFB; border-radius: 2px;
+    font: inherit; color: var(--line); font-size: 12px; font-weight: 700;
+  }
+  .name-strip button:focus-visible { outline: 3px solid var(--mustard); outline-offset: 1px; }
+  .name-strip img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+  .name-strip .n { position: relative; z-index: 1; }
+  .name-strip .is-done img { opacity: 1; }
+  .name-strip .is-done .n {
+    position: absolute; left: 2px; bottom: 1px; color: #fff; font-size: 9.5px;
+    background: var(--ink); padding: 0 4px; line-height: 1.5;
+  }
+  .name-strip .is-current { border-width: 2.5px; border-color: var(--orange); color: var(--orange); background: #FFF7E9; }
+  .name-strip .is-current:not(.is-done)::after {
+    content: ""; position: absolute; inset: 3px; border: 1.5px dashed var(--orange); opacity: .6;
+  }
+  .name-note { margin: 5px 0 0; font-size: 11px; color: var(--ink-soft); }
+  @media (prefers-reduced-motion: no-preference) {
+    .name-strip .ink-in img { animation: ink-in .7s cubic-bezier(.2,.8,.2,1) both; }
+    .name-strip .ink-in { animation: panel-stamp .5s cubic-bezier(.2,.9,.25,1.2) .5s both; }
+  }
+  @keyframes ink-in { from { opacity: 0; clip-path: inset(0 100% 0 0); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
+  @keyframes panel-stamp { 0% { transform: scale(1); } 45% { transform: scale(1.12) rotate(-2deg); } 100% { transform: scale(1); } }
+
+  /* ===== 3章: あなたの言葉が吹き出しになる ===== */
+  .bubble-preview { margin: 10px 0 4px; }
+  .bubble-preview .bp-cap { font-size: 12px; font-weight: 700; color: var(--accent-deep); margin: 0 0 6px; }
+  .bubble-preview .bp-panel {
+    position: relative; min-height: 236px; padding: 16px 14px 22px; border: 2px solid var(--ink); background-color: #FFFEFB;
+    background-image: radial-gradient(rgba(38,52,59,.12) 1px, transparent 1px); background-size: 6px 6px;
+    display: flex; flex-direction: row-reverse; justify-content: flex-start; align-items: flex-start; gap: 16px;
+    box-shadow: 4px 4px 0 rgba(38,52,59,.10);
+  }
+  .bubble-preview .bubble {
+    position: relative; writing-mode: vertical-rl; text-orientation: mixed;
+    max-height: 196px; padding: 16px 11px; background: #fff; border: 2px solid var(--ink);
+    border-radius: 50% / 34%; font-size: 14px; font-weight: 600; line-height: 1.55; letter-spacing: .04em; color: var(--ink);
+  }
+  .bubble-preview .bubble::after {
+    content: ""; position: absolute; left: -9px; bottom: 16px; width: 14px; height: 14px; background: #fff;
+    border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink); transform: skewY(28deg) rotate(12deg);
+  }
+  .bubble-preview .bubble.thought { border-radius: 42%; border-style: solid; background: #FFF8E9; }
+  .bubble-preview .bubble.thought::after { display: none; }
+  .bubble-preview .bp-note { position: absolute; right: 8px; bottom: 3px; font-size: 10px; color: var(--ink-soft); }
+  @media (prefers-reduced-motion: no-preference) {
+    .bubble-preview .bubble.pop { animation: bubble-pop .32s cubic-bezier(.2,.9,.25,1.25) both; }
+  }
+  @keyframes bubble-pop { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: scale(1); } }
+
+  /* ===== 補足の「例を見る」 ===== */
+  .hint-toggle {
+    display: inline-block; margin: 2px 0 4px; padding: 1px 10px; border: 1px solid var(--line); border-radius: 999px;
+    background: #FFFEFB; color: var(--accent-deep); font: inherit; font-size: 12px; font-weight: 500; cursor: pointer;
+  }
+  .hint-toggle[aria-expanded="true"] { background: var(--accent-soft); border-color: var(--accent); }
+
+  /* ===== 一休み・完成のネーム ===== */
+  .card.rest { text-align: center; padding-top: 36px; }
+  .card.rest h2, .card.finish h2 { font-family: "Noto Serif JP", "Kaisei Decol", serif; }
+  .card.rest p { max-width: 460px; margin: 8px auto 0; font-size: 14.5px; }
+  .name-page {
+    display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(4, 64px); gap: 6px;
+    max-width: 420px; margin: 18px auto 6px; padding: 8px; background: #fff; border: 2px solid var(--ink);
+    box-shadow: 5px 5px 0 rgba(38,52,59,.12);
+  }
+  .name-page .np { position: relative; overflow: hidden; border: 1.5px solid var(--ink); background: #FFFEFB; }
+  .name-page .np img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .name-page .np span { position: absolute; left: 3px; top: 2px; font-size: 10px; font-weight: 700; color: #fff; background: var(--ink); padding: 0 4px; }
+  .name-page .np:nth-child(1) { grid-area: 1 / 1 / 2 / 5; }
+  .name-page .np:nth-child(2) { grid-area: 1 / 5 / 2 / 7; }
+  .name-page .np:nth-child(3) { grid-area: 2 / 1 / 4 / 4; }
+  .name-page .np:nth-child(4) { grid-area: 2 / 4 / 3 / 7; }
+  .name-page .np:nth-child(5) { grid-area: 3 / 4 / 4 / 7; }
+  .name-page .np:nth-child(6) { grid-area: 4 / 1 / 5 / 3; }
+  .name-page .np:nth-child(7) { grid-area: 4 / 3 / 5 / 7; }
+  .name-page .np.is-empty img { opacity: .12; filter: grayscale(1); }
+  @media (prefers-reduced-motion: no-preference) {
+    .is-current .name-page .np { animation: ink-in .6s cubic-bezier(.2,.8,.2,1) both; }
+    .is-current .name-page .np:nth-child(2) { animation-delay: .08s; }
+    .is-current .name-page .np:nth-child(3) { animation-delay: .16s; }
+    .is-current .name-page .np:nth-child(4) { animation-delay: .24s; }
+    .is-current .name-page .np:nth-child(5) { animation-delay: .32s; }
+    .is-current .name-page .np:nth-child(6) { animation-delay: .40s; }
+    .is-current .name-page .np:nth-child(7) { animation-delay: .48s; }
+  }
+  .name-page-cap { font-size: 12.5px; color: var(--ink-soft); margin: 0 0 14px; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
+  <div id="landing">
   <div class="hero">
     <img src="decor/hero-hybrid-studio-v3.jpg" alt="紙のラフ、デジタル作画画面、スマートフォンを使った漫画制作の流れ">
     <div class="title">
@@ -417,9 +538,13 @@
     </ul>
   </div>
 
+  </div>
+
   <div class="progress-card" aria-label="フォームの現在位置">
-    <div class="progress-meta"><span>現在の章・下書き自動保存</span><strong id="stepText">1 / 7</strong></div>
-    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-meta"><span id="stepLabel">現在の章・下書き自動保存</span><strong id="stepText">1 / 7</strong></div>
+    <div class="progress-track" id="progressTrack"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="name-strip" id="nameStrip" hidden></div>
+    <p class="name-note" id="nameNote" hidden>章を書き終えるたびに、あなたのネームのコマが1つ埋まります（下書きは自動保存）</p>
   </div>
 
   <form id="f">
@@ -537,11 +662,13 @@
     <label class="q">それはいつ頃ですか？<span class="hint">ざっくりでOK。例: 5年前、下の子が生まれた頃</span><input type="text" name="turning_when"></label>
     <label class="q">その瞬間を、場面で教えてください<span class="hint">どこにいて、誰と一緒で、何をしていましたか？ 目に入っていたものや、体の感じ（足が止まった・涙が出た など）も、書けるだけどうぞ。例: 金曜の夜、会社帰りの駅の改札を出たところで、足が止まって動けなくなった</span><textarea name="turning_scene"></textarea></label>
     <label class="q">そのとき、誰かに言われた一言と、あなたが返した一言は？<span class="hint">例: 夫に「しばらく休みなよ」と言われて、私は「でも…」としか言えなかった。正確でなくて大丈夫です。誰とも話していなければ、心の中でつぶやいた言葉でも</span><span class="why">→ 漫画のセリフのいちばん大事な材料になります</span><textarea class="short" name="turning_dialogue"></textarea></label>
+    <div class="bubble-preview" data-source="turning_dialogue" data-cap="あなたの言葉は、漫画ではこんな吹き出しになります（イメージ）" hidden></div>
     <label class="q">そのあと、自分で決めて最初にしたことは？<span class="hint">例: 次の日、上司に休職の相談をした／資格の資料を取り寄せた</span><textarea class="short" name="turning_words"></textarea></label>
 
     <p class="q3-head">② 抜け出せた理由<span class="why">→ 漫画の中心になり、読者が持ち帰れるヒントになります</span></p>
     <label class="q">楽になれた・うまくいき始めたのは、何に気づいたから、何を変えたからですか？<span class="badge needed">制作に必要</span><span class="hint">考え方ひとつ、習慣ひとつで大丈夫です。例: 「休むのも仕事のうち」と言われて、週に一度は予定を入れない日をつくった。誰かに言われた言葉がきっかけなら、その言葉もどうぞ</span><textarea name="way_out"></textarea></label>
     <label class="q">あの頃の自分に、今のあなたなら何と声をかけますか？（任意）<span class="why">→ 漫画の最後の一言や、読者への語りかけに使います</span><textarea class="short" name="past_self_message"></textarea></label>
+    <div class="bubble-preview" data-source="past_self_message" data-kind="thought" data-cap="あの頃のあなたへの一言は、こんなふうに入ります（イメージ）" hidden></div>
 
     <p class="q3-head">③ 転機の前のこと<span class="badge needed">どちらか1つ</span><span class="why">→ 読者が「私も同じだ」と自分を重ねるシーンになります</span></p>
     <div class="soft-note">つらい話を無理に書く必要はありません。書けるところだけどうぞ。</div>
@@ -890,27 +1017,230 @@
     if (target.name === "goal_type" || target.name === "chara_how" || target.name === "photo_after") updateConditionalSections();
   });
 
-  // スクロール位置に合わせて現在の項目を表示
+  // ===== 1章ずつ見せる・あなたのネーム（2026-09-24）=====
+  // 70項目超を縦に並べると、スクロールバーの小ささだけで「長い」と感じさせる。
+  // 1画面に1章だけ出し、章を終えるたびに7コマのネームが1つ埋まる。
+  var STEP_KEY = "hearing-step-v8", DONE_KEY = "hearing-done-v8";
+  var MINUTES = { 1: 7, 2: 8, 3: 20, 4: 5, 5: 8, 6: 5, 7: 7 };
+  var STRIP_W = [3, 2, 4, 2, 3, 2, 3];
+  var reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var landing = document.getElementById("landing");
   var stepCards = Array.prototype.slice.call(document.querySelectorAll(".card[data-step]"));
-  var stepText = document.getElementById("stepText");
-  var progressFill = document.getElementById("progressFill");
-  var currentStep = 0;
-  function showStep(step) {
-    stepText.textContent = step + " / " + stepCards.length;
-    progressFill.style.width = ((step / stepCards.length) * 100) + "%";
-    if (step !== currentStep) {
-      currentStep = step;
-      pulseClass(progressFill, "is-moving", 650);
+  var finishCard = document.querySelector(".card.finish");
+  var total = stepCards.length;
+  var titles = stepCards.map(function (c) { var h = c.querySelector("h2"); return h ? h.textContent.replace(/^\d+\.\s*/, "") : ""; });
+  var thumbs = stepCards.map(function (c) { var im = c.querySelector(".chapter-visual img"); return im ? im.getAttribute("src") : ""; });
+  var done = {};
+  var current = 1;
+
+  function readStore(key, fallback) { try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch (e) { return fallback; } }
+  function writeStore(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {} }
+
+  function makeNav(prevLabel, nextLabel, nextStep, prevStep) {
+    var nav = document.createElement("div");
+    nav.className = "step-nav";
+    if (prevStep) {
+      var prev = document.createElement("button");
+      prev.type = "button"; prev.className = "btn sub"; prev.textContent = prevLabel;
+      prev.addEventListener("click", function () { go(prevStep, true); });
+      nav.appendChild(prev);
+    } else {
+      var sp = document.createElement("span"); sp.className = "spacer"; nav.appendChild(sp);
+    }
+    if (nextStep) {
+      var next = document.createElement("button");
+      next.type = "button"; next.className = "btn"; next.textContent = nextLabel;
+      next.addEventListener("click", function () { completeAndGo(nextStep); });
+      nav.appendChild(next);
+    }
+    return nav;
+  }
+
+  // 3章のあとの一休み
+  var restCard = document.createElement("div");
+  restCard.className = "card rest";
+  restCard.innerHTML = '<div class="finish-mark" aria-hidden="true">½</div>'
+    + '<h2 style="color:var(--accent-deep); margin:12px 0 4px">ここで半分です</h2>'
+    + '<p>いちばん大事な3章「あなたの物語」を書き終えました。ここまでの下書きは、この端末に保存されています。</p>'
+    + '<p><strong>続きは、明日でも大丈夫です。</strong>同じスマホ・パソコンでこのページを開けば、続きから書けます。</p>'
+    + '<div class="name-page" aria-hidden="true"></div>'
+    + '<p class="name-page-cap">あなたのネーム: 3 / 7 コマ</p>';
+  stepCards[2].parentNode.insertBefore(restCard, stepCards[3]);
+
+  // 各章の目安時間と、前後のボタン
+  stepCards.forEach(function (card, i) {
+    var n = i + 1;
+    var copy = card.querySelector(".chapter-copy");
+    if (copy && MINUTES[n]) {
+      var t = document.createElement("p");
+      t.className = "chapter-time";
+      t.textContent = "この章の目安 約" + MINUTES[n] + "分";
+      copy.appendChild(t);
+    }
+    var nextStep = n === 3 ? "rest" : (n === total ? "finish" : n + 1);
+    var nextLabel = n === total ? "回答をまとめる →" : "次の章へ →";
+    card.appendChild(makeNav("← 前の章へ", nextLabel, nextStep, n > 1 ? (n === 4 ? "rest" : n - 1) : null));
+  });
+  restCard.appendChild(makeNav("← 3章を見直す", "続けて4章へ →", 4, 3));
+  finishCard.insertBefore(makeNav("← 7章に戻る", "", null, total), finishCard.firstChild);
+  var finishPage = document.createElement("div");
+  finishPage.innerHTML = '<div class="name-page" aria-hidden="true"></div><p class="name-page-cap">7コマ、そろいました。この材料から、あなたのネームをつくります。</p>';
+  finishCard.insertBefore(finishPage, finishCard.querySelector(".finish-mark"));
+
+  // ネームの帯（進み具合）
+  var strip = document.getElementById("nameStrip");
+  var stripButtons = [];
+  for (var k = 1; k <= total; k++) {
+    (function (n) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.style.setProperty("--w", STRIP_W[n - 1] || 1);
+      b.setAttribute("aria-label", n + "章 " + titles[n - 1] + "へ移動");
+      b.innerHTML = (thumbs[n - 1] ? '<img src="' + thumbs[n - 1] + '" alt="" loading="lazy">' : "") + '<span class="n">' + n + "</span>";
+      b.addEventListener("click", function () { go(n, n < stepNumber(current)); });
+      strip.appendChild(b);
+      stripButtons.push(b);
+    })(k);
+  }
+
+  function stepNumber(step) { return step === "rest" ? 3.5 : step === "finish" ? total + 1 : step; }
+  function doneCount() { var c = 0; for (var i = 1; i <= total; i++) if (done[i]) c++; return c; }
+
+  function renderNamePages() {
+    document.querySelectorAll(".name-page").forEach(function (page) {
+      page.innerHTML = "";
+      for (var i = 1; i <= total; i++) {
+        var cell = document.createElement("div");
+        cell.className = "np" + (done[i] ? "" : " is-empty");
+        cell.innerHTML = (thumbs[i - 1] ? '<img src="' + thumbs[i - 1] + '" alt="">' : "") + "<span>" + i + "</span>";
+        page.appendChild(cell);
+      }
+    });
+    var cap = restCard.querySelector(".name-page-cap");
+    if (cap) cap.textContent = "あなたのネーム: " + doneCount() + " / " + total + " コマ";
+  }
+
+  function renderStrip(justDone) {
+    stripButtons.forEach(function (b, i) {
+      var n = i + 1;
+      b.classList.toggle("is-done", !!done[n]);
+      b.classList.toggle("is-current", n === current);
+      if (n === justDone) {
+        b.classList.remove("ink-in"); void b.offsetWidth; b.classList.add("ink-in");
+      }
+    });
+    var label = document.getElementById("stepLabel");
+    var text = document.getElementById("stepText");
+    if (current === "rest") { label.textContent = "一休み"; text.textContent = doneCount() + " / " + total + " コマ"; }
+    else if (current === "finish") { label.textContent = "回答をまとめる"; text.textContent = doneCount() + " / " + total + " コマ"; }
+    else { label.textContent = current + "章 " + titles[current - 1]; text.textContent = current + " / " + total; }
+  }
+
+  function go(step, fromPrev) {
+    current = step;
+    var target = step === "rest" ? restCard : step === "finish" ? finishCard : stepCards[step - 1];
+    [].concat(stepCards, [restCard, finishCard]).forEach(function (c) {
+      var on = c === target;
+      c.classList.toggle("is-current", on);
+      if (!on) c.classList.remove("is-entering", "from-prev");
+    });
+    target.classList.add("is-revealed");
+    if (step === "rest" || step === "finish") renderNamePages();
+    target.classList.remove("is-entering", "from-prev"); void target.offsetWidth;
+    target.classList.add("is-entering");
+    if (fromPrev) target.classList.add("from-prev");
+    landing.classList.toggle("is-away", step !== 1);
+    renderStrip();
+    writeStore(STEP_KEY, step);
+    var anchor = step === 1 ? landing : target;
+    anchor.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  }
+
+  function completeAndGo(nextStep) {
+    var justDone = null;
+    if (typeof current === "number" && !done[current]) { done[current] = true; justDone = current; }
+    writeStore(DONE_KEY, done);
+    go(nextStep, false);
+    if (justDone) {
+      renderStrip(justDone);
+      flashSavebar(justDone + "コマ目が埋まりました（" + doneCount() + " / " + total + "）");
     }
   }
-  if ("IntersectionObserver" in window) {
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) showStep(Number(entry.target.getAttribute("data-step")));
-      });
-    }, { rootMargin: "-20% 0px -65% 0px", threshold: 0 });
-    stepCards.forEach(function (card) { observer.observe(card); });
+
+  function startPaging() {
+    document.documentElement.classList.add("paged");
+    document.getElementById("progressTrack").hidden = true;
+    strip.hidden = false;
+    document.getElementById("nameNote").hidden = false;
+    done = readStore(DONE_KEY, {}) || {};
+    var saved = readStore(STEP_KEY, 1);
+    var valid = saved === "rest" || saved === "finish" || (typeof saved === "number" && saved >= 1 && saved <= total);
+    current = valid ? saved : 1;
+    var target = current === "rest" ? restCard : current === "finish" ? finishCard : stepCards[current - 1];
+    [].concat(stepCards, [restCard, finishCard]).forEach(function (c) { c.classList.toggle("is-current", c === target); });
+    target.classList.add("is-revealed");
+    renderNamePages();
+    landing.classList.toggle("is-away", current !== 1);
+    renderStrip();
   }
+
+  function resetPaging() {
+    done = {};
+    writeStore(DONE_KEY, done);
+    go(1, true);
+  }
+
+  // ===== 補足の「例を見る」 =====
+  // 長い補足文は最初は畳んでおき、押したときだけ出す（3章は書き方の案内そのものなので畳まない）
+  document.querySelectorAll('.card[data-step]:not([data-step="3"]) label.q .hint').forEach(function (hint) {
+    if (hint.textContent.length <= 34) return;
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "hint-toggle";
+    btn.textContent = "例・くわしい説明を見る";
+    btn.setAttribute("aria-expanded", "false");
+    hint.hidden = true;
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      hint.hidden = !hint.hidden;
+      btn.setAttribute("aria-expanded", hint.hidden ? "false" : "true");
+      btn.textContent = hint.hidden ? "例・くわしい説明を見る" : "説明を閉じる";
+    });
+    hint.parentNode.insertBefore(btn, hint);
+  });
+
+  // ===== 3章: 書いた言葉が吹き出しになる =====
+  function bubbleTexts(value) {
+    var v = (value || "").trim();
+    if (!v) return [];
+    var quoted = v.match(/「[^」]+」/g);
+    var parts = quoted ? quoted.map(function (q) { return q.slice(1, -1); }) : [v.split(/\n/)[0]];
+    return parts.slice(0, 2).map(function (t) { t = t.trim(); return t.length > 30 ? t.slice(0, 29) + "…" : t; });
+  }
+  var previews = Array.prototype.slice.call(document.querySelectorAll(".bubble-preview"));
+  function renderPreview(box, animate) {
+    var field = form.querySelector('[name="' + box.getAttribute("data-source") + '"]');
+    var texts = bubbleTexts(field && field.value);
+    box.hidden = texts.length === 0;
+    if (!texts.length) { box.innerHTML = ""; box.removeAttribute("data-key"); return; }
+    var key = texts.join("|");
+    if (box.getAttribute("data-key") === key) return;
+    var isNew = box.getAttribute("data-key") === null || box.querySelectorAll(".bubble").length !== texts.length;
+    box.setAttribute("data-key", key);
+    var kind = box.getAttribute("data-kind") === "thought" ? " thought" : "";
+    box.innerHTML = '<p class="bp-cap">' + box.getAttribute("data-cap") + "</p>"
+      + '<div class="bp-panel">' + texts.map(function (t) {
+        var span = document.createElement("span"); span.textContent = t;
+        return '<span class="bubble' + kind + (animate && isNew ? " pop" : "") + '">' + span.innerHTML + "</span>";
+      }).join("") + '<span class="bp-note">実際の絵と文字は、制作時に整えます</span></div>';
+  }
+  var previewTimer = null;
+  form.addEventListener("input", function (event) {
+    var name = event.target && event.target.name;
+    if (name !== "turning_dialogue" && name !== "past_self_message") return;
+    clearTimeout(previewTimer);
+    previewTimer = setTimeout(function () { previews.forEach(function (b) { renderPreview(b, true); }); }, 250);
+  });
 
   // 章が画面に入ったときだけ、一度だけ扉コマを動かす
   var revealTargets = Array.prototype.slice.call(document.querySelectorAll(".card"));
@@ -1028,12 +1358,16 @@
     localStorage.removeItem(KEY);
     form.reset();
     updateConditionalSections();
+    previews.forEach(function (b) { renderPreview(b, false); });
+    resetPaging();
     flashSavebar("下書きを消しました");
     window.scrollTo(0, 0);
   });
 
   restore();
   updateConditionalSections();
+  previews.forEach(function (b) { renderPreview(b, false); });
+  startPaging();
 })();
 </script>
 </body>
