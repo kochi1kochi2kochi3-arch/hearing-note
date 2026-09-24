@@ -516,7 +516,7 @@
   .card.rest h2, .card.finish h2 { font-family: "Noto Serif JP", "Kaisei Decol", serif; }
   .card.rest p { max-width: 460px; margin: 8px auto 0; font-size: 14.5px; }
   .name-page {
-    display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(4, 64px); gap: 6px;
+    display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(2, 84px); gap: 6px;
     max-width: 420px; margin: 18px auto 6px; padding: 8px; background: #fff; border: 2px solid var(--ink);
     box-shadow: 5px 5px 0 rgba(38,52,59,.12);
   }
@@ -525,11 +525,8 @@
   .name-page .np span { position: absolute; left: 3px; top: 2px; font-size: 10px; font-weight: 700; color: #fff; background: var(--ink); padding: 0 4px; }
   .name-page .np:nth-child(1) { grid-area: 1 / 1 / 2 / 5; }
   .name-page .np:nth-child(2) { grid-area: 1 / 5 / 2 / 7; }
-  .name-page .np:nth-child(3) { grid-area: 2 / 1 / 4 / 4; }
-  .name-page .np:nth-child(4) { grid-area: 2 / 4 / 3 / 7; }
-  .name-page .np:nth-child(5) { grid-area: 3 / 4 / 4 / 7; }
-  .name-page .np:nth-child(6) { grid-area: 4 / 1 / 5 / 3; }
-  .name-page .np:nth-child(7) { grid-area: 4 / 3 / 5 / 7; }
+  .name-page .np:nth-child(3) { grid-area: 2 / 1 / 3 / 3; }
+  .name-page .np:nth-child(4) { grid-area: 2 / 3 / 3 / 7; }
   .name-page .np.is-empty img { opacity: .12; filter: grayscale(1); }
   @media (prefers-reduced-motion: no-preference) {
     .is-current .name-page .np { animation: ink-in .6s cubic-bezier(.2,.8,.2,1) both; }
@@ -620,11 +617,10 @@
     <strong>これは、正解を当てるアンケートではありません。</strong><br>
     あなたの経験を「集客に使えるストーリー漫画」へ変えるための、最初のネームづくりです。思い出せる場面や言葉を材料として預かり、物語と申込みへの流れはこちらで一緒に組み立てます。
     <ul>
-      <li><strong>全部の質問に答えなくて大丈夫です。</strong>拝見したあと、制作に必要なところだけこちらからLINEで追加質問します</li>
-      <li>完璧な文章でなくてOK。箇条書き・話し言葉、大歓迎です。<strong>3章「あなたの物語」だけは、要約より「その場面」をくわしく</strong>教えてください（漫画のコマとセリフになるのはここです）</li>
-      <li><strong>いただいたお話が、全部漫画に載るわけではありません。</strong>10ページで読む方にいちばん届くよう、場面を選んで組み立てます。どの場面を使うかは、絵を描く前にネーム（全ページのコマ割りとセリフの下書き）でご確認いただきます</li>
-      <li>各パートには「→ 漫画のどこに使うか」を添えてあります。迷ったら『おまかせ』と書いて飛ばしてください</li>
-      <li><strong>「制作に必要」の8項目だけなら約20分</strong>。すべての任意項目までじっくり書く場合は<strong>60〜80分ほど</strong>です。分けて回答しても大丈夫です（このページは自動で下書き保存されます。<strong>同じスマホ・パソコンで開けば続きから書けます</strong>）</li>
+      <li><strong>ここで伺うのは、漫画の中身になる「物語の材料」だけです。</strong>全4章・約25分（「制作に必要」の項目だけなら約15分）。分けて回答しても大丈夫です（このページは自動で下書き保存されます。<strong>同じスマホ・パソコンで開けば続きから書けます</strong>）</li>
+      <li><strong>絵柄や見た目のことは、あとで伺います。</strong>ネーム（全ページのコマ割りとセリフの下書き）を見ていただいたあとに、5〜10分の短い確認をお送りします</li>
+      <li>完璧な文章でなくてOK。箇条書き・話し言葉、大歓迎です。<strong>2章と3章は、要約より「その場面」をくわしく</strong>教えてください（漫画のコマとセリフになるのはここです）</li>
+      <li><strong>いただいたお話が、全部漫画に載るわけではありません。</strong>10ページで読む方にいちばん届くよう、場面を選んで組み立てます。どの場面を使うかは、ネームでご確認いただきます</li>
       <li>ここに書かれた内容は漫画制作以外には使いません。公開前に必ずご確認いただきます</li>
     </ul>
   </div>
@@ -632,7 +628,7 @@
   </div>
 
   <div class="progress-card" aria-label="フォームの現在位置">
-    <div class="progress-meta"><span id="stepLabel">現在の章・下書き自動保存</span><strong id="stepText">1 / 7</strong></div>
+    <div class="progress-meta"><span id="stepLabel">現在の章・下書き自動保存</span><strong id="stepText">1 / 4</strong></div>
     <div class="progress-track" id="progressTrack"><div class="progress-fill" id="progressFill"></div></div>
     <div class="name-strip" id="nameStrip" hidden></div>
     <p class="name-note" id="nameNote" hidden>章を書き終えるたびに、あなたのネームのコマが1つ埋まります（下書きは自動保存）</p>
@@ -640,102 +636,55 @@
 
   <form id="f">
 
-  <!-- 1 届けたい相手とゴール -->
   <div class="card" data-step="1">
     <div class="chapter-opening">
       <div class="chapter-copy">
-        <div class="sec-head"><img src="decor/sec1.png" alt=""><h2>1. 届けたい相手とゴール</h2></div>
-        <p class="chapter-teaser">誰に何を届ける物語か、ラストシーンから逆算します。</p>
-        <p class="chapter-caption">届けたい相手が、物語の向こうに見えてくる。</p>
+        <div class="sec-head"><img src="decor/sec1.png" alt=""><h2>1. あなたとお仕事</h2></div>
+        <p class="chapter-teaser">まずは、お仕事のことから。短く答えられる質問です。</p>
+        <p class="chapter-caption">漫画の最後に「今のあなた」として登場します。</p>
       </div>
       <figure class="chapter-visual">
-        <img src="decor/chapter-1-audience-v2.jpg" alt="白紙の漫画からさまざまな読者へ物語が届くイメージ" loading="lazy">
+        <img src="decor/chapter-2-work-v1.jpg" alt="打ち合わせや仕事の場面のイメージ" loading="lazy">
       </figure>
     </div>
-    <p class="sec-note">白紙からマーケティングを考える必要はありません。近いものを選んでください。<strong>回答をもとに、誰へどう届けるかはこちらからご提案します。</strong></p>
-    <p class="field-guide">「制作に必要」は、漫画の軸を決める項目です。今すぐ答えにくい場合は「おまかせ」「提案希望」を選べます。</p>
-    <label class="q">今回の漫画で、一番かなえたいことはどれですか？（1つ選択）<span class="badge needed">制作に必要</span><span class="why">→ 物語のラストと、読者への語りかけ方を決めます</span></label>
-    <div class="opts">
-      <label><input type="radio" name="goal_type" value="人柄・背景を知ってほしい">自分の人柄や、今の仕事を始めた背景を知ってほしい</label>
-      <label><input type="radio" name="goal_type" value="共感・信頼につなげたい">「わかる」と共感して、信頼してほしい</label>
-      <label><input type="radio" name="goal_type" value="相談・申込につなげたい">サービスの相談・申込みにつなげたい</label>
-      <label><input type="radio" name="goal_type" value="採用・仲間集めにつなげたい">採用・コミュニティなど、仲間集めにつなげたい</label>
-      <label><input type="radio" name="goal_type" value="提案希望">まだ決められないので提案してほしい</label>
-    </div>
-    <label class="q">読んでほしい相手として、実際に思い浮かぶ人はいますか？<span class="badge needed">制作に必要</span><span class="hint">名前は不要です。「最近相談に来た40代の小規模事業者」のような書き方で大丈夫です。思い浮かばなければ「おまかせ」とご記入ください</span><span class="why">→ 架空の人物像ではなく、実際のお客様に届く言葉を選ぶ材料になります</span><input type="text" name="reader_anchor"></label>
-    <label class="q">今思い浮かべたその方は、どんな言葉で悩みを話していましたか？<span class="hint">ここでは「一人の実際の言葉」を伺います。正確な文章でなくて大丈夫です。なければ「特になし」で構いません</span><textarea class="short" name="customer_problem_scene"></textarea></label>
-    <div class="bubble-preview" data-kind="reader" data-source="customer_problem_scene" data-cap="読者のこの言葉が、漫画の1ページ目の「つかみ」になります（イメージ）" hidden></div>
-
-    <details class="monitor" id="offerDetails">
-      <summary>相談・登録・仲間集めにつなげたい方へ</summary>
-      <p class="sec-note" style="margin-top:10px">案内先がまだない場合は、無理に埋めなくて大丈夫です。制作開始前に一緒に整理します。</p>
-      <label class="q">漫画で案内したい商品・サービス・活動<span class="badge if-needed">該当する方</span><textarea class="short" name="featured_offer"></textarea></label>
-      <label class="q">読んだ直後に、最初にしてほしい行動<span class="badge if-needed">該当する方</span><span class="hint">例: プロフィールを見る、LINEに登録する、相談を申し込む。「何をしてほしいか」を伺う項目です</span><input type="text" name="desired_action"></label>
-      <label class="q">実際の案内先URL<span class="badge if-needed">該当する方</span><span class="hint">URLがまだない場合は「準備中」とご記入ください</span><input type="text" name="destination_url"></label>
-      <label class="q">案内先に進んだ方に、最初に届くものと、その後の流れ<span class="badge if-needed">該当する方</span><span class="hint">例: LINE登録 → あいさつと特典PDF「〇〇」が届く → メッセージ内の予約フォームから個別相談へ。決まっていなければ「未定」で大丈夫です</span><span class="why">→ 漫画の最後で「進むと何が受け取れるか」を、物語の中身とつなげて案内します</span><textarea class="short" name="offer_flow"></textarea></label>
-    </details>
-    <label class="q">読み終えた人に、どんな気持ちが一番残ってほしいですか？（1つ選択）<span class="hint">ここでは「読後に残す感情」を伺います。物語のテンポや絵の見た目は、別の質問で確認します</span><span class="why">→ 脚本の感情の着地点を決める基準になります</span></label>
-    <div class="opts">
-      <label><input type="radio" name="tone" value="感動系">泣ける・感動系</label>
-      <label><input type="radio" name="tone" value="共感系">「わかる…」の共感系</label>
-      <label><input type="radio" name="tone" value="前向き系">明るく前向き系</label>
-      <label><input type="radio" name="tone" value="安心・信頼系">安心できる・信頼が残る</label>
-      <label><input type="radio" name="tone" value="行動喚起系">自分も一歩動いてみようと思える</label>
-      <label><input type="radio" name="tone" value="おまかせ">おまかせ</label>
-    </div>
-    <label class="q">この漫画を最初に置く場所はどこですか？（1つ選択）<span class="badge needed">制作に必要</span><span class="hint">ここでは「最初に読まれる場所」を伺います。画面の見え方や、1ページ目のつかみを考える材料になります</span></label>
-    <div class="opts">
-      <label><input type="radio" name="primary_channel" value="Instagramフィード">Instagramフィード</label>
-      <label><input type="radio" name="primary_channel" value="Instagramストーリーズ・ハイライト">Instagramストーリーズ・ハイライト</label>
-      <label><input type="radio" name="primary_channel" value="Threads">Threads</label>
-      <label><input type="radio" name="primary_channel" value="公式LINE">公式LINE</label>
-      <label><input type="radio" name="primary_channel" value="ホームページ・ブログ">ホームページ・ブログ</label>
-      <label><input type="radio" name="primary_channel" value="未定・提案希望">未定・提案してほしい</label>
-    </div>
-    <label class="q">そのほかにも掲載したい場所があれば（任意）<input type="text" name="secondary_channels"></label>
-    <p class="sec-note" style="margin-top:10px">※標準納品はInstagramフィード向け4:5・1セットです。別サイズや内容違いの追加版は、制作前に対応可否と追加料金をご案内します。</p>
-    <label class="q">物語の進む速さや「間」の好みがあれば（任意）<span class="hint">入力欄を押すと候補が出ます。自由に書き換えても、「おまかせ」でも大丈夫です</span><span class="why">→ コマ数やカメラを直接選んでいただくのではなく、この回答からこちらで読み心地を設計します。特定作品・漫画家の画風そのものをまねる制作は行いません</span><input type="text" name="reading_preference" list="readingPreferenceOptions"></label>
-    <datalist id="readingPreferenceOptions">
-      <option value="余韻を残して静かに読ませたい"></option>
-      <option value="日常会話のように自然に進めたい"></option>
-      <option value="テンポよく読み進められる形にしたい"></option>
-      <option value="力強くドラマチックに見せたい"></option>
-      <option value="内容に合わせて提案してほしい"></option>
-    </datalist>
+    <label class="q">漫画に載せるお名前<span class="hint">本名・屋号・活動名など、漫画の中で使いたい表記</span><input type="text" name="name"></label>
+    <label class="q">肩書き<span class="hint">例: 家族写真カメラマン、キャリアコーチ、整体師</span><input type="text" name="title"></label>
+    <label class="q">どんなお仕事か、一言で教えてください<span class="hint">例: お母さんも一緒に写る、家族の出張撮影</span><input type="text" name="service"></label>
+    <label class="q">普段、発信しているページ（1つ以上）<span class="hint">InstagramなどのURL。絵や色の雰囲気の参考にします</span><textarea class="short" name="main_profile_url"></textarea></label>
   </div>
 
-  <!-- 2 お仕事のこと -->
   <div class="card" data-step="2">
     <div class="chapter-opening">
       <div class="chapter-copy">
-        <div class="sec-head"><img src="decor/sec2.png" alt=""><h2>2. あなたとお仕事のこと</h2></div>
-        <p class="chapter-teaser">仕事の価値が伝わる会話と場面を探します。</p>
-        <p class="chapter-caption">仕事の価値は、会話や手元の場面になる。</p>
+        <div class="sec-head"><img src="decor/sec2.png" alt=""><h2>2. あなたのお客様</h2></div>
+        <p class="chapter-teaser">漫画のいちばんの見せ場は、あなたのお客様が変わる場面です。</p>
+        <p class="chapter-caption">あなたに出会って、誰かが変わった。</p>
       </div>
       <figure class="chapter-visual">
-        <img src="decor/chapter-2-work-v1.jpg" alt="仕事の会話や手元が漫画の場面になるイメージ" loading="lazy">
+        <img src="decor/chapter-6-people-v1.jpg" alt="さまざまな人の表情が並ぶイメージ" loading="lazy">
       </figure>
     </div>
-    <p class="sec-note"><strong>ここは「お仕事」の話です。</strong>漫画のラストシーン（今のあなた）と、読者への誘導の材料になります。</p>
-    <label class="q">お名前（漫画に載せる表記）<span class="hint">本名・屋号・活動名など、漫画内で使いたい表記をご記入ください</span><input type="text" name="name"></label>
-    <label class="q">肩書き<span class="hint">例: Webコンサルタント、整体師、キャリア支援者</span><span class="why">→ ラストで「今のあなた」を紹介するコマに使います</span><input type="text" name="title"></label>
-    <label class="q">サービス内容はどんなお仕事ですか？<span class="hint">例: 中小企業向けの採用支援、発信が苦手な個人事業主向けのSNSサポート</span><textarea class="short" name="service"></textarea></label>
-    <label class="q">同じようなお客様に共通する、あなたに出会う前の状態は？<span class="hint">ここでは「多くのお客様に共通する傾向」を伺います。うまく整理できなければ、よく受ける相談を一つ教えてください</span><span class="why">→ 読者が「これ、私のことだ」と感じる冒頭の材料になります</span><textarea class="short" name="customer_before_problem"></textarea></label>
-    <label class="q">サービスを受けたあと、お客様に起きた変化があれば（任意）<span class="hint">数字がなくても「安心して任せられるようになった」などで大丈夫です。まだ事例がなければ「まだない」とご記入ください</span><textarea class="short" name="customer_after_result"></textarea></label>
-    <label class="q">お客様に実際に言われて、印象に残っている言葉があれば（任意）<span class="hint">まだなければ「まだない」で大丈夫です</span><input type="text" name="actual_customer_quote"></label>
-    <label class="q">その成果や言葉を、漫画に使ってもよいですか？</label>
-    <div class="opts">
-      <label><input type="radio" name="quote_publish_permission" value="実名を伏せれば使用可">お客様の実名・特定情報を伏せれば使ってよい</label>
-      <label><input type="radio" name="quote_publish_permission" value="本人確認後に使用可">そのお客様本人に確認できた場合のみ使ってよい</label>
-      <label><input type="radio" name="quote_publish_permission" value="使用不可">漫画には使わないでほしい</label>
-      <label><input type="radio" name="quote_publish_permission" value="該当なし・提案希望">該当する実績がない・提案してほしい</label>
+    <p class="sec-note"><strong>漫画を読んだ人が「この人にお願いしたい」と思うのは、あなたのお客様が変わる場面を見たときです。</strong>1人のお客様を思い浮かべて答えてください。</p>
+    <label class="q">漫画を届けたい相手として、実際に思い浮かぶお客様を1人教えてください<span class="badge needed">制作に必要</span><span class="hint">名前は不要です。例: 去年撮影した、3歳と0歳の子のお母さん／最近相談に来た、40代の会社員の方</span><span class="why">→ 架空の人物像ではなく、実際のお客様に届く漫画にします</span><input type="text" name="reader_anchor"></label>
+    <label class="q">その方が、最初に口にしていた悩みの言葉は？<span class="hint">正確でなくて大丈夫です。例: 「私はいいです、写らなくて」</span><textarea class="short" name="customer_problem_scene"></textarea></label>
+    <div class="bubble-preview" data-kind="reader" data-who="お客様" data-source="customer_problem_scene" data-cap="この言葉が、漫画の1ページ目の「つかみ」になります（イメージ）" hidden></div>
+    <div class="q-group" data-fields="customer_scene_before,customer_scene_action,customer_scene_after">その方との、忘れられない場面を教えてください<span class="badge needed">制作に必要</span><span class="hint">3つに分けて伺います。まだお客様がいない方は、①に「まだない」と書いて次へ進んでください（あなた自身が変わった場面を、見せ場にします）</span><span class="why">→ 漫画のいちばんの見せ場になります</span></div>
+    <div class="dialogue-pair">
+      <label class="q">① 最初は、どんな様子でしたか？<textarea class="short" name="customer_scene_before" placeholder="例: 撮影の日も「私は後ろで見てます」と、カメラから離れて立っていた"></textarea></label>
+      <label class="q">② あなたは、何をしましたか？<textarea class="short" name="customer_scene_action" placeholder="例: 子どもたちに「ママのところへ走っていって」とお願いした"></textarea></label>
+      <label class="q">③ その方は、どう変わりましたか？<textarea class="short" name="customer_scene_after" placeholder="例: 子どもに抱きつかれて、声を出して笑っていた"></textarea></label>
     </div>
-    <label class="q">InstagramアカウントまたはURL<input type="text" name="insta"></label>
-    <label class="q">ThreadsアカウントまたはURL<input type="text" name="threads"></label>
-    <label class="q">そのほか、普段使っている発信ページのURL<input type="text" name="main_profile_url"></label>
+    <label class="q">そのとき、その方が言ってくれた言葉は？<span class="hint">例: 「私、こんな顔で笑ってたんですね」</span><textarea class="short" name="actual_customer_quote"></textarea></label>
+    <div class="bubble-preview" data-kind="reader" data-who="お客様" data-source="actual_customer_quote" data-cap="お客様の言葉は、こんなふうに入ります（イメージ）" hidden></div>
+    <label class="q">このお客様の場面や言葉を、漫画に使ってもよいですか？</label>
+    <div class="opts">
+      <label><input type="radio" name="quote_publish_permission" value="実名を伏せれば使用可">お名前や、その方と分かることを伏せれば、使ってよい</label>
+      <label><input type="radio" name="quote_publish_permission" value="本人確認後に使用可">そのお客様に確認してから、使ってよい</label>
+      <label><input type="radio" name="quote_publish_permission" value="使用不可">漫画には使わないでほしい</label>
+      <label><input type="radio" name="quote_publish_permission" value="該当なし・提案希望">まだお客様がいない・提案してほしい</label>
+    </div>
   </div>
 
-  <!-- 3 あなたの物語 -->
   <div class="card" data-step="3">
     <div class="chapter-opening">
       <div class="chapter-copy">
@@ -749,257 +698,54 @@
     </div>
     <p class="sec-note"><strong>ここが漫画の中身になる、いちばん大事な章です。</strong>年表のように全部書く必要はありません。そのかわり、「何があったか」の要約よりも、<strong>その場面</strong>を教えてください——どこにいて、誰と一緒で、何と言われ、何と返したか。漫画では、この場面がそのままコマとセリフになります。話し言葉・箇条書きで大丈夫です（スマホの音声入力も便利です）。</p>
 
-    <p class="q3-head">① 転機になった出来事<span class="why">→ 漫画のいちばんの見せ場になります</span></p>
-    <label class="q">今の仕事を始める「きっかけ」になった出来事は何ですか？（1つだけ）<span class="badge needed">制作に必要</span><textarea class="short" name="turning_what"></textarea></label>
-    <label class="q">それはいつ頃ですか？<span class="hint">ざっくりでOK。例: 5年前、下の子が生まれた頃</span><input type="text" name="turning_when"></label>
-    <label class="q">その瞬間を、場面で教えてください<span class="hint">どこにいて、誰と一緒で、何をしていましたか？ 目に入っていたものや、体の感じ（足が止まった・涙が出た など）も、書けるだけどうぞ。例: 金曜の夜、会社帰りの駅の改札を出たところで、足が止まって動けなくなった</span><textarea name="turning_scene"></textarea></label>
+    <p class="q3-head">① 転機になった出来事<span class="why">→ 漫画の感情の山になります</span></p>
+    <label class="q">今の仕事を始めるきっかけになった出来事は何ですか？（1つだけ）<span class="badge needed">制作に必要</span><textarea class="short" name="turning_what"></textarea></label>
+    <label class="q">それはいつ頃ですか？<span class="hint">ざっくりでOK。例: 3年前、下の子が1歳になった頃</span><input type="text" name="turning_when"></label>
+    <label class="q">その瞬間を、場面で教えてください<span class="badge needed">制作に必要</span><span class="hint">どこにいて、誰と一緒で、何をしていましたか？ 目に入っていたものや、体の感じ（足が止まった・涙が出た など）も、書けるだけどうぞ。例: 日曜の夕方、リビングの床に写真を広げてアルバムを作っていた</span><textarea name="turning_scene"></textarea></label>
     <div class="q-group">そのとき、誰かに言われた一言と、あなたが返した一言は？<span class="hint">正確でなくて大丈夫です。誰とも話していなければ、「言った人」「その人の言葉」は空けたまま、心の中でつぶやいた言葉を「あなた」の欄にどうぞ</span><span class="why">→ 漫画のセリフのいちばん大事な材料になります</span></div>
     <div class="dialogue-pair">
-      <label class="q">言った人<input type="text" name="turning_speaker" placeholder="例: 夫、妻、上司、母、友人"></label>
-      <label class="q">その人の言葉<textarea class="short" name="turning_other_line" placeholder="例: しばらく休みなよ"></textarea></label>
-      <label class="q">あなたが返した言葉（言えなかった言葉・心の中の声でも）<textarea class="short" name="turning_self_line" placeholder="例: でも、まだがんばれるから"></textarea></label>
+      <label class="q">言った人<input type="text" name="turning_speaker" placeholder="例: 夫、妻、娘、上司、母、友人"></label>
+      <label class="q">その人の言葉<textarea class="short" name="turning_other_line" placeholder="例: ママはどこにいるの？"></textarea></label>
+      <label class="q">あなたが返した言葉（言えなかった言葉・心の中の声でも）<textarea class="short" name="turning_self_line" placeholder="例: ママは、撮る係だったからね"></textarea></label>
     </div>
     <div class="bubble-preview" data-kind="dialogue" data-cap="あなたの言葉は、漫画ではこんな吹き出しになります（イメージ）。改行したところで、吹き出しの中も改行されます" hidden></div>
-    <label class="q">そのあと、自分で決めて最初にしたことは？<span class="hint">例: 次の日、上司に休職の相談をした／資格の資料を取り寄せた</span><textarea class="short" name="turning_words"></textarea></label>
+    <label class="q">そのあと、自分で決めて最初にしたことは？<span class="hint">例: 次の週末、夫にカメラを渡して、一緒に撮ってもらった</span><textarea class="short" name="turning_words"></textarea></label>
 
     <p class="q3-head">② 抜け出せた理由<span class="why">→ 漫画の中心になり、読者が持ち帰れるヒントになります</span></p>
-    <label class="q">楽になれた・うまくいき始めたのは、何に気づいたから、何を変えたからですか？<span class="badge needed">制作に必要</span><span class="hint">考え方ひとつ、習慣ひとつで大丈夫です。例: 「休むのも仕事のうち」と言われて、週に一度は予定を入れない日をつくった。誰かに言われた言葉がきっかけなら、その言葉もどうぞ</span><textarea name="way_out"></textarea></label>
-    <label class="q">あの頃の自分に、今のあなたなら何と声をかけますか？（任意）<span class="why">→ 漫画の最後の一言や、読者への語りかけに使います</span><textarea class="short" name="past_self_message"></textarea></label>
-    <div class="bubble-preview" data-source="past_self_message" data-kind="thought" data-cap="あの頃のあなたへの一言は、こんなふうに入ります（イメージ）" hidden></div>
+    <label class="q">楽になれた・うまくいき始めたのは、何に気づいたから、何を変えたからですか？<span class="badge needed">制作に必要</span><span class="hint">考え方ひとつ、習慣ひとつで大丈夫です。誰かの言葉がきっかけなら、その言葉もどうぞ</span><textarea name="way_out"></textarea></label>
 
-    <p class="q3-head">③ 転機の前のこと<span class="badge needed">どちらか1つ</span><span class="why">→ 読者が「私も同じだ」と自分を重ねるシーンになります</span></p>
+    <p class="q3-head">③ 転機の前のこと<span class="why">→ 読者が「私も同じだ」と自分を重ねる場面になります</span></p>
     <div class="soft-note">つらい話を無理に書く必要はありません。書けるところだけどうぞ。</div>
-    <label class="q">①の出来事の前、悩んでいたこと・うまくいっていなかったことは？<textarea class="short" name="before_pain"></textarea></label>
-    <label class="q">その頃の毎日は、どんな感じでしたか？<span class="hint">例: 目の前の業務に追われ、発信や営業まで手が回らなかった</span><textarea class="short" name="before_days"></textarea></label>
-    <label class="q">言われてつらかった・悔しかった一言があれば<span class="hint">誰に・何と</span><input type="text" name="before_words"></label>
+    <label class="q">その頃のあなたを思い出すと、どんな場面が浮かびますか？（1つ）<span class="hint">例: 夜、子どもを寝かせたあと、ひとりでスマホの写真を見返していた／朝、会社の前で足が止まった</span><textarea class="short" name="before_scene"></textarea></label>
 
-    <label class="q">ここまでに書いた、ほかの方（ご家族・上司・友人など）の言葉を、漫画のセリフとして使ってもよいですか？<span class="hint">実際の言葉をセリフにすると、いちばん伝わります。言った方が特定されないよう、名前や立場はぼかして描けます</span></label>
+    <label class="q">ここまでに書いた、ほかの方（ご家族・上司・お客様など）の言葉を、漫画のセリフとして使ってもよいですか？<span class="hint">実際の言葉をセリフにすると、いちばん伝わります。言った方が特定されないよう、名前や立場はぼかして描けます</span></label>
     <div class="opts">
       <label><input type="radio" name="others_words_permission" value="特定されない形なら使用可">言った方が分からない形なら、使ってよい</label>
       <label><input type="radio" name="others_words_permission" value="本人確認後に使用可">言った方に確認してから、使ってよい</label>
       <label><input type="radio" name="others_words_permission" value="セリフには使わない">セリフにはせず、出来事として描いてほしい</label>
       <label><input type="radio" name="others_words_permission" value="該当なし">ほかの方の言葉は書いていない</label>
     </div>
-
-    <details class="monitor">
-      <summary>④ 仕事を始めたあとにも、大きな転機があった方へ（任意）</summary>
-      <div class="soft-note">失敗を大きく見せる必要はありません。考え方や働き方を変えた、小さな出来事でも十分です。</div>
-      <label class="q">特につらかったこと・うまくいかなかったことは？<textarea class="short" name="setback"></textarea></label>
-      <label class="q">そこから、考え方や行動をどう変えましたか？<textarea class="short" name="change_action"></textarea></label>
-    </details>
-
-    <p class="q3-head">⑤ 今とこれから<span class="why">→ ラストシーンの材料になります</span></p>
-    <label class="q">今の仕事をしていて「この仕事にしてよかった」と思った瞬間は？<span class="badge needed">制作に必要</span><textarea class="short" name="joy_moment"></textarea></label>
-    <label class="q">これから実現したい働き方や、届けたい未来はありますか？<textarea class="short" name="future"></textarea></label>
-
-    <label class="q">（任意）子どもの頃のことで、今のあなたにつながっていそうな思い出があれば<textarea class="short" name="childhood"></textarea></label>
   </div>
 
-  <!-- 4 -->
   <div class="card" data-step="4">
     <div class="chapter-opening">
       <div class="chapter-copy">
-        <div class="sec-head"><img src="decor/sec4.png" alt=""><h2>4. 漫画に入れたいこと・入れたくないこと</h2></div>
-        <p class="chapter-teaser">大切な事実を守りながら、描く範囲を決めます。</p>
-        <p class="chapter-caption">描くこと・伏せることを、一緒に選ぶ。</p>
-      </div>
-      <figure class="chapter-visual">
-        <img src="decor/chapter-4-editing-v1.jpg" alt="漫画に描く場面と伏せる場面を選ぶイメージ" loading="lazy">
-      </figure>
-    </div>
-    <label class="q">必ず描いてほしい場面・エピソード ①<span class="why">→ 構成の優先順位に反映します</span><input type="text" name="must1"></label>
-    <label class="q">② <span class="hint">（あれば）</span><input type="text" name="must2"></label>
-    <label class="q">③ <span class="hint">（あれば）</span><input type="text" name="must3"></label>
-    <label class="q">触れてほしくない話題があれば教えてください<span class="badge needed">制作に必要</span><span class="hint">家族のこと、病気のこと、前職のことなど。なければ必ず「なし」とご記入ください</span><textarea name="ng"></textarea></label>
-    <label class="q">会社名・学校名・地域・人物など、伏せたい情報はありますか？<span class="hint">「すべて架空名に」「前職の会社が分からないように」など。なければ「なし」で大丈夫です</span><textarea class="short" name="anonymize_notes"></textarea></label>
-    <label class="q">健康・美容・お金・法律など、表現に注意が必要な内容があれば教えてください<span class="hint">該当しなければ「なし」で大丈夫です</span><textarea class="short" name="regulated_expression_notes"></textarea></label>
-  </div>
-
-  <!-- 5 -->
-  <div class="card" data-step="5">
-    <div class="chapter-opening">
-      <div class="chapter-copy">
-        <div class="sec-head"><img src="decor/sec5.png" alt=""><h2>5. 見た目・画面づくりについて</h2></div>
-        <p class="chapter-teaser">回答と写真から、主人公と作品全体の見せ方を設計します。</p>
-        <p class="chapter-caption">あなたらしさを、絵・コマ・文字まで一つに揃える。</p>
-      </div>
-      <figure class="chapter-visual">
-        <img src="decor/chapter-5-character-v3.jpg" alt="回答や写真、配色をもとにデジタルで漫画キャラクターを設計している途中のイメージ" loading="lazy">
-        <figcaption class="chapter-art-note">※制作工程のイメージです。完成漫画の絵柄サンプルではありません。</figcaption>
-      </figure>
-    </div>
-    <label class="q">絵そのものを見た瞬間、どんな印象を持ってほしいですか？（最優先を1つ）<span class="badge needed">制作に必要</span><span class="hint">ここでは「見た目の第一印象」を伺います。読後の気持ちや物語のテンポとは別の項目です</span></label>
-    <div class="soft-note"><strong>絵柄サンプルから選ぶ方式ではありません。</strong>この回答、普段の発信、ご本人の写真をもとに、絵柄だけでなく色・コマ割り・カメラ・文字・吹き出し・最後の案内まで案件専用に設計します。制作前にキャラクター設計図と代表コマ、<strong>絵を描く前のネーム（全ページのコマ割りとセリフの下書き）</strong>、最初の完成ページをお見せし、方向性をご承認いただいてから本編へ進みます。</div>
-    <div class="opts">
-      <label><input type="radio" name="style" value="温かい・自然体">温かく、自然体で親しみやすい<span class="desc">落ち着いた色、手描き感、日常の空気を大切にした方向</span></label>
-      <label><input type="radio" name="style" value="信頼感・プロフェッショナル">信頼感があり、プロフェッショナル<span class="desc">落ち着いた構図と色で、専門性や仕事への姿勢が伝わる方向</span></label>
-      <label><input type="radio" name="style" value="洗練・上質">洗練され、少し憧れを感じる<span class="desc">清潔感と余白があり、上質に整った方向</span></label>
-      <label><input type="radio" name="style" value="明快・読みやすい">明快で、内容がすっと伝わる<span class="desc">表情と場面が分かりやすく、スマホで読みやすい方向</span></label>
-      <label><input type="radio" name="style" value="提案希望">内容と普段の発信を見て提案してほしい</label>
-    </div>
-    <label class="q">避けたい見た目・演出があればお選びください（複数可）<span class="why">→ 絵柄、コマ割り、文字、最後の案内で避ける表現に反映します</span></label>
-    <div class="opts">
-      <label><input type="checkbox" name="style_avoid" value="幼く見える">子どもっぽい・幼く見える</label>
-      <label><input type="checkbox" name="style_avoid" value="目が大きい・キラキラが強い">目が大きい・キラキラが強い</label>
-      <label><input type="checkbox" name="style_avoid" value="写真のようにリアル">写真のようにリアル</label>
-      <label><input type="checkbox" name="style_avoid" value="デフォルメが強い">デフォルメが強い</label>
-      <label><input type="checkbox" name="style_avoid" value="色が暗い・重い">色が暗い・重い</label>
-      <label><input type="checkbox" name="style_avoid" value="演出が大げさ・ドラマチックすぎる">演出が大げさ・ドラマチックすぎる</label>
-      <label><input type="checkbox" name="style_avoid" value="ポップ・コミカルすぎる">ポップ・コミカルすぎる</label>
-      <label><input type="checkbox" name="style_avoid" value="堅く企業資料のように見える">堅く企業資料のように見える</label>
-      <label><input type="checkbox" name="style_avoid" value="売り込み感が強い">売り込み感が強い</label>
-      <label><input type="checkbox" name="style_avoid" value="コマや文字が詰まって見える">コマや文字が詰まって見える</label>
-      <label><input type="checkbox" name="style_avoid" value="特になし・提案希望">特になし・提案してほしい</label>
-    </div>
-    <details class="monitor" id="styleDetails">
-      <summary>絵・色・文字にこだわりがある方へ（任意・未記入なら、回答と発信から提案します）</summary>
-    <label class="q">絵柄や雰囲気について、補足したい希望があれば（任意）<span class="hint">例: 力強い、漫画らしい勢い、線は柔らかく、かわいすぎない。特定の漫画家・作品そのものの模倣はできません</span><input type="text" name="style_notes"></label>
-    <label class="q">普段の発信でよく使う色や、避けたい色があれば<span class="hint">例: ネイビーとベージュ／原色は避けたい。なければ「おまかせ」で大丈夫です</span><input type="text" name="brand_colors"></label>
-    <label class="q">あなたらしさが伝わる場所・仕事道具・持ち物・ブランド資料があれば（任意）<span class="hint">例: 相談室の窓、愛用のノート、施術ベッド、店舗の木製カウンター、普段のCanva投稿。URLや「特になし」でも大丈夫です</span><span class="why">→ 背景や小物を、誰にでも当てはまる素材ではなく、この作品らしい視覚モチーフにします</span><textarea class="short" name="visual_identity_cues"></textarea></label>
-    <label class="q">文字や吹き出しは、どんな印象が近いですか？（1つ選択）<span class="why">→ フォント名を選ぶ質問ではありません。完成ページの文字の太さ・形・余白を決めます</span></label>
-    <div class="opts">
-      <label><input type="radio" name="lettering_mood" value="柔らかく親しみやすい">柔らかく親しみやすい</label>
-      <label><input type="radio" name="lettering_mood" value="すっきり信頼感がある">すっきりして信頼感がある</label>
-      <label><input type="radio" name="lettering_mood" value="元気で力強い">元気で力強い</label>
-      <label><input type="radio" name="lettering_mood" value="上質でシンプル">上質でシンプル</label>
-      <label><input type="radio" name="lettering_mood" value="提案希望">内容に合わせて提案してほしい</label>
-    </div>
-    </details>
-    <ul class="ack-list">
-      <li>絵柄・キャラクター・コマ割り・文字は、回答とお写真から、あなた専用にご提案します</li>
-      <li>キャラクター設計図・代表コマ・ネーム（コマ割りとセリフの下書き）・最初の完成ページを見ていただいてから、正式に決めます</li>
-    </ul>
-    <div class="opts" style="margin-top:8px">
-      <label><input type="checkbox" name="style_direction_ack" value="確認済み">上の2点を確認しました</label>
-    </div>
-    <details class="monitor" id="lookDetails">
-      <summary>写真を送らない方・写真と変えて描いてほしい点がある方へ（任意）</summary>
-      <label class="q">髪型・髪色（任意）<input type="text" name="hair"></label>
-      <label class="q">普段の服装の雰囲気（任意）<span class="hint">例: ジャケット、シャツ＋デニム、ニット、ワンピース</span><input type="text" name="fashion"></label>
-      <label class="q">メガネ・アクセサリーなど特徴（任意）<input type="text" name="accessory"></label>
-    </details>
-    <label class="q">ご本人らしさを、どの程度取り入れますか？（1つ選択）</label>
-    <div class="opts">
-      <label><input type="radio" name="face" value="特徴を取り入れる">髪型・輪郭・表情など、本人らしい特徴を取り入れてほしい（写真を2〜3枚お送りください）</label>
-      <label><input type="radio" name="face" value="雰囲気">雰囲気が合っていれば似ていなくてよい</label>
-      <label><input type="radio" name="face" value="おまかせ">おまかせ</label>
-    </div>
-    <p class="sec-note" style="margin-top:10px">※写真の特徴を参考にしたイラスト化です。似顔絵のような完全な再現を保証するものではありません。</p>
-    <div class="photo-note">
-      <strong>お写真について:</strong> このフォームには写真を添付できません。顔写真・よく着る服の写真（任意・2〜3枚）は、<strong>LINEまたはメールで別途お送りください</strong>。普段の雰囲気がわかるもので、スマホの自撮りで十分です。場面ごとに服装を変えて描くので、普段の服装がわかると仕上がりがぐっとあなたらしくなります。
-    </div>
-    <label class="q">お写真を送っていただく場合の確認</label>
-    <div class="opts">
-      <label><input type="checkbox" name="photo_consent" value="同意">送った写真を、漫画キャラクター作成の参考としてAIツールに読み込ませることに同意します（写真そのものが漫画に載ることはありません。イラスト化のための参照のみに使います）</label>
-    </div>
-    <label class="q">納品後の写真の扱い（1つ選択）</label>
-    <div class="opts">
-      <label><input type="radio" name="photo_after" value="削除">削除してほしい</label>
-      <label><input type="radio" name="photo_after" value="保管">次回制作に備えて保管OK</label>
-      <label><input type="radio" name="photo_after" value="写真を送らない">写真は送らない</label>
-    </div>
-    <p class="sec-note" style="margin-top:10px">※「削除」は制作側で保管している写真データが対象です。AIツール提供会社側でのデータ処理・保持は、利用時点の各社規約に従います。</p>
-  </div>
-
-  <!-- 6 -->
-  <div class="card" data-step="6">
-    <div class="chapter-opening">
-      <div class="chapter-copy">
-        <div class="sec-head"><img src="decor/sec52.png" alt=""><h2>6. あなた以外の登場人物</h2></div>
-        <p class="chapter-teaser">関係性が見えると、物語に奥行きが生まれます。</p>
-        <p class="chapter-caption">大切な人が、物語の登場人物になる。</p>
-      </div>
-      <figure class="chapter-visual">
-        <img src="decor/chapter-6-people-v1.jpg" alt="周囲の人々が漫画の登場人物になるイメージ" loading="lazy">
-      </figure>
-    </div>
-    <p class="sec-note">本人以外を登場させるか、最初に選んでください。登場させる場合だけ、ご家族・恩師・お客様などを3人まで伺います。</p>
-    <label class="q">本人以外の登場人物を、どのように描きますか？（1つ選択）</label>
-    <div class="opts">
-      <label><input type="radio" name="chara_how" value="おまかせ">おまかせでイラスト化してほしい（特徴の文章だけでこちらでお作りします。これまでの作品もこの方式です）</label>
-      <label><input type="radio" name="chara_how" value="写真">写真を参考にしてほしい（必ずご本人の了承を得た写真のみ、LINE等で別送してください）</label>
-      <label><input type="radio" name="chara_how" value="登場人物なし">本人以外は登場させない</label>
-    </div>
-    <div id="peopleDetails">
-      <label class="q">1人目: 呼び名・あなたとの関係<span class="hint">例: 配偶者、共同経営者、上司、お客様</span><input type="text" name="chara1_rel"></label>
-      <label class="q">1人目: 特徴<span class="hint">年齢感・髪型・雰囲気</span><input type="text" name="chara1_desc"></label>
-      <label class="q">2人目: 呼び名・関係<input type="text" name="chara2_rel"></label>
-      <label class="q">2人目: 特徴<input type="text" name="chara2_desc"></label>
-      <label class="q">3人目: 呼び名・関係<input type="text" name="chara3_rel"></label>
-      <label class="q">3人目: 特徴<input type="text" name="chara3_desc"></label>
-      <label class="q">登場する方の公開について</label>
-      <div class="opts">
-        <label><input type="radio" name="people_permission" value="了承済み・必要に応じ匿名化">登場について了承を得ている（必要に応じて匿名化する）</label>
-        <label><input type="radio" name="people_permission" value="本人に似せない匿名キャラなら可">本人に似せない匿名の人物としてなら描いてよい</label>
-        <label><input type="radio" name="people_permission" value="要相談">まだ確認していないので相談したい</label>
-        <label><input type="radio" name="people_permission" value="登場人物なし">本人以外は登場させない</label>
-      </div>
-      <p class="sec-note" style="margin-top:10px">※未成年を公開作品に登場させる場合は、保護者の確認が必要です。<br>※実際の出来事に必要な脇役は、本人に似せない匿名キャラクターとして描けます。事実にない人物や出来事を追加することはありません。</p>
-    </div>
-  </div>
-
-  <!-- 7 -->
-  <div class="card" data-step="7">
-    <div class="chapter-opening">
-      <div class="chapter-copy">
-        <div class="sec-head"><img src="decor/sec6.png" alt=""><h2>7. 公開と仕上げについて</h2></div>
-        <p class="chapter-teaser">読後に取ってほしい行動まで、一つの物語にします。</p>
-        <p class="chapter-caption">完成した物語が、必要な人へ届く。</p>
+        <div class="sec-head"><img src="decor/sec4.png" alt=""><h2>4. 漫画の最後に必要なこと</h2></div>
+        <p class="chapter-teaser">読み終えた人が、次の一歩を踏み出せるように。</p>
+        <p class="chapter-caption">物語の最後に、あなたへの入口をつくる。</p>
       </div>
       <figure class="chapter-visual">
         <img src="decor/chapter-7-publish-v1.jpg" alt="完成した漫画がスマートフォンを通して読者へ届くイメージ" loading="lazy">
       </figure>
     </div>
-    <label class="q">最後の案内文に、入れたい言葉があれば（任意）<span class="hint">例:「無料相談・サービス詳細はプロフィールから」。空欄の場合は、1章の「してほしい行動」と案内先URLからこちらでご提案します</span><input type="text" name="cta"></label>
-    <div class="cta-preview" id="ctaPreview" hidden></div>
-    <label class="q">最後の案内は、どのくらいの強さが合いそうですか？（1つ選択）<span class="why">→ 同じ案内内容でも、やさしく誘うか、次の行動を明確に示すかでページの印象が変わります</span></label>
-    <div class="opts">
-      <label><input type="radio" name="cta_tone" value="やさしく案内する">やさしく、無理のない形で案内したい</label>
-      <label><input type="radio" name="cta_tone" value="行動を明確に促す">次にしてほしい行動を、はっきり伝えたい</label>
-      <label><input type="radio" name="cta_tone" value="力強く募集する">募集・参加を、力強く呼びかけたい</label>
-      <label><input type="radio" name="cta_tone" value="提案希望">内容と読者に合わせて提案してほしい</label>
-    </div>
-    <p class="sec-note" style="margin-top:10px">※標準の漫画では、主な読者と案内先をそれぞれ一つに絞ります。読者や案内先が異なる追加版は、別構成・別見積りになる場合があります。</p>
-    <label class="q">納品サイズについて<span class="hint">1章の「最初に置く場所」は物語の見せ方、ここでは画像サイズの希望を確認します</span></label>
-    <div class="opts">
-      <label><input type="radio" name="format_option" value="標準4:5・1セット">標準のInstagramフィード向け4:5・1セット</label>
-      <label><input type="radio" name="format_option" value="別媒体も相談">ほかのサイズ・媒体向けも相談したい</label>
-      <label><input type="radio" name="format_option" value="提案希望">よく分からないので提案してほしい</label>
-    </div>
-    <label class="q">納品後に、ご自身で文字を変更できるCanva編集リンクは必要ですか？<span class="hint">完成PNGは全員に納品します。編集リンクが必要な場合だけ、対応方法と範囲を制作前に確認します</span></label>
-    <div class="opts">
-      <label><input type="radio" name="editable_link_needed" value="必要">Canva編集リンクが必要</label>
-      <label><input type="radio" name="editable_link_needed" value="不要">完成PNGだけでよい</label>
-      <label><input type="radio" name="editable_link_needed" value="相談したい">よく分からないので相談したい</label>
-    </div>
-    <label class="q">公開したい時期・期日があれば<input type="text" name="deadline"></label>
-    <label class="q">連絡時のお名前・LINE表示名（漫画に載せるお名前と違う場合のみ）<span class="hint">回答と別送写真を同じ方のものとして確認するために使います。同じ場合は空欄で大丈夫です</span><input type="text" name="contact_name"></label>
-
-    <details class="monitor">
-      <summary>無料モニターとして参加する方へ</summary>
-      <p class="sec-note" style="margin-top:10px">該当する内容を確認してください。公開範囲は、制作前にもう一度相談して決めます。</p>
-      <div class="opts">
-        <label><input type="radio" name="monitor_social_permission" value="協力できる">完成した漫画をご自身のSNSで掲載することに協力できる</label>
-        <label><input type="radio" name="monitor_social_permission" value="相談したい">SNS掲載は相談したい</label>
-        <label><input type="radio" name="monitor_portfolio_permission" value="許可する">制作者の実績・ポートフォリオへの掲載を許可する</label>
-        <label><input type="radio" name="monitor_portfolio_permission" value="条件を相談したい">実績掲載の範囲を相談したい</label>
-        <label><input type="radio" name="monitor_feedback_permission" value="協力できる">制作後の感想・アンケートに協力できる</label>
-        <label><input type="radio" name="monitor_feedback_permission" value="難しい">感想・アンケートへの協力は難しい</label>
-        <label><input type="radio" name="monitor_metrics_permission" value="共有できる">可能な範囲で投稿後の閲覧数・保存・問い合わせなどを共有できる</label>
-        <label><input type="radio" name="monitor_metrics_permission" value="難しい">投稿後の反応共有は難しい</label>
-      </div>
-      <label class="q">公開について不安なこと、相談したいことがあれば<textarea class="short" name="monitor_note"></textarea></label>
-    </details>
-
-    <label class="q">修正の進め方の確認</label>
-    <ul class="ack-list">
-      <li>あらすじ・構成・ネーム（全ページのコマ割りとセリフの下書き）・最初の完成ページの段階で、方向性を一緒に確認します</li>
-      <li>完成ページの修正は2ラウンドまで（1ラウンドの中なら、全ページ・何箇所でもOK）</li>
-      <li>納品後にご自身で文字を直せる編集リンクは、希望する方だけ事前にご相談します</li>
-    </ul>
-    <div class="opts" style="margin-top:8px">
-      <label><input type="checkbox" name="kakunin" value="確認済み">上の3点を確認しました</label>
-    </div>
+    <label class="q">漫画を読んだ人に、最初にしてほしいことは？<span class="badge needed">制作に必要</span><span class="hint">例: 公式LINEに登録して、撮影の相談をしてもらう</span><input type="text" name="desired_action"></label>
+    <label class="q">その案内先のURL<span class="badge needed">制作に必要</span><span class="hint">まだなければ「準備中」とご記入ください</span><input type="text" name="destination_url"></label>
+    <label class="q">案内先に進んだ方に、最初に届くものと、そのあとの流れ<span class="hint">例: LINE登録 → あいさつと特典PDF「〇〇」が届く → トークで相談 → 予約フォーム。決まっていなければ「未定」で大丈夫です</span><span class="why">→ 漫画の最後で「進むと何が受け取れるか」を、物語の中身とつなげて案内します</span><textarea class="short" name="offer_flow"></textarea></label>
+    <label class="q">必ず入れてほしい場面があれば（1つ）<input type="text" name="must1"></label>
+    <label class="q">触れてほしくない話題<span class="badge needed">制作に必要</span><span class="hint">家族のこと、病気のこと、前の職場のことなど。なければ「なし」とご記入ください</span><textarea class="short" name="ng"></textarea></label>
+    <label class="q">伏せたい名前や、表現で気をつけたいことがあれば<span class="hint">例: 前の職場の名前は出さない／「治る」などの言い方は避けたい。なければ「なし」で大丈夫です</span><textarea class="short" name="caution_notes"></textarea></label>
+    <label class="q">連絡時のお名前・LINE表示名（漫画に載せるお名前と違う場合のみ）<span class="hint">回答を同じ方のものとして確認するために使います。同じ場合は空欄で大丈夫です</span><input type="text" name="contact_name"></label>
+    <div class="soft-note"><strong>このあとの流れ:</strong> いただいた回答をもとに、構成とネーム（全ページのコマ割りとセリフの下書き）をお送りします。絵柄や見た目のことは、ネームを見ていただいたあとに、短い確認でお伺いします。</div>
   </div>
 
   <!-- 送信 -->
@@ -1135,8 +881,9 @@
   // 70項目超を縦に並べると、スクロールバーの小ささだけで「長い」と感じさせる。
   // 1画面に1章だけ出し、章を終えるたびに7コマのネームが1つ埋まる。
   var STEP_KEY = "hearing-step-v8", DONE_KEY = "hearing-done-v8";
-  var MINUTES = { 1: 7, 2: 8, 3: 20, 4: 5, 5: 8, 6: 5, 7: 7 };
-  var STRIP_W = [3, 2, 4, 2, 3, 2, 3];
+  var MINUTES = { 1: 3, 2: 7, 3: 12, 4: 5 };
+  var STRIP_W = [2, 3, 4, 2];
+  var REST_AFTER = 2; // 一休みは2章のあと（次の3章がいちばん重い）
   var reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var landing = document.getElementById("landing");
   var stepCards = Array.prototype.slice.call(document.querySelectorAll(".card[data-step]"));
@@ -1178,11 +925,11 @@
   restCard.className = "card rest";
   restCard.innerHTML = '<div class="finish-mark" aria-hidden="true">½</div>'
     + '<h2 style="color:var(--accent-deep); margin:12px 0 4px">ここで半分です</h2>'
-    + '<p>いちばん大事な3章「あなたの物語」を書き終えました。ここまでの下書きは、この端末に保存されています。</p>'
+    + '<p>ここまでの下書きは、この端末に保存されています。次の3章「あなたの物語」が、漫画の中身になるいちばん大事な章です。</p>'
     + '<p><strong>続きは、明日でも大丈夫です。</strong>同じスマホ・パソコンでこのページを開けば、続きから書けます。</p>'
     + '<div class="name-page" aria-hidden="true"></div>'
     + '<p class="name-page-cap">あなたのネーム: 3 / 7 コマ</p>';
-  stepCards[2].parentNode.insertBefore(restCard, stepCards[3]);
+  stepCards[REST_AFTER].parentNode.insertBefore(restCard, stepCards[REST_AFTER]);
 
   // 各章の目安時間と、前後のボタン
   stepCards.forEach(function (card, i) {
@@ -1194,23 +941,24 @@
       t.textContent = "この章の目安 約" + MINUTES[n] + "分";
       copy.appendChild(t);
     }
-    var nextStep = n === 3 ? "rest" : (n === total ? "finish" : n + 1);
+    var nextStep = n === REST_AFTER ? "rest" : (n === total ? "finish" : n + 1);
     var nextLabel = n === total ? "回答をまとめる →" : "次の章へ →";
-    card.appendChild(makeNav("← 前の章へ", nextLabel, nextStep, n > 1 ? (n === 4 ? "rest" : n - 1) : null));
+    card.appendChild(makeNav("← 前の章へ", nextLabel, nextStep, n > 1 ? (n === REST_AFTER + 1 ? "rest" : n - 1) : null));
   });
-  restCard.appendChild(makeNav("← 3章を見直す", "続けて4章へ →", 4, 3));
+  restCard.appendChild(makeNav("← " + REST_AFTER + "章を見直す", "続けて" + (REST_AFTER + 1) + "章へ →", REST_AFTER + 1, REST_AFTER));
   finishCard.insertBefore(makeNav("← 7章に戻る", "", null, total), finishCard.firstChild);
   var finishPage = document.createElement("div");
-  finishPage.innerHTML = '<div class="name-page" aria-hidden="true"></div><p class="name-page-cap">7コマ、そろいました。この材料から、あなたのネームをつくります。</p>';
+  finishPage.innerHTML = '<div class="name-page" aria-hidden="true"></div><p class="name-page-cap">4コマ、そろいました。この材料から、あなたのネームをつくります。</p>';
   finishCard.insertBefore(finishPage, finishCard.querySelector(".finish-mark"));
   var skeleton = document.createElement("div");
   skeleton.className = "yonkoma";
   finishCard.insertBefore(skeleton, finishCard.querySelector(".finish-mark"));
+  // 最後のコマは本人ではなく「お客様の変化」。骨組みだけで「この人に頼むとこうなる」が伝わる形にする
   var SKELETON = [
-    { label: "あの頃（転機の前）", fields: ["before_pain", "before_days"] },
-    { label: "転機の瞬間", fields: ["turning_scene", "turning_what"] },
-    { label: "抜け出せた理由", fields: ["way_out"] },
-    { label: "今", fields: ["joy_moment"] }
+    { label: "あの頃（転機の前）", fields: ["before_scene"], step: 3 },
+    { label: "転機の瞬間", fields: ["turning_scene", "turning_what"], step: 3 },
+    { label: "抜け出せた理由", fields: ["way_out"], step: 3 },
+    { label: "お客様の変化", fields: ["customer_scene_after", "actual_customer_quote"], step: 2 }
   ];
   function renderSkeleton() {
     var html = "<h3>あなたの物語の骨組み</h3><p class=\"yk-lead\">いただいた言葉を、4コマに並べました。この骨組みから、10ページの物語を組み立てます。</p>";
@@ -1225,13 +973,13 @@
       if (text.length > 80) text = text.slice(0, 79) + "…";
       if (!text) empty++;
       html += '<div class="yk' + (text ? "" : " is-empty") + '"><span class="no">' + (i + 1) + '</span><span class="lb">' + k.label + "</span>"
-        + '<div class="tx">' + (text ? esc(text) : 'まだ空欄です<button type="button" class="jump" data-field="' + field + '">3章で書く</button>') + "</div></div>";
+        + '<div class="tx">' + (text ? esc(text) : 'まだ空欄です<button type="button" class="jump" data-step="' + k.step + '" data-field="' + field + '">' + k.step + "章で書く</button>") + "</div></div>";
     });
     html += '<p class="yk-note">' + (empty ? "空いているコマは、書き足すか、あとでこちらから伺います。" : "4コマそろいました。この言葉が、漫画のセリフと場面になります。") + "</p>";
     skeleton.innerHTML = html;
     skeleton.querySelectorAll(".jump").forEach(function (b) {
       b.addEventListener("click", function () {
-        go(3, true);
+        go(Number(b.getAttribute("data-step")), true);
         var el = form.querySelector('[name="' + b.getAttribute("data-field") + '"]');
         if (el) setTimeout(function () { el.scrollIntoView({ block: "center" }); try { el.focus({ preventScroll: true }); } catch (e) {} el.classList.add("flash-field"); }, 450);
       });
@@ -1254,7 +1002,7 @@
     })(k);
   }
 
-  function stepNumber(step) { return step === "rest" ? 3.5 : step === "finish" ? total + 1 : step; }
+  function stepNumber(step) { return step === "rest" ? REST_AFTER + .5 : step === "finish" ? total + 1 : step; }
   function doneCount() { var c = 0; for (var i = 1; i <= total; i++) if (done[i]) c++; return c; }
 
   function renderNamePages() {
@@ -1323,6 +1071,12 @@
     var out = [];
     card.querySelectorAll(".badge.needed").forEach(function (badge) {
       var holder = badge.parentNode;
+      if (holder.getAttribute("data-fields")) {
+        var names = holder.getAttribute("data-fields").split(",");
+        var any = names.some(function (n) { var f = form.querySelector('[name="' + n + '"]'); return f && f.value.trim(); });
+        if (!any) out.push({ title: questionTitle(holder), target: form.querySelector('[name="' + names[0] + '"]') });
+        return;
+      }
       if (badge.textContent.indexOf("どちらか") >= 0) {
         var a = form.querySelector('[name="before_pain"]'), b = form.querySelector('[name="before_days"]');
         if (a && b && !a.value.trim() && !b.value.trim()) out.push({ title: "転機の前のこと（どちらか1つ）", target: a });
@@ -1408,8 +1162,8 @@
 
   // ===== 補足の「例を見る」 =====
   // 長い補足文は最初は畳んでおき、押したときだけ出す（3章は書き方の案内そのものなので畳まない）
-  document.querySelectorAll('.card[data-step]:not([data-step="3"]) label.q .hint').forEach(function (hint) {
-    if (hint.textContent.length <= 34) return;
+  document.querySelectorAll('.card[data-step]:not([data-step="2"]):not([data-step="3"]) label.q .hint').forEach(function (hint) {
+    if (hint.textContent.length <= 60) return;
     var btn = document.createElement("button");
     btn.type = "button";
     btn.className = "hint-toggle";
@@ -1498,7 +1252,7 @@
     var art = dialogue
       ? '<span class="bp-figures">' + FIGURES + '</span><span class="bp-who left">あなた</span><span class="bp-who right">' + esc(speaker) + "</span>"
       : reader
-        ? '<span class="bp-figures">' + FIGURE_ONE + '</span><span class="bp-who center">読者</span>'
+        ? '<span class="bp-figures">' + FIGURE_ONE + '</span><span class="bp-who center">' + esc(box.getAttribute("data-who") || "読者") + "</span>"
         : '<span class="bp-art" aria-hidden="true"></span>';
     box.innerHTML = '<p class="bp-cap">' + box.getAttribute("data-cap") + "</p>"
       + '<div class="bp-panel">' + art + items.map(function (it) {
@@ -1524,7 +1278,7 @@
   form.addEventListener("input", function (event) {
     var name = event.target && event.target.name;
     if (name === "cta" || name === "name" || name === "title") { renderCta(); return; }
-    if (["turning_speaker", "turning_other_line", "turning_self_line", "past_self_message", "customer_problem_scene"].indexOf(name) < 0) return;
+    if (["turning_speaker", "turning_other_line", "turning_self_line", "customer_problem_scene", "actual_customer_quote"].indexOf(name) < 0) return;
     clearTimeout(previewTimer);
     previewTimer = setTimeout(function () { previews.forEach(function (b) { renderPreview(b, true); }); }, 250);
   });
@@ -1546,50 +1300,26 @@
 
   // 回答テキスト生成
   var LABELS = [
-    ["■ 1. 届けたい相手とゴール", null],
-    ["今回の主目的", "goal_type"], ["実際に思い浮かぶ読者", "reader_anchor"],
-    ["思い浮かべた一人が話した悩みの言葉", "customer_problem_scene"],
-    ["案内したい商品・サービス・活動", "featured_offer"], ["読後に取ってほしい行動", "desired_action"],
-    ["実際の案内先URL", "destination_url"], ["案内先で最初に届くもの・その後の流れ", "offer_flow"], ["読後に残したい気持ち", "tone"],
-    ["最初に置く場所", "primary_channel"], ["その他の掲載先", "secondary_channels"],
-    ["物語のテンポ・読み心地", "reading_preference"],
-    ["■ 2. あなたとお仕事のこと", null],
-    ["お名前（漫画に載せる表記）", "name"], ["肩書き", "title"], ["サービス内容", "service"],
-    ["お客様に共通する、出会う前の状態", "customer_before_problem"],
-    ["サービス後のお客様の変化", "customer_after_result"], ["実際のお客様の言葉", "actual_customer_quote"],
-    ["成果・お客様の言葉の掲載許可", "quote_publish_permission"], ["Instagram", "insta"],
-    ["Threads", "threads"], ["その他の発信ページ", "main_profile_url"],
+    ["■ 1. あなたとお仕事", null],
+    ["お名前（漫画に載せる表記）", "name"], ["肩書き", "title"], ["お仕事を一言で", "service"],
+    ["普段発信しているページ", "main_profile_url"],
+    ["■ 2. あなたのお客様", null],
+    ["届けたいお客様（実在の1人）", "reader_anchor"], ["その方の最初の悩みの言葉", "customer_problem_scene"],
+    ["忘れられない場面①最初の様子", "customer_scene_before"], ["忘れられない場面②あなたがしたこと", "customer_scene_action"],
+    ["忘れられない場面③その方の変化", "customer_scene_after"], ["その方が言ってくれた言葉", "actual_customer_quote"],
+    ["お客様の場面・言葉の掲載許可", "quote_publish_permission"],
     ["■ 3. あなたの物語", null],
-    ["①転機: きっかけになった出来事", "turning_what"], ["①転機: いつ頃", "turning_when"], ["①転機: その瞬間の場面", "turning_scene"], ["①転機: 言った人", "turning_speaker"], ["①転機: その人の言葉", "turning_other_line"], ["①転機: あなたが返した言葉", "turning_self_line"], ["①転機: 最初の行動", "turning_words"],
-    ["②抜け出せた理由（気づいたこと・変えたこと）", "way_out"], ["②あの頃の自分への一言", "past_self_message"],
-    ["③転機の前: 悩んでいたこと", "before_pain"], ["③転機の前: その頃の毎日", "before_days"], ["③転機の前: つらかった一言", "before_words"],
+    ["①転機: きっかけになった出来事", "turning_what"], ["①転機: いつ頃", "turning_when"], ["①転機: その瞬間の場面", "turning_scene"],
+    ["①転機: 言った人", "turning_speaker"], ["①転機: その人の言葉", "turning_other_line"], ["①転機: あなたが返した言葉", "turning_self_line"],
+    ["①転機: 最初の行動", "turning_words"],
+    ["②抜け出せた理由（気づいたこと・変えたこと）", "way_out"],
+    ["③転機の前: 思い浮かぶ場面", "before_scene"],
     ["ほかの方の言葉をセリフに使う許可", "others_words_permission"],
-    ["④うまくいかなかったこと", "setback"], ["④変えた考え方・行動", "change_action"],
-    ["⑤今: うれしかった瞬間", "joy_moment"], ["⑤これから実現したい未来", "future"],
-    ["（任意）子どもの頃の思い出", "childhood"],
-    ["■ 4. 入れたいこと・入れたくないこと", null],
-    ["必ず描いてほしい場面①", "must1"], ["必ず描いてほしい場面②", "must2"], ["必ず描いてほしい場面③", "must3"],
-    ["触れてほしくない話題", "ng"], ["伏せたい情報", "anonymize_notes"], ["表現に注意が必要な内容", "regulated_expression_notes"],
-    ["■ 5. 見た目・画面づくり", null],
-    ["絵を見た瞬間に持ってほしい印象", "style"], ["絵柄・雰囲気の補足希望", "style_notes"],
-    ["避けたい見た目・演出", "style_avoid"], ["使用色・避けたい色", "brand_colors"],
-    ["あなたらしさが伝わる場所・道具・資料", "visual_identity_cues"], ["文字・吹き出しの印象", "lettering_mood"],
-    ["絵柄決定フローの確認", "style_direction_ack"],
-    ["髪型・髪色", "hair"], ["普段の服装", "fashion"], ["特徴（メガネ等）", "accessory"],
-    ["本人らしさの取り入れ方", "face"], ["写真のAI参照同意", "photo_consent"], ["納品後の写真の扱い", "photo_after"],
-    ["■ 6. あなた以外の登場人物", null],
-    ["登場人物の描き方", "chara_how"],
-    ["1人目 関係", "chara1_rel"], ["1人目 特徴", "chara1_desc"],
-    ["2人目 関係", "chara2_rel"], ["2人目 特徴", "chara2_desc"],
-    ["3人目 関係", "chara3_rel"], ["3人目 特徴", "chara3_desc"],
-    ["登場人物の公開確認", "people_permission"],
-    ["■ 7. 公開と仕上げについて", null],
-    ["最後の案内文に入れたい言葉", "cta"], ["最後の案内の強さ", "cta_tone"], ["納品サイズ", "format_option"],
-    ["Canva編集リンクの希望", "editable_link_needed"],
-    ["公開したい時期", "deadline"], ["連絡時のお名前・LINE表示名", "contact_name"],
-    ["モニター: SNS掲載", "monitor_social_permission"], ["モニター: 実績掲載", "monitor_portfolio_permission"],
-    ["モニター: 感想", "monitor_feedback_permission"], ["モニター: 反応共有", "monitor_metrics_permission"],
-    ["公開についての相談", "monitor_note"], ["修正の進め方", "kakunin"]
+    ["■ 4. 漫画の最後に必要なこと", null],
+    ["読んだ人に最初にしてほしいこと", "desired_action"], ["案内先のURL", "destination_url"],
+    ["案内先で最初に届くもの・その後の流れ", "offer_flow"], ["必ず入れてほしい場面", "must1"],
+    ["触れてほしくない話題", "ng"], ["伏せたい名前・表現で気をつけたいこと", "caution_notes"],
+    ["連絡時のお名前・LINE表示名", "contact_name"]
   ];
 
   function buildText() {
@@ -1600,7 +1330,7 @@
         omittedKeys[key] = true;
       });
     }
-    var lines = ["【ストーリー漫画 制作ヒアリング回答】", "schema_version: 8.2", ""];
+    var lines = ["【ストーリー漫画 制作ヒアリング回答（第1段階・物語）】", "schema_version: 9.0", ""];
     LABELS.forEach(function (row) {
       var label = row[0], key = row[1];
       if (!key) { lines.push("", label); return; }

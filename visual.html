@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<script>document.documentElement.classList.add("motion-ready");</script>
+<title>絵の確認シート｜ストーリー漫画</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Kaisei Decol の長音記号「ー」は波線の意匠で「スト〜リ〜」に見えるため、「ー」1文字だけ Noto Serif JP で表示する -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&amp;text=%E3%83%BC&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@500;700&amp;family=Noto+Sans+JP:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F4EFE5;
+    --card: #FFFDF8;
+    --ink: #26343B;
+    --ink-soft: #5F6C70;
+    --accent: #2D7C78;
+    --accent-deep: #185B58;
+    --accent-soft: #DDEDE9;
+    --orange: #C96F45;
+    --mustard: #D7A43B;
+    --navy: #263B46;
+    --sand: #EAE0D1;
+    --line: #CFC5B8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    background-image: radial-gradient(rgba(38,52,59,0.055) 0.8px, transparent 0.8px);
+    background-size: 10px 10px;
+    color: var(--ink);
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+    line-height: 1.75;
+    font-size: 16px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 16px 96px; }
+
+  /* ヘッダー */
+  .hero {
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    margin: 18px 0 0;
+    min-height: 276px;
+    border: 2px solid var(--ink);
+    background: #F7F0E3;
+    box-shadow: 7px 7px 0 rgba(38,52,59,0.14);
+  }
+  .hero img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,250,240,0.96) 0%, rgba(255,250,240,0.84) 39%, rgba(255,250,240,0.10) 70%); }
+  .hero .title {
+    position: relative; z-index: 2; min-height: 276px;
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    text-align: left; padding: 34px 38px; max-width: 520px;
+  }
+  .hero .kicker {
+    margin-bottom: 10px; color: var(--accent-deep); font-size: 11px;
+    font-weight: 700; letter-spacing: 0.12em; background: #FFFDF8;
+    border: 1.5px solid var(--ink); padding: 4px 9px; transform: rotate(-1deg);
+  }
+  .hero h1 {
+    margin: 0; font-family: "Noto Serif JP", "Kaisei Decol", serif; font-size: clamp(25px, 5vw, 38px); font-weight: 700;
+    color: var(--navy); letter-spacing: 0.04em; line-height: 1.42;
+  }
+  .hero p {
+    margin: 10px 0 0; font-size: clamp(13px, 3vw, 15px); color: var(--ink-soft);
+  }
+
+  /* はじめに */
+  .intro {
+    position: relative; background: #FFFDF8; border-radius: 18px; padding: 22px 24px; margin: 28px 0 24px;
+    border: 2px solid var(--ink); box-shadow: 5px 5px 0 var(--accent-soft);
+    font-size: 14.5px;
+  }
+  .intro ul { margin: 8px 0 0; padding-left: 20px; }
+  .intro li { margin: 4px 0; }
+  .intro::before {
+    content: ""; position: absolute; width: 18px; height: 18px; left: 42px; top: -11px;
+    background: #FFFDF8; border-left: 2px solid var(--ink); border-top: 2px solid var(--ink); transform: rotate(45deg);
+  }
+
+  /* 漫画ができるまでの3コマ */
+  .story-flow { display: grid; grid-template-columns: 1fr 24px 1fr 24px 1fr; align-items: center; gap: 7px; margin: 26px 0 8px; }
+  .story-flow .panel { min-height: 82px; display: flex; flex-direction: column; justify-content: center; padding: 13px 14px; background: #FFFDF8; border: 2px solid var(--ink); box-shadow: 4px 4px 0 rgba(38,52,59,0.12); }
+  .story-flow .panel.middle { transform: rotate(-1deg); background: #EFF6F4; }
+  .story-flow .panel.last { transform: rotate(1deg); background: #FFF2E9; }
+  .story-flow .num { color: var(--orange); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
+  .story-flow strong { font-family: "Noto Serif JP", "Kaisei Decol", serif; font-size: 14px; color: var(--ink); }
+  .story-flow .arrow { color: var(--ink); text-align: center; font-size: 18px; font-weight: 700; }
+
+  /* 現在位置 */
+  .progress-card {
+    position: sticky; top: 8px; z-index: 10;
+    background: rgba(255,253,248,0.96); border: 1.5px solid var(--ink);
+    border-radius: 14px; padding: 10px 14px; margin: 18px 0 20px;
+    box-shadow: 0 4px 18px rgba(35,62,69,0.09); backdrop-filter: blur(8px);
+  }
+  .progress-meta { display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; color: var(--ink-soft); margin-bottom: 6px; }
+  .progress-meta strong { color: var(--accent-deep); }
+  .progress-track { height: 7px; border-radius: 999px; background: var(--accent-soft); overflow: hidden; }
+  .progress-fill {
+    width: 14.28%; height: 100%; position: relative;
+    background: linear-gradient(90deg, #4C9B95, var(--accent-deep));
+    transition: width .45s cubic-bezier(.2,.8,.2,1);
+  }
+  .progress-fill::after {
+    content: ""; position: absolute; inset: 0; opacity: 0;
+    background: linear-gradient(105deg, transparent 25%, rgba(255,255,255,.72) 48%, transparent 72%);
+    transform: translateX(-100%);
+  }
+
+  /* セクションカード */
+  .card {
+    position: relative; background: var(--card); border-radius: 14px; padding: 52px 22px 28px;
+    margin: 30px 0; box-shadow: 6px 6px 0 rgba(38,52,59,0.10);
+    border: 2px solid var(--ink);
+  }
+  .card[data-step]::before {
+    content: "CHAPTER " attr(data-step); position: absolute; top: 14px; left: 20px;
+    color: #fff; background: var(--ink); padding: 3px 10px; font-size: 10px; font-weight: 700;
+    letter-spacing: .12em; transform: rotate(-1deg);
+  }
+  .card[data-step]::after {
+    content: ""; position: absolute; width: 78px; height: 42px; right: 12px; top: 10px;
+    background-image: radial-gradient(rgba(38,52,59,.34) 1.2px, transparent 1.2px);
+    background-size: 7px 7px; clip-path: polygon(34% 0, 100% 0, 100% 100%, 0 100%);
+    opacity: .46; pointer-events: none;
+  }
+  .sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .sec-head::before { content: ""; width: 7px; height: 30px; background: var(--orange); transform: skew(-9deg); flex-shrink: 0; }
+  .sec-head img { display: none; }
+  .sec-head h2 { margin: 0; font-family: "Noto Serif JP", "Kaisei Decol", serif; font-size: 20px; color: var(--navy); letter-spacing: 0.03em; }
+  .sec-note { font-size: 13.5px; color: var(--ink-soft); margin: 0 0 14px; }
+
+  /* 章タイトル・予告文・挿絵を一枚の「扉コマ」にまとめる */
+  .chapter-opening {
+    display: grid; grid-template-columns: minmax(0, 1fr) 164px; gap: 22px; align-items: start;
+    margin: 0 0 22px; padding: 0 0 20px; border-bottom: 1.5px solid var(--line);
+  }
+  .chapter-copy { min-width: 0; }
+  .chapter-teaser {
+    margin: 10px 0 0; max-width: 33em; color: var(--ink-soft);
+    font-size: 13px; font-weight: 500; line-height: 1.75;
+  }
+  .chapter-visual {
+    width: 100%; margin: 0; padding: 0; position: relative; z-index: 1;
+    transform: rotate(.55deg);
+  }
+  .chapter-visual img {
+    display: block; width: 100%; aspect-ratio: 1; object-fit: cover;
+    border: 2px solid var(--ink); background: #F8F0E3;
+    box-shadow: 5px 5px 0 rgba(45,124,120,.24);
+    transition: transform .22s ease, box-shadow .22s ease;
+  }
+  .chapter-art-note {
+    display: block; margin: 9px 1px 0; color: var(--ink-soft);
+    font-size: 10.5px; font-weight: 500; line-height: 1.55; text-align: left;
+  }
+  .chapter-caption {
+    width: fit-content; margin: 14px 0 0; padding: 7px 10px 7px 12px; color: var(--ink);
+    font-family: "Noto Serif JP", "Kaisei Decol", serif; font-size: 12px; font-weight: 700; line-height: 1.55;
+    border-left: 4px solid var(--orange); background: #FFF7E9;
+  }
+  /* 「→ 漫画のどこに使うか」 */
+  .why {
+    display: block; position: relative; width: fit-content; font-size: 12.5px; font-weight: 500; color: #714626;
+    margin: 6px 0 9px 6px; padding: 4px 9px; background: #FFF0C8;
+    border: 1px solid #E2C97D; border-radius: 6px; transform: rotate(-.2deg);
+  }
+  .why::after {
+    content: ""; position: absolute; left: 14px; bottom: -5px; width: 8px; height: 8px;
+    background: #FFF0C8; border-right: 1px solid #E2C97D; border-bottom: 1px solid #E2C97D;
+    transform: rotate(45deg);
+  }
+
+  /* §3の小見出し */
+  .q3-head { font-weight: 700; font-size: 16px; color: var(--accent-deep); margin: 22px 0 0; }
+  .q3-head .why { margin-top: 0; }
+
+  /* 入力欄 */
+  label.q { display: block; font-weight: 700; font-size: 15px; margin: 18px 0 6px; }
+  label.q .hint { font-weight: 400; font-size: 12.5px; color: var(--ink-soft); display: block; }
+  input[type="text"], textarea {
+    width: 100%; border: 1.5px solid #AFA79C; border-radius: 8px;
+    padding: 10px 14px; font: inherit; font-size: 15px; color: var(--ink);
+    background: #FFFEFB; outline: none;
+    transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+  }
+  input[type="text"]:focus, textarea:focus {
+    border-color: var(--accent); box-shadow: 0 0 0 3px rgba(43,122,120,0.10);
+    transform: translateY(-1px);
+  }
+  textarea { min-height: 110px; resize: vertical; }
+  textarea.tall { min-height: 150px; }
+  textarea.short { min-height: 76px; }
+
+  /* 選択肢 */
+  .opts { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+  .opts label {
+    display: flex; align-items: flex-start; gap: 10px; position: relative;
+    background: #FFFEFB; border: 1.5px solid #B8B0A5; border-radius: 8px;
+    padding: 10px 14px; cursor: pointer; font-size: 14.5px;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .opts label:hover { transform: translateY(-1px); }
+  .opts label:has(:checked) { border-color: var(--ink); background: #EAF4F1; box-shadow: 3px 3px 0 var(--mustard); }
+  .opts label:has(:checked)::after {
+    content: "✓"; display: grid; place-items: center; flex: 0 0 22px; width: 22px; height: 22px;
+    margin-left: auto; border: 1.5px solid var(--ink); border-radius: 50%;
+    color: #fff; background: var(--accent-deep); font-size: 13px; font-weight: 700; line-height: 1;
+  }
+  .opts input { margin-top: 5px; accent-color: var(--accent-deep); flex-shrink: 0; }
+  .opts .desc { font-size: 12.5px; color: var(--ink-soft); display: block; }
+
+  .photo-note {
+    background: #EDF1F6; border-radius: 12px; padding: 12px 16px;
+    font-size: 13.5px; margin-top: 14px; color: var(--ink);
+  }
+  .photo-note strong { color: #3E6072; }
+
+  .soft-note {
+    background: #F2F7F3; border-radius: 12px; padding: 10px 16px;
+    font-size: 13px; margin: 10px 0 0; color: var(--ink);
+  }
+
+  .art-note {
+    position: relative; margin: 16px 0 22px; padding: 13px 16px 13px 46px;
+    border: 1.5px solid var(--ink); border-radius: 10px; background: #FFF8E9;
+    color: var(--ink); font-size: 13px; box-shadow: 3px 3px 0 rgba(201,111,69,.18);
+  }
+  .art-note::before {
+    content: "✦"; position: absolute; left: 16px; top: 12px;
+    color: var(--orange); font-size: 19px; line-height: 1;
+  }
+  .art-note strong { color: var(--accent-deep); }
+
+  .field-guide {
+    margin: 0 0 18px; padding: 10px 14px; border-left: 4px solid var(--mustard);
+    background: #FFF8E9; color: var(--ink-soft); font-size: 12.5px;
+  }
+  .badge {
+    display: inline-block; margin-left: 7px; padding: 1px 7px;
+    border-radius: 999px; vertical-align: 1px; font-size: 10px; font-weight: 700;
+    letter-spacing: .04em;
+  }
+  .badge.needed { color: #fff; background: var(--orange); }
+  .badge.if-needed { color: var(--accent-deep); background: var(--accent-soft); }
+  [hidden] { display: none !important; }
+
+  details.monitor {
+    margin-top: 18px; border: 1.5px dashed var(--accent); border-radius: 14px;
+    background: #F4F9F8; padding: 12px 14px;
+  }
+  details.monitor summary { cursor: pointer; color: var(--accent-deep); font-weight: 700; }
+  .send-steps { text-align: left; max-width: 510px; margin: 12px auto; font-size: 14px; }
+  .send-steps li { margin: 4px 0; }
+  .btn-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+
+  /* 保存表示・送信 */
+  /* 常時表示だとスマホで本文・入力欄に重なるため、保存した直後だけ数秒表示する。
+     常時の目印は上部の「現在の章・下書き自動保存」が担う */
+  .savebar {
+    position: fixed; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%);
+    opacity: 0; pointer-events: none; transition: opacity .3s ease;
+    background: rgba(255,255,255,0.95); border: 1px solid var(--line);
+    border-radius: 999px; padding: 6px 18px; font-size: 12.5px; color: var(--ink-soft);
+    box-shadow: 0 2px 10px rgba(160,120,100,0.12); white-space: nowrap;
+  }
+  .savebar.is-visible { opacity: 1; }
+  .finish { text-align: center; padding-top: 28px; }
+  .finish-mark {
+    width: 56px; height: 56px; margin: 0 auto 10px; border-radius: 50%;
+    display: grid; place-items: center; color: #fff; background: var(--accent-deep);
+    font-size: 27px; font-weight: 700; box-shadow: 0 6px 18px rgba(24,89,87,0.18);
+  }
+
+  /* 回答の流れを楽しくする、短い漫画的モーション */
+  @keyframes panel-enter {
+    from { opacity: 0; translate: 0 12px; }
+    to { opacity: 1; translate: 0 0; }
+  }
+  @keyframes chapter-title-reveal {
+    0% { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateY(4px); }
+    100% { opacity: 1; clip-path: inset(0 0 0 0); transform: translateY(0); }
+  }
+  @keyframes chapter-art-reveal {
+    0% { opacity: 0; clip-path: inset(0 100% 0 0); transform: scale(.98); }
+    100% { opacity: 1; clip-path: inset(0 0 0 0); transform: scale(1); }
+  }
+  @keyframes chapter-text-reveal {
+    0% { opacity: 0; transform: translateY(7px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes chapter-slash-reveal {
+    0% { opacity: 0; transform: skew(-9deg) scaleY(0); }
+    100% { opacity: 1; transform: skew(-9deg) scaleY(1); }
+  }
+  @keyframes choice-pop {
+    0% { transform: scale(1); }
+    48% { transform: translateY(-2px) scale(1.012); }
+    100% { transform: scale(1); }
+  }
+  @keyframes stamp-in {
+    0% { opacity: 0; transform: scale(1.7) rotate(-16deg); }
+    70% { opacity: 1; transform: scale(.92) rotate(3deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0); }
+  }
+  @keyframes save-pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.035); }
+  }
+  @keyframes progress-shine {
+    from { opacity: .15; transform: translateX(-100%); }
+    45% { opacity: .85; }
+    to { opacity: 0; transform: translateX(100%); }
+  }
+  @keyframes finish-pop {
+    0% { opacity: 0; transform: scale(.55) rotate(-12deg); }
+    70% { opacity: 1; transform: scale(1.1) rotate(3deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0); }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .story-flow .panel { animation: panel-enter .48s cubic-bezier(.2,.8,.2,1) both; }
+    .story-flow .panel.middle { animation-delay: .1s; }
+    .story-flow .panel.last { animation-delay: .2s; }
+    /* 見出しと説明文は最初から表示しておく（以前はスクロールで出るまで章が白紙に見えた）。動かすのは挿絵だけ */
+    .motion-ready .card[data-step]:not(.is-revealed) .chapter-visual img { opacity: 0; }
+    .card.is-revealed .chapter-visual img {
+      animation: chapter-art-reveal .72s cubic-bezier(.2,.8,.2,1) .12s both;
+    }
+    .opts label.choice-pop { animation: choice-pop .28s ease-out; }
+    .opts label:has(:checked)::after { animation: stamp-in .28s cubic-bezier(.2,.9,.25,1.2) both; }
+    .savebar.is-saving, .savebar.is-saved { animation: save-pulse .34s ease-out; }
+    .progress-fill.is-moving::after { animation: progress-shine .58s ease-out; }
+    .finish.is-revealed .finish-mark { animation: finish-pop .5s cubic-bezier(.2,.9,.25,1.2) both; }
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .chapter-visual img:hover { transform: translateY(-2px) rotate(-.4deg); box-shadow: 7px 7px 0 rgba(45,124,120,.26); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  }
+  .btn {
+    display: inline-block; border: none; cursor: pointer; font: inherit; font-weight: 700;
+    background: var(--ink); color: #fff; border-radius: 8px; border: 2px solid var(--ink);
+    padding: 14px 36px; font-size: 16px; margin-top: 14px;
+    box-shadow: 5px 5px 0 var(--orange);
+  }
+  .btn:active { transform: translate(3px,3px); box-shadow: 2px 2px 0 var(--orange); }
+  /* LINEで送る（LINEのブランド色） */
+  .btn.line { background: #06C755; border-color: #06C755; box-shadow: 5px 5px 0 var(--ink); font-size: 17px; padding: 15px 44px; }
+  .btn.line:active { box-shadow: 2px 2px 0 var(--ink); }
+  .btn.sub-strong { background: #fff; color: var(--ink); box-shadow: 4px 4px 0 var(--line); }
+  .send-main { margin: 16px auto 6px; max-width: 420px; }
+  .send-how { font-size: 12.5px; color: var(--ink-soft); margin: 10px 0 0; }
+  details.send-other { max-width: 510px; margin: 14px auto 0; text-align: left; border-top: 1.5px dashed var(--line); padding-top: 10px; }
+  details.send-other summary { cursor: pointer; color: var(--accent-deep); font-weight: 700; font-size: 13.5px; text-align: center; }
+  .btn.sub { background: #fff; color: var(--ink-soft); border: 1.5px solid var(--line); box-shadow: none; font-weight: 400; font-size: 13px; padding: 8px 20px; }
+  .btn.share { background: #6C9B78; box-shadow: 0 3px 10px rgba(75,130,90,0.25); display: none; }
+  #copied { display: none; color: var(--accent-deep); font-weight: 700; margin-top: 10px; }
+  #output {
+    display: none; width: 100%; min-height: 200px; margin-top: 14px;
+    border: 1.5px solid var(--line); border-radius: 12px; padding: 12px; font-size: 12px;
+  }
+  @media (max-width: 520px) {
+    body { font-size: 15px; }
+    .card { padding: 50px 17px 24px; box-shadow: 4px 4px 0 rgba(38,52,59,0.10); }
+    .sec-head { gap: 10px; }
+    .sec-head h2 { font-size: 17px; }
+    .hero { min-height: 245px; box-shadow: 4px 4px 0 rgba(38,52,59,0.14); }
+    .hero img { object-position: 58% center; }
+    .hero::after { background: linear-gradient(90deg, rgba(255,250,240,0.97) 0%, rgba(255,250,240,0.87) 58%, rgba(255,250,240,0.24) 100%); }
+    .hero .title { min-height: 245px; padding: 24px 20px; max-width: 92%; }
+    .story-flow { grid-template-columns: 1fr; gap: 8px; }
+    .story-flow .arrow { transform: rotate(90deg); line-height: 1; }
+    .story-flow .panel { min-height: 64px; }
+    .chapter-opening { grid-template-columns: 1fr; gap: 14px; padding-bottom: 18px; }
+    .chapter-visual { width: min(100%, 240px); margin: 0 auto; transform: rotate(.5deg); }
+    .chapter-visual img { box-shadow: 4px 4px 0 rgba(45,124,120,.24); }
+    .opts label { padding: 11px 12px; }
+    .btn { width: 100%; margin-top: 8px; }
+    .progress-card { top: 5px; }
+  }
+
+  /* ===== 1章ずつ見せる（2026-09-24）=====
+     JSが動いたときだけ html.paged を付ける。JSが無ければ従来どおり全章を縦に並べる */
+  .paged .card[data-step]:not(.is-current),
+  .paged .card.finish:not(.is-current),
+  .paged .card.rest:not(.is-current),
+  .paged #landing.is-away { display: none; }
+  .card { scroll-margin-top: 118px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .paged .card.is-current.is-entering { animation: page-in .38s cubic-bezier(.2,.8,.2,1) both; }
+    .paged .card.is-current.is-entering.from-prev { animation-name: page-in-prev; }
+  }
+  @keyframes page-in { from { opacity: 0; transform: translateX(26px) rotate(.4deg); } to { opacity: 1; transform: none; } }
+  @keyframes page-in-prev { from { opacity: 0; transform: translateX(-26px) rotate(-.4deg); } to { opacity: 1; transform: none; } }
+
+  .chapter-time {
+    display: inline-block; margin: 10px 0 0; padding: 2px 10px; border-radius: 999px;
+    font-size: 12px; font-weight: 700; color: var(--accent-deep); background: var(--accent-soft);
+  }
+  .step-nav { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 30px; padding-top: 18px; border-top: 1.5px dashed var(--line); }
+  .step-nav .btn { margin-top: 0; width: auto; }
+  .step-nav .btn.sub { padding: 10px 16px; }
+  .step-nav .spacer { flex: 1; }
+  @media (max-width: 520px) {
+    .step-nav { flex-direction: column-reverse; align-items: stretch; }
+    .step-nav .btn { width: 100%; }
+  }
+
+  /* ===== あなたのネーム（7コマの進み具合）===== */
+  .progress-meta { align-items: baseline; }
+  .progress-meta #stepLabel { font-weight: 700; color: var(--ink); font-size: 13px; }
+  .name-strip { display: flex; gap: 4px; height: 44px; }
+  .name-strip button {
+    flex: var(--w, 1); min-width: 0; padding: 0; position: relative; overflow: hidden; cursor: pointer;
+    border: 1.5px solid var(--ink); background: #FFFEFB; border-radius: 2px;
+    font: inherit; color: var(--line); font-size: 12px; font-weight: 700;
+  }
+  .name-strip button:focus-visible { outline: 3px solid var(--mustard); outline-offset: 1px; }
+  .name-strip img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+  .name-strip .n { position: relative; z-index: 1; }
+  .name-strip .is-done img { opacity: 1; }
+  .name-strip .is-done .n {
+    position: absolute; left: 2px; bottom: 1px; color: #fff; font-size: 9.5px;
+    background: var(--ink); padding: 0 4px; line-height: 1.5;
+  }
+  .name-strip .is-current { border-width: 2.5px; border-color: var(--orange); color: var(--orange); background: #FFF7E9; }
+  .name-strip .is-current:not(.is-done)::after {
+    content: ""; position: absolute; inset: 3px; border: 1.5px dashed var(--orange); opacity: .6;
+  }
+  .name-note { margin: 5px 0 0; font-size: 11px; color: var(--ink-soft); }
+  @media (prefers-reduced-motion: no-preference) {
+    .name-strip .ink-in img { animation: ink-in .7s cubic-bezier(.2,.8,.2,1) both; }
+    .name-strip .ink-in { animation: panel-stamp .5s cubic-bezier(.2,.9,.25,1.2) .5s both; }
+  }
+  @keyframes ink-in { from { opacity: 0; clip-path: inset(0 100% 0 0); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
+  @keyframes panel-stamp { 0% { transform: scale(1); } 45% { transform: scale(1.12) rotate(-2deg); } 100% { transform: scale(1); } }
+
+  /* ===== 3章: あなたの言葉が吹き出しになる ===== */
+  .bubble-preview { margin: 10px 0 4px; }
+  .bubble-preview .bp-cap { font-size: 12px; font-weight: 700; color: var(--accent-deep); margin: 0 0 6px; }
+  .bubble-preview .bp-panel {
+    position: relative; overflow: hidden; border: 2px solid var(--ink); background: #FFFEFB;
+    /* 上は紙（吹き出しの場所）、下に挿絵。padding の % は幅基準なので、絵の高さと一緒に伸び縮みする */
+    padding: 14px 14px calc(var(--art-pad, 44%) + 4px);
+    display: flex; flex-direction: row-reverse; justify-content: space-around; align-items: flex-start; gap: 10px;
+    box-shadow: 4px 4px 0 rgba(38,52,59,.10);
+  }
+  .bubble-preview .bp-art {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 0; aspect-ratio: var(--art-ratio, 450 / 202);
+    background: var(--art) center / cover no-repeat;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 34%); mask-image: linear-gradient(to bottom, transparent 0, #000 34%);
+  }
+  .bubble-preview[data-kind="dialogue"] .bp-panel { --art-pad: 43.4%; justify-content: space-between; padding-left: 8%; padding-right: 8%; }
+  .bubble-preview[data-source="past_self_message"] .bp-panel { --art: url("decor/bubble-past-v1.jpg"); --art-ratio: 435 / 180; --art-pad: 41%; justify-content: flex-start; padding-right: 22px; }
+  /* ネーム（下書き）風の人物。性別が出ないよう、丸い頭と顔の向きの線だけで描く */
+  .bubble-preview .bp-figures { position: absolute; left: 0; right: 0; bottom: 0; z-index: 0; aspect-ratio: 300 / 130; }
+  .bubble-preview .bp-figures svg { display: block; width: 100%; height: 100%; }
+  .bubble-preview .bp-who {
+    position: absolute; bottom: 6px; z-index: 2; transform: translateX(-50%);
+    font-size: 11px; font-weight: 700; color: #fff; background: var(--ink); padding: 0 7px; border-radius: 3px; white-space: nowrap;
+    max-width: 44%; overflow: hidden; text-overflow: ellipsis;
+  }
+  .bubble-preview .bp-who.left { left: 29.3%; }
+  .bubble-preview .bp-who.right { left: 70.7%; }
+  .bubble-preview .bubble {
+    position: relative; z-index: 1; writing-mode: vertical-rl; text-orientation: mixed; white-space: pre-line;
+    max-height: 184px; padding: 24px 17px; background: #fff; border: 2px solid var(--ink);
+    border-radius: 50%; font-size: 14px; font-weight: 600; line-height: 1.6; letter-spacing: .04em; color: var(--ink);
+  }
+  .bubble-preview .bubble.is-empty { visibility: hidden; }
+  /* しっぽ: 枠線の三角（before）の上に白い三角（after）を重ね、吹き出しの枠線を切る */
+  .bubble-preview .bubble::before,
+  .bubble-preview .bubble::after {
+    content: ""; position: absolute; left: 50%; clip-path: polygon(0 0, 100% 0, 42% 100%);
+  }
+  .bubble-preview .bubble::before { width: 20px; height: 20px; bottom: -18px; margin-left: -8px; background: var(--ink); }
+  .bubble-preview .bubble::after { width: 13px; height: 15px; bottom: -13px; margin-left: -4px; background: #fff; }
+  .bubble-preview .bubble.to-left::before, .bubble-preview .bubble.to-left::after { clip-path: polygon(0 0, 100% 0, 58% 100%); }
+  .bubble-preview .bubble.to-left::before { margin-left: -12px; }
+  .bubble-preview .bubble.to-left::after { margin-left: -9px; }
+  /* 心の声: しっぽの代わりに小さな丸 */
+  .bubble-preview .bubble.thought { background: #FFF8E9; }
+  .bubble-preview .bubble.thought::before,
+  .bubble-preview .bubble.thought::after { clip-path: none; border: 2px solid var(--ink); border-radius: 50%; background: #FFF8E9; }
+  .bubble-preview .bubble.thought::before { width: 14px; height: 14px; bottom: -20px; left: 30%; margin-left: 0; }
+  .bubble-preview .bubble.thought::after { width: 8px; height: 8px; bottom: -34px; left: 18%; margin-left: 0; }
+  .bubble-preview .bp-note { margin: 5px 0 0; font-size: 11px; color: var(--ink-soft); text-align: right; }
+  .q-group { font-weight: 700; font-size: 15px; margin: 18px 0 6px; }
+  .q-group .hint { font-weight: 400; font-size: 12.5px; color: var(--ink-soft); display: block; }
+  .dialogue-pair { border-left: 3px solid var(--accent-soft); padding-left: 12px; }
+  .dialogue-pair label.q { font-size: 14px; margin-top: 10px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .bubble-preview .bubble.pop { animation: bubble-pop .32s cubic-bezier(.2,.9,.25,1.25) both; }
+  }
+  @keyframes bubble-pop { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: scale(1); } }
+
+  /* ===== 補足の「例を見る」 ===== */
+  .hint-toggle {
+    display: inline-block; margin: 2px 0 4px; padding: 1px 10px; border: 1px solid var(--line); border-radius: 999px;
+    background: #FFFEFB; color: var(--accent-deep); font: inherit; font-size: 12px; font-weight: 500; cursor: pointer;
+  }
+  .hint-toggle[aria-expanded="true"] { background: var(--accent-soft); border-color: var(--accent); }
+
+  /* ===== 一休み・完成のネーム ===== */
+  .card.rest { text-align: center; padding-top: 36px; }
+  .card.rest h2, .card.finish h2 { font-family: "Noto Serif JP", "Kaisei Decol", serif; }
+  .card.rest p { max-width: 460px; margin: 8px auto 0; font-size: 14.5px; }
+  .name-page {
+    display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(2, 84px); gap: 6px;
+    max-width: 420px; margin: 18px auto 6px; padding: 8px; background: #fff; border: 2px solid var(--ink);
+    box-shadow: 5px 5px 0 rgba(38,52,59,.12);
+  }
+  .name-page .np { position: relative; overflow: hidden; border: 1.5px solid var(--ink); background: #FFFEFB; }
+  .name-page .np img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .name-page .np span { position: absolute; left: 3px; top: 2px; font-size: 10px; font-weight: 700; color: #fff; background: var(--ink); padding: 0 4px; }
+  .name-page .np:nth-child(1) { grid-area: 1 / 1 / 2 / 5; }
+  .name-page .np:nth-child(2) { grid-area: 1 / 5 / 2 / 7; }
+  .name-page .np:nth-child(3) { grid-area: 2 / 1 / 3 / 3; }
+  .name-page .np:nth-child(4) { grid-area: 2 / 3 / 3 / 7; }
+  .name-page .np.is-empty img { opacity: .12; filter: grayscale(1); }
+  @media (prefers-reduced-motion: no-preference) {
+    .is-current .name-page .np { animation: ink-in .6s cubic-bezier(.2,.8,.2,1) both; }
+    .is-current .name-page .np:nth-child(2) { animation-delay: .08s; }
+    .is-current .name-page .np:nth-child(3) { animation-delay: .16s; }
+    .is-current .name-page .np:nth-child(4) { animation-delay: .24s; }
+    .is-current .name-page .np:nth-child(5) { animation-delay: .32s; }
+    .is-current .name-page .np:nth-child(6) { animation-delay: .40s; }
+    .is-current .name-page .np:nth-child(7) { animation-delay: .48s; }
+  }
+  .name-page-cap { font-size: 12.5px; color: var(--ink-soft); margin: 0 0 14px; }
+
+  /* ===== 1章: 読者のつぶやき／7章: 最終ページの見本 ===== */
+  .bubble-preview[data-kind="reader"] .bp-panel { --art-pad: 43.4%; justify-content: center; }
+  .bubble-preview .bp-who.center { left: 50%; }
+  .cta-preview { margin: 10px 0 4px; }
+  .cta-page {
+    position: relative; border: 2px solid var(--ink); background: #FFFEFB; padding: 10px 14px 14px;
+    box-shadow: 4px 4px 0 rgba(38,52,59,.10);
+  }
+  .cta-page .bp-figures { position: static; display: block; width: 86%; margin: 0 auto; aspect-ratio: 300 / 120; }
+  .cta-preview .bp-cap { font-size: 12px; font-weight: 700; color: var(--accent-deep); margin: 0 0 6px; }
+  .cta-preview .bp-note { margin: 5px 0 0; font-size: 11px; color: var(--ink-soft); text-align: right; }
+  .cta-box {
+    position: relative; margin-top: -14px; padding: 10px 14px; border: 2px solid var(--ink); background: #FFF8E9;
+    font-size: 14px; font-weight: 700; line-height: 1.7; white-space: pre-line; overflow-wrap: anywhere;
+  }
+  .cta-name { margin: 8px 0 0; text-align: right; font-size: 12.5px; font-weight: 700; color: var(--ink-soft); }
+
+  /* ===== 空欄のお知らせ ===== */
+  .need-notice {
+    margin-top: 22px; padding: 12px 14px; border: 2px solid var(--mustard); border-radius: 10px; background: #FFF8E9;
+    font-size: 13.5px;
+  }
+  .need-notice p { margin: 0 0 6px; }
+  .need-notice ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .need-notice li { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .need-notice li span { font-weight: 700; }
+  .need-notice .jump {
+    flex-shrink: 0; padding: 2px 10px; border: 1px solid var(--accent); border-radius: 999px; background: #fff;
+    color: var(--accent-deep); font: inherit; font-size: 12px; cursor: pointer;
+  }
+  .flash-field { animation: flash-field 1.4s ease-out; }
+  @keyframes flash-field { 0%, 40% { box-shadow: 0 0 0 4px rgba(215,164,59,.55); } 100% { box-shadow: none; } }
+
+  /* ===== 物語の骨組み（4コマ）===== */
+  .yonkoma { max-width: 420px; margin: 20px auto 8px; text-align: left; }
+  .yonkoma h3 { margin: 0 0 4px; font-family: "Noto Serif JP", "Kaisei Decol", serif; font-size: 17px; color: var(--accent-deep); text-align: center; }
+  .yonkoma .yk-lead { margin: 0 0 10px; font-size: 12.5px; color: var(--ink-soft); text-align: center; }
+  .yonkoma .yk { position: relative; border: 2px solid var(--ink); background: #FFFEFB; padding: 26px 14px 12px; margin-bottom: 7px; min-height: 84px; }
+  .yonkoma .yk .no { position: absolute; left: -2px; top: -2px; background: var(--ink); color: #fff; font-size: 11px; font-weight: 700; padding: 1px 8px; }
+  .yonkoma .yk .lb { position: absolute; left: 34px; top: 3px; font-size: 11.5px; font-weight: 700; color: var(--orange); }
+  .yonkoma .yk .tx { font-size: 14px; line-height: 1.7; white-space: pre-line; overflow-wrap: anywhere; }
+  .yonkoma .yk.is-empty { background-image: radial-gradient(rgba(38,52,59,.10) 1px, transparent 1px); background-size: 6px 6px; }
+  .yonkoma .yk.is-empty .tx { color: var(--ink-soft); font-size: 13px; }
+  .yonkoma .yk .jump { margin-left: 6px; padding: 1px 10px; border: 1px solid var(--accent); border-radius: 999px; background: #fff; color: var(--accent-deep); font: inherit; font-size: 12px; cursor: pointer; }
+  .yonkoma .yk-note { font-size: 12px; color: var(--ink-soft); text-align: center; margin: 4px 0 0; }
+
+  /* ===== 確認文の箇条書き ===== */
+  .ack-list { margin: 10px 0 0; padding: 10px 14px 10px 30px; background: #F4F9F8; border: 1.5px solid var(--accent-soft); border-radius: 10px; font-size: 13.5px; }
+  .ack-list li { margin: 3px 0; }
+</style>
+
+<style>
+  /* 第2段階（絵の確認）だけで使う */
+  .hero.hero-sm, .hero.hero-sm .title { min-height: 210px; }
+  .person-box { border: 1.5px solid var(--line); border-radius: 12px; padding: 4px 14px 14px; margin: 12px 0; background: #FFFEFB; }
+  .person-name { margin: 12px 0 0; font-weight: 700; font-size: 16px; color: var(--accent-deep); }
+  .person-name::before { content: "● "; color: var(--orange); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero hero-sm">
+    <img src="decor/chapter-5-character-v3.jpg" alt="回答や写真、配色をもとにデジタルで漫画キャラクターを設計している途中のイメージ">
+    <div class="title">
+      <span class="kicker">STEP 2 — 絵の確認</span>
+      <h1>絵をつくるための<br>確認シート</h1>
+      <p id="greeting">ネームの確認、ありがとうございました。ここからは、絵をつくるための確認です（5〜10分）。</p>
+    </div>
+  </div>
+
+  <div class="intro">
+    <strong>物語はもう決まりました。ここでは、見た目のことだけを伺います。</strong>
+    <ul>
+      <li>この回答と普段の発信をもとに、キャラクターの設計図と代表の1コマをつくり、<strong>見ていただいてから</strong>本編の絵に進みます</li>
+      <li>迷ったら「おまかせ」で大丈夫です。こちらからご提案します</li>
+      <li>このページは自動で下書き保存されます</li>
+    </ul>
+  </div>
+
+  <form id="f">
+
+  <div class="card">
+    <div class="sec-head"><h2>1. 絵の雰囲気</h2></div>
+    <label class="q">絵を見た瞬間、どんな印象を持ってほしいですか？（いちばん大事なものを1つ）<span class="badge needed">制作に必要</span></label>
+    <div class="opts">
+      <label><input type="radio" name="style" value="温かい・自然体">温かく、自然体で親しみやすい<span class="desc">落ち着いた色、手描き感、日常の空気を大切にした方向</span></label>
+      <label><input type="radio" name="style" value="信頼感・プロフェッショナル">信頼感があり、プロフェッショナル<span class="desc">落ち着いた構図と色で、専門性や仕事への姿勢が伝わる方向</span></label>
+      <label><input type="radio" name="style" value="洗練・上質">洗練され、少し憧れを感じる<span class="desc">清潔感と余白があり、上質に整った方向</span></label>
+      <label><input type="radio" name="style" value="明快・読みやすい">明快で、内容がすっと伝わる<span class="desc">表情と場面が分かりやすく、スマホで読みやすい方向</span></label>
+      <label><input type="radio" name="style" value="提案希望">おまかせ（ネームと普段の発信から提案してほしい）</label>
+    </div>
+    <label class="q">避けたい見た目があればお選びください（いくつでも）</label>
+    <div class="opts">
+      <label><input type="checkbox" name="style_avoid" value="幼く見える">子どもっぽい・幼く見える</label>
+      <label><input type="checkbox" name="style_avoid" value="目が大きい・キラキラが強い">目が大きい・キラキラが強い</label>
+      <label><input type="checkbox" name="style_avoid" value="写真のようにリアル">写真のようにリアル</label>
+      <label><input type="checkbox" name="style_avoid" value="デフォルメが強い">デフォルメが強い</label>
+      <label><input type="checkbox" name="style_avoid" value="色が暗い・重い">色が暗い・重い</label>
+      <label><input type="checkbox" name="style_avoid" value="演出が大げさ・ドラマチックすぎる">演出が大げさ・ドラマチックすぎる</label>
+      <label><input type="checkbox" name="style_avoid" value="特になし・提案希望">特になし</label>
+    </div>
+    <label class="q">普段の発信でよく使う色や、避けたい色<span class="hint">例: やわらかいオレンジとベージュ／原色は避けたい。なければ「おまかせ」</span><input type="text" name="brand_colors"></label>
+    <label class="q">あなたらしさが伝わる場所・仕事道具・持ち物があれば<span class="hint">例: いつも首からかけている黒いカメラ、相談室の窓、愛用のノート</span><span class="why">→ 背景や小物を、この漫画らしい目印にします</span><textarea class="short" name="visual_identity_cues"></textarea></label>
+    <label class="q">そのほか、絵について希望があれば（任意）<span class="hint">例: 線はやわらかく、かわいすぎない。特定の漫画家・作品そのものをまねることはできません</span><input type="text" name="style_notes"></label>
+  </div>
+
+  <div class="card">
+    <div class="sec-head"><h2>2. 主人公（あなた）の見た目</h2></div>
+    <label class="q">髪型・髪色<span class="hint">例: 肩につかないくらいのボブ、こげ茶</span><input type="text" name="hair"></label>
+    <label class="q">よく着る服<span class="hint">例: 動きやすいデニムに、白かベージュのTシャツ</span><input type="text" name="fashion"></label>
+    <label class="q">メガネ・アクセサリーなどの特徴<span class="hint">なければ「なし」</span><input type="text" name="accessory"></label>
+    <label class="q">ご本人らしさを、どのくらい取り入れますか？（1つ）</label>
+    <div class="opts">
+      <label><input type="radio" name="face" value="特徴を取り入れる">髪型・輪郭・表情など、本人らしい特徴を取り入れてほしい（写真を2〜3枚お送りください）</label>
+      <label><input type="radio" name="face" value="雰囲気">雰囲気が合っていれば、似ていなくてよい</label>
+      <label><input type="radio" name="face" value="おまかせ">おまかせ</label>
+    </div>
+    <div class="photo-note"><strong>お写真について:</strong> このページには写真を添付できません。顔写真やよく着る服の写真（任意・2〜3枚）は、<strong>LINEで別にお送りください</strong>。スマホの自撮りで十分です。</div>
+    <label class="q">お写真を送っていただく場合の確認</label>
+    <div class="opts">
+      <label><input type="checkbox" name="photo_consent" value="同意">送った写真を、キャラクターをつくる参考としてAIツールに読み込ませることに同意します（写真そのものが漫画に載ることはありません）</label>
+    </div>
+    <label class="q">納品後の写真の扱い（1つ）</label>
+    <div class="opts">
+      <label><input type="radio" name="photo_after" value="削除">削除してほしい</label>
+      <label><input type="radio" name="photo_after" value="保管">次回の制作に備えて保管してよい</label>
+      <label><input type="radio" name="photo_after" value="写真を送らない">写真は送らない</label>
+    </div>
+  </div>
+
+  <div class="card" id="peopleCard">
+    <div class="sec-head"><h2>3. 漫画に登場する人</h2></div>
+    <p class="sec-note" id="peopleLead">あなたの漫画には、次の人が登場します。1人ずつ教えてください。</p>
+    <div id="peopleList"></div>
+    <p class="sec-note">※未成年の方を公開作品に登場させる場合は、保護者の確認が必要です。<br>※本人に似せない匿名の人物として描くこともできます。</p>
+  </div>
+
+  <div class="card">
+    <div class="sec-head"><h2>4. 確認</h2></div>
+    <ul class="ack-list">
+      <li>絵柄・キャラクター・色は、この回答と普段の発信から、あなた専用にご提案します</li>
+      <li>キャラクターの設計図と代表の1コマ、最初の完成ページを見ていただいてから、本編の絵に進みます</li>
+    </ul>
+    <div class="opts" style="margin-top:8px">
+      <label><input type="checkbox" name="style_direction_ack" value="確認済み">上の2点を確認しました</label>
+    </div>
+  </div>
+
+  <div class="card finish">
+    <div class="finish-mark" aria-hidden="true">✓</div>
+    <h2 style="color:var(--accent-deep); margin:12px 0 4px">ありがとうございました！</h2>
+    <p style="font-size:14px; margin:0">このページだけでは回答は送信されません。下のボタンから、担当者へお送りください。</p>
+    <div class="send-main">
+      <button type="button" class="btn line" id="lineBtn">LINEで送る</button>
+      <p class="send-how">LINEが開き、回答が入力された状態になります。送り先に担当者を選んで、送信してください</p>
+    </div>
+    <details class="send-other">
+      <summary>LINEがうまく開かないとき・メールで送るとき</summary>
+      <ol class="send-steps"><li>「回答をコピーする」を押す</li><li>LINEまたはメールを開く</li><li>貼り付けて送信する</li></ol>
+      <div class="btn-row">
+        <button type="button" class="btn sub-strong" id="copyBtn">回答をコピーする</button>
+      </div>
+      <div id="copied">コピーしました！ LINE・メールを開いて貼り付け、送信してください</div>
+    </details>
+    <textarea id="output" readonly></textarea>
+  </div>
+
+  </form>
+</div>
+
+<div class="savebar" id="savebar">下書き自動保存 ON</div>
+
+<script>
+(function () {
+  // 使い方: visual.html?name=なつみ&people=娘（当時4歳）|撮影したお客様のお母さん
+  // people はネームに登場する人を「|」区切りで。こちらで記入して、お客様ごとのリンクとして送る
+  var params = new URLSearchParams(location.search);
+  var clientName = (params.get("name") || "").trim();
+  var people = (params.get("people") || "").split("|").map(function (x) { return x.trim(); }).filter(Boolean).slice(0, 6);
+  var KEY = "hearing-visual-v9:" + clientName + ":" + people.join("|");
+  var LINE_OA_ID = "";
+  var form = document.getElementById("f");
+  var savebar = document.getElementById("savebar");
+  function esc(t) { var s = document.createElement("span"); s.textContent = t; return s.innerHTML; }
+
+  if (clientName) {
+    document.getElementById("greeting").textContent = clientName + "さん、ネームの確認ありがとうございました。ここからは、絵をつくるための確認です（5〜10分）。";
+  }
+
+  // 登場する人: 1人ずつ「どんな方か」「描き方」「登場の了承」
+  var list = document.getElementById("peopleList");
+  if (!people.length) {
+    document.getElementById("peopleLead").textContent = "あなた以外に登場する人がいれば、呼び名（例: 夫、娘、お客様）と一緒に教えてください。いなければ空欄で大丈夫です。";
+    people = [""];
+  }
+  people.forEach(function (who, i) {
+    var n = i + 1;
+    var box = document.createElement("div");
+    box.className = "person-box";
+    box.innerHTML =
+      (who
+        ? '<p class="person-name">' + esc(who) + '</p><input type="hidden" name="person' + n + '_who" value="' + esc(who) + '">'
+        : '<label class="q">登場する人の呼び名<input type="text" name="person' + n + '_who" placeholder="例: 夫、娘、お客様"></label>')
+      + '<label class="q">どんな方ですか？<span class="hint">年齢の感じ・髪型・雰囲気など。例: 当時4歳、前髪ぱっつんのボブ</span><input type="text" name="person' + n + '_desc"></label>'
+      + '<label class="q">描き方（1つ）</label><div class="opts">'
+      + '<label><input type="radio" name="person' + n + '_how" value="おまかせ">文章だけで、こちらにおまかせ（本人には似せない）</label>'
+      + '<label><input type="radio" name="person' + n + '_how" value="写真">写真を参考にしてほしい（ご本人の了承を得た写真のみ、LINEで別にお送りください）</label>'
+      + '</div>'
+      + '<label class="q">この方の登場について（1つ）</label><div class="opts">'
+      + '<label><input type="radio" name="person' + n + '_permission" value="了承済み">登場について、ご本人の了承を得ている</label>'
+      + '<label><input type="radio" name="person' + n + '_permission" value="匿名なら可">本人に似せない匿名の人物としてなら、描いてよい</label>'
+      + '<label><input type="radio" name="person' + n + '_permission" value="要相談">まだ確認していないので相談したい</label>'
+      + '</div>';
+    list.appendChild(box);
+  });
+
+  function collect() {
+    var data = {};
+    form.querySelectorAll("input, textarea").forEach(function (el) {
+      if (!el.name) return;
+      if (el.type === "radio") { if (el.checked) data[el.name] = el.value; }
+      else if (el.type === "checkbox") { if (!data[el.name]) data[el.name] = []; if (el.checked) data[el.name].push(el.value); }
+      else data[el.name] = el.value;
+    });
+    return data;
+  }
+  var hideTimer = null;
+  function flash(text) {
+    savebar.textContent = text; savebar.classList.add("is-visible");
+    clearTimeout(hideTimer); hideTimer = setTimeout(function () { savebar.classList.remove("is-visible"); }, 2400);
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(collect())); flash("下書きを自動保存しました"); } catch (e) { flash("自動保存できませんでした"); } }
+  function restore() {
+    try {
+      var raw = localStorage.getItem(KEY); if (!raw) return;
+      var data = JSON.parse(raw);
+      form.querySelectorAll("input, textarea").forEach(function (el) {
+        if (!el.name || !(el.name in data) || el.type === "hidden") return;
+        if (el.type === "radio") el.checked = data[el.name] === el.value;
+        else if (el.type === "checkbox") el.checked = (data[el.name] || []).indexOf(el.value) >= 0;
+        else el.value = data[el.name];
+      });
+      flash("前回の下書きを読み込みました");
+    } catch (e) {}
+  }
+  var timer = null;
+  form.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(save, 600); });
+  form.addEventListener("change", function () { clearTimeout(timer); timer = setTimeout(save, 300); });
+
+  var LABELS = [
+    ["■ 1. 絵の雰囲気", null],
+    ["絵を見た瞬間に持ってほしい印象", "style"], ["避けたい見た目", "style_avoid"], ["使用色・避けたい色", "brand_colors"],
+    ["あなたらしさが伝わる場所・道具・持ち物", "visual_identity_cues"], ["絵についての希望", "style_notes"],
+    ["■ 2. 主人公（あなた）の見た目", null],
+    ["髪型・髪色", "hair"], ["よく着る服", "fashion"], ["特徴（メガネ等）", "accessory"],
+    ["本人らしさの取り入れ方", "face"], ["写真のAI参照同意", "photo_consent"], ["納品後の写真の扱い", "photo_after"]
+  ];
+  function buildText() {
+    var data = collect();
+    var lines = ["【ストーリー漫画 制作ヒアリング回答（第2段階・絵の確認）】", "schema_version: 9.0-visual", "・お名前: " + (clientName || "（リンクに記載なし）"), ""];
+    function push(label, v) {
+      if (Array.isArray(v)) v = v.join("、");
+      v = v || "（未記入）";
+      if (String(v).indexOf("\n") >= 0) lines.push("・" + label + ":", v); else lines.push("・" + label + ": " + v);
+    }
+    LABELS.forEach(function (r) { if (!r[1]) lines.push("", r[0]); else push(r[0], data[r[1]]); });
+    lines.push("", "■ 3. 漫画に登場する人");
+    people.forEach(function (who, i) {
+      var n = i + 1, name = data["person" + n + "_who"] || who || "（呼び名なし）";
+      push("登場する人" + n + ": 呼び名", name);
+      push("登場する人" + n + ": どんな方か", data["person" + n + "_desc"]);
+      push("登場する人" + n + ": 描き方", data["person" + n + "_how"]);
+      push("登場する人" + n + ": 登場の了承", data["person" + n + "_permission"]);
+    });
+    lines.push("", "■ 4. 確認");
+    push("絵の決め方の確認", data.style_direction_ack);
+    lines.push("", "【回答ここまで】");
+    return lines.join("\n");
+  }
+  document.getElementById("lineBtn").addEventListener("click", function () {
+    save();
+    var text = encodeURIComponent(buildText());
+    location.href = LINE_OA_ID ? "https://line.me/R/oaMessage/" + encodeURIComponent(LINE_OA_ID) + "/?" + text : "https://line.me/R/msg/text/?" + text;
+  });
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    save();
+    var text = buildText();
+    var done = function () { document.getElementById("copied").style.display = "block"; };
+    var fallback = function () {
+      var out = document.getElementById("output"); out.style.display = "block"; out.value = text; out.select();
+      try { document.execCommand("copy"); done(); } catch (e) {}
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+  });
+  restore();
+})();
+</script>
+</body>
+</html>
