@@ -533,6 +533,56 @@
     .is-current .name-page .np:nth-child(7) { animation-delay: .48s; }
   }
   .name-page-cap { font-size: 12.5px; color: var(--ink-soft); margin: 0 0 14px; }
+
+  /* ===== 1章: 読者のつぶやき／7章: 最終ページの見本 ===== */
+  .bubble-preview[data-kind="reader"] .bp-panel { --art-pad: 43.4%; justify-content: center; }
+  .bubble-preview .bp-who.center { left: 50%; }
+  .cta-preview { margin: 10px 0 4px; }
+  .cta-page {
+    position: relative; border: 2px solid var(--ink); background: #FFFEFB; padding: 10px 14px 14px;
+    box-shadow: 4px 4px 0 rgba(38,52,59,.10);
+  }
+  .cta-page .bp-figures { position: static; display: block; width: 86%; margin: 0 auto; aspect-ratio: 300 / 120; }
+  .cta-preview .bp-cap { font-size: 12px; font-weight: 700; color: var(--accent-deep); margin: 0 0 6px; }
+  .cta-preview .bp-note { margin: 5px 0 0; font-size: 11px; color: var(--ink-soft); text-align: right; }
+  .cta-box {
+    position: relative; margin-top: -14px; padding: 10px 14px; border: 2px solid var(--ink); background: #FFF8E9;
+    font-size: 14px; font-weight: 700; line-height: 1.7; white-space: pre-line; overflow-wrap: anywhere;
+  }
+  .cta-name { margin: 8px 0 0; text-align: right; font-size: 12.5px; font-weight: 700; color: var(--ink-soft); }
+
+  /* ===== 空欄のお知らせ ===== */
+  .need-notice {
+    margin-top: 22px; padding: 12px 14px; border: 2px solid var(--mustard); border-radius: 10px; background: #FFF8E9;
+    font-size: 13.5px;
+  }
+  .need-notice p { margin: 0 0 6px; }
+  .need-notice ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .need-notice li { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .need-notice li span { font-weight: 700; }
+  .need-notice .jump {
+    flex-shrink: 0; padding: 2px 10px; border: 1px solid var(--accent); border-radius: 999px; background: #fff;
+    color: var(--accent-deep); font: inherit; font-size: 12px; cursor: pointer;
+  }
+  .flash-field { animation: flash-field 1.4s ease-out; }
+  @keyframes flash-field { 0%, 40% { box-shadow: 0 0 0 4px rgba(215,164,59,.55); } 100% { box-shadow: none; } }
+
+  /* ===== 物語の骨組み（4コマ）===== */
+  .yonkoma { max-width: 420px; margin: 20px auto 8px; text-align: left; }
+  .yonkoma h3 { margin: 0 0 4px; font-family: "Noto Serif JP", "Kaisei Decol", serif; font-size: 17px; color: var(--accent-deep); text-align: center; }
+  .yonkoma .yk-lead { margin: 0 0 10px; font-size: 12.5px; color: var(--ink-soft); text-align: center; }
+  .yonkoma .yk { position: relative; border: 2px solid var(--ink); background: #FFFEFB; padding: 26px 14px 12px; margin-bottom: 7px; min-height: 84px; }
+  .yonkoma .yk .no { position: absolute; left: -2px; top: -2px; background: var(--ink); color: #fff; font-size: 11px; font-weight: 700; padding: 1px 8px; }
+  .yonkoma .yk .lb { position: absolute; left: 34px; top: 3px; font-size: 11.5px; font-weight: 700; color: var(--orange); }
+  .yonkoma .yk .tx { font-size: 14px; line-height: 1.7; white-space: pre-line; overflow-wrap: anywhere; }
+  .yonkoma .yk.is-empty { background-image: radial-gradient(rgba(38,52,59,.10) 1px, transparent 1px); background-size: 6px 6px; }
+  .yonkoma .yk.is-empty .tx { color: var(--ink-soft); font-size: 13px; }
+  .yonkoma .yk .jump { margin-left: 6px; padding: 1px 10px; border: 1px solid var(--accent); border-radius: 999px; background: #fff; color: var(--accent-deep); font: inherit; font-size: 12px; cursor: pointer; }
+  .yonkoma .yk-note { font-size: 12px; color: var(--ink-soft); text-align: center; margin: 4px 0 0; }
+
+  /* ===== 確認文の箇条書き ===== */
+  .ack-list { margin: 10px 0 0; padding: 10px 14px 10px 30px; background: #F4F9F8; border: 1.5px solid var(--accent-soft); border-radius: 10px; font-size: 13.5px; }
+  .ack-list li { margin: 3px 0; }
 </style>
 </head>
 <body>
@@ -606,6 +656,7 @@
     </div>
     <label class="q">読んでほしい相手として、実際に思い浮かぶ人はいますか？<span class="badge needed">制作に必要</span><span class="hint">名前は不要です。「最近相談に来た40代の小規模事業者」のような書き方で大丈夫です。思い浮かばなければ「おまかせ」とご記入ください</span><span class="why">→ 架空の人物像ではなく、実際のお客様に届く言葉を選ぶ材料になります</span><input type="text" name="reader_anchor"></label>
     <label class="q">今思い浮かべたその方は、どんな言葉で悩みを話していましたか？<span class="hint">ここでは「一人の実際の言葉」を伺います。正確な文章でなくて大丈夫です。なければ「特になし」で構いません</span><textarea class="short" name="customer_problem_scene"></textarea></label>
+    <div class="bubble-preview" data-kind="reader" data-source="customer_problem_scene" data-cap="読者のこの言葉が、漫画の1ページ目の「つかみ」になります（イメージ）" hidden></div>
 
     <details class="monitor" id="offerDetails">
       <summary>相談・登録・仲間集めにつなげたい方へ</summary>
@@ -806,8 +857,12 @@
       <label><input type="radio" name="lettering_mood" value="提案希望">内容に合わせて提案してほしい</label>
     </div>
     </details>
-    <div class="opts" style="margin-top:12px">
-      <label><input type="checkbox" name="style_direction_ack" value="確認済み">回答と写真から、絵柄・キャラクター・コマ割り・文字を含む専用の見せ方を提案し、キャラクター設計図・代表コマ・ネーム（コマ割りとセリフの下書き）・最初の完成ページを見てから正式決定することを確認しました</label>
+    <ul class="ack-list">
+      <li>絵柄・キャラクター・コマ割り・文字は、回答とお写真から、あなた専用にご提案します</li>
+      <li>キャラクター設計図・代表コマ・ネーム（コマ割りとセリフの下書き）・最初の完成ページを見ていただいてから、正式に決めます</li>
+    </ul>
+    <div class="opts" style="margin-top:8px">
+      <label><input type="checkbox" name="style_direction_ack" value="確認済み">上の2点を確認しました</label>
     </div>
     <details class="monitor" id="lookDetails">
       <summary>写真を送らない方・写真と変えて描いてほしい点がある方へ（任意）</summary>
@@ -888,6 +943,7 @@
       </figure>
     </div>
     <label class="q">最後の案内文に、入れたい言葉があれば（任意）<span class="hint">例:「無料相談・サービス詳細はプロフィールから」。空欄の場合は、1章の「してほしい行動」と案内先URLからこちらでご提案します</span><input type="text" name="cta"></label>
+    <div class="cta-preview" id="ctaPreview" hidden></div>
     <label class="q">最後の案内は、どのくらいの強さが合いそうですか？（1つ選択）<span class="why">→ 同じ案内内容でも、やさしく誘うか、次の行動を明確に示すかでページの印象が変わります</span></label>
     <div class="opts">
       <label><input type="radio" name="cta_tone" value="やさしく案内する">やさしく、無理のない形で案内したい</label>
@@ -928,8 +984,13 @@
     </details>
 
     <label class="q">修正の進め方の確認</label>
-    <div class="opts">
-      <label><input type="checkbox" name="kakunin" value="確認済み">あらすじ・構成・ネーム（全ページのコマ割りとセリフの下書き）・最初の完成ページの段階で方向性を確認し、完成ページの修正は2ラウンドまで（1ラウンド内は全ページ・何箇所でもOK）、納品後に自分で文字を変更できる編集リンクは希望者のみ事前相談となることを確認しました</label>
+    <ul class="ack-list">
+      <li>あらすじ・構成・ネーム（全ページのコマ割りとセリフの下書き）・最初の完成ページの段階で、方向性を一緒に確認します</li>
+      <li>完成ページの修正は2ラウンドまで（1ラウンドの中なら、全ページ・何箇所でもOK）</li>
+      <li>納品後にご自身で文字を直せる編集リンクは、希望する方だけ事前にご相談します</li>
+    </ul>
+    <div class="opts" style="margin-top:8px">
+      <label><input type="checkbox" name="kakunin" value="確認済み">上の3点を確認しました</label>
     </div>
   </div>
 
@@ -1088,7 +1149,10 @@
     if (nextStep) {
       var next = document.createElement("button");
       next.type = "button"; next.className = "btn"; next.textContent = nextLabel;
-      next.addEventListener("click", function () { completeAndGo(nextStep); });
+      next.addEventListener("click", function () {
+        if (warnIfMissing(nav, nextStep)) return;
+        completeAndGo(nextStep);
+      });
       nav.appendChild(next);
     }
     return nav;
@@ -1124,6 +1188,40 @@
   var finishPage = document.createElement("div");
   finishPage.innerHTML = '<div class="name-page" aria-hidden="true"></div><p class="name-page-cap">7コマ、そろいました。この材料から、あなたのネームをつくります。</p>';
   finishCard.insertBefore(finishPage, finishCard.querySelector(".finish-mark"));
+  var skeleton = document.createElement("div");
+  skeleton.className = "yonkoma";
+  finishCard.insertBefore(skeleton, finishCard.querySelector(".finish-mark"));
+  var SKELETON = [
+    { label: "あの頃（転機の前）", fields: ["before_pain", "before_days"] },
+    { label: "転機の瞬間", fields: ["turning_scene", "turning_what"] },
+    { label: "抜け出せた理由", fields: ["way_out"] },
+    { label: "今", fields: ["joy_moment"] }
+  ];
+  function renderSkeleton() {
+    var html = "<h3>あなたの物語の骨組み</h3><p class=\"yk-lead\">いただいた言葉を、4コマに並べました。この骨組みから、10ページの物語を組み立てます。</p>";
+    var empty = 0;
+    SKELETON.forEach(function (k, i) {
+      var text = "", field = null;
+      for (var j = 0; j < k.fields.length; j++) {
+        var el = form.querySelector('[name="' + k.fields[j] + '"]');
+        if (el && el.value.trim()) { text = el.value.trim(); break; }
+        if (!field) field = k.fields[j];
+      }
+      if (text.length > 80) text = text.slice(0, 79) + "…";
+      if (!text) empty++;
+      html += '<div class="yk' + (text ? "" : " is-empty") + '"><span class="no">' + (i + 1) + '</span><span class="lb">' + k.label + "</span>"
+        + '<div class="tx">' + (text ? esc(text) : 'まだ空欄です<button type="button" class="jump" data-field="' + field + '">3章で書く</button>') + "</div></div>";
+    });
+    html += '<p class="yk-note">' + (empty ? "空いているコマは、書き足すか、あとでこちらから伺います。" : "4コマそろいました。この言葉が、漫画のセリフと場面になります。") + "</p>";
+    skeleton.innerHTML = html;
+    skeleton.querySelectorAll(".jump").forEach(function (b) {
+      b.addEventListener("click", function () {
+        go(3, true);
+        var el = form.querySelector('[name="' + b.getAttribute("data-field") + '"]');
+        if (el) setTimeout(function () { el.scrollIntoView({ block: "center" }); try { el.focus({ preventScroll: true }); } catch (e) {} el.classList.add("flash-field"); }, 450);
+      });
+    });
+  }
 
   // ネームの帯（進み具合）
   var strip = document.getElementById("nameStrip");
@@ -1184,6 +1282,7 @@
     });
     target.classList.add("is-revealed");
     if (step === "rest" || step === "finish") renderNamePages();
+    if (step === "finish") renderSkeleton();
     target.classList.remove("is-entering", "from-prev"); void target.offsetWidth;
     target.classList.add("is-entering");
     if (fromPrev) target.classList.add("from-prev");
@@ -1192,6 +1291,69 @@
     writeStore(STEP_KEY, step);
     var anchor = step === 1 ? landing : target;
     anchor.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  }
+
+  // 「制作に必要」の欄が空いていたら、一度だけ知らせる（進むのは止めない）
+  function questionTitle(el) {
+    var t = "";
+    for (var i = 0; i < el.childNodes.length; i++) {
+      var n = el.childNodes[i];
+      if (n.nodeType === 3) t += n.textContent;
+      else if (n.nodeType === 1 && n.tagName === "SPAN") break;
+    }
+    t = t.replace(/\s+/g, "").replace(/（1つ(選択|だけ)）|（最優先を1つ）/g, "");
+    return t.length > 26 ? t.slice(0, 25) + "…" : t;
+  }
+  function missingRequired(card) {
+    var out = [];
+    card.querySelectorAll(".badge.needed").forEach(function (badge) {
+      var holder = badge.parentNode;
+      if (badge.textContent.indexOf("どちらか") >= 0) {
+        var a = form.querySelector('[name="before_pain"]'), b = form.querySelector('[name="before_days"]');
+        if (a && b && !a.value.trim() && !b.value.trim()) out.push({ title: "転機の前のこと（どちらか1つ）", target: a });
+        return;
+      }
+      var field = holder.querySelector('input[type="text"], textarea');
+      if (field) {
+        if (!field.value.trim()) out.push({ title: questionTitle(holder), target: field });
+        return;
+      }
+      var opts = holder.nextElementSibling;
+      while (opts && !(opts.classList && opts.classList.contains("opts"))) opts = opts.nextElementSibling;
+      if (opts && !opts.querySelector("input:checked")) out.push({ title: questionTitle(holder), target: opts });
+    });
+    return out;
+  }
+  function warnIfMissing(nav, nextStep) {
+    var card = nav.parentNode;
+    if (typeof current !== "number" || card.getAttribute("data-warned") === "1") return false;
+    var missing = missingRequired(card);
+    if (!missing.length) return false;
+    card.setAttribute("data-warned", "1");
+    var box = document.createElement("div");
+    box.className = "need-notice";
+    box.setAttribute("role", "status");
+    box.innerHTML = "<p>「制作に必要」の欄が<strong>" + missing.length + "つ</strong>空いています。あとで書いても、こちらから伺っても大丈夫です。</p><ul></ul>";
+    var ul = box.querySelector("ul");
+    missing.forEach(function (m) {
+      var li = document.createElement("li");
+      var label = document.createElement("span"); label.textContent = m.title;
+      var btn = document.createElement("button"); btn.type = "button"; btn.className = "jump"; btn.textContent = "ここを書く";
+      btn.addEventListener("click", function () {
+        m.target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+        var focusable = m.target.matches("input, textarea") ? m.target : m.target.querySelector("input");
+        if (focusable) setTimeout(function () { try { focusable.focus({ preventScroll: true }); } catch (e) {} }, 350);
+        m.target.classList.remove("flash-field"); void m.target.offsetWidth; m.target.classList.add("flash-field");
+      });
+      li.appendChild(label); li.appendChild(btn); ul.appendChild(li);
+    });
+    var old = card.querySelector(".need-notice");
+    if (old) old.remove();
+    card.insertBefore(box, nav);
+    var next = nav.querySelector(".btn:not(.sub)");
+    if (next) next.textContent = "このまま次へ →";
+    box.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+    return true;
   }
 
   function completeAndGo(nextStep) {
@@ -1218,6 +1380,7 @@
     [].concat(stepCards, [restCard, finishCard]).forEach(function (c) { c.classList.toggle("is-current", c === target); });
     target.classList.add("is-revealed");
     renderNamePages();
+    if (current === "finish") renderSkeleton();
     landing.classList.toggle("is-away", current !== 1);
     renderStrip();
   }
@@ -1277,11 +1440,30 @@
     + '<path d="M203 26 Q191 48 203 71" stroke-opacity=".6"/><path d="M189 46 Q212 54 235 46" stroke-opacity=".6"/>'
     + '<path d="M186 97 Q170 101 158 94" /><path d="M158 94 L152 90 M158 94 L151 95" stroke-opacity=".7"/>'
     + '</g></svg>';
+  // 読者（1章）: 1人。最終ページ（7章）: 正面を向いた本人
+  var FIGURE_ONE = '<svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMax meet" aria-hidden="true">'
+    + '<g fill="none" stroke="#6B7478" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'
+    + '<path d="M8 113 L292 113" stroke-opacity=".55"/>'
+    + '<path d="M110 113 C113 88 128 77 150 77 C172 77 187 88 190 113" fill="#F3EEE4"/>'
+    + '<circle cx="150" cy="50" r="23" fill="#FBF8F1"/><circle cx="150.8" cy="49.4" r="23.6" stroke-opacity=".3"/>'
+    + '<path d="M146 28 Q137 50 146 72" stroke-opacity=".6"/><path d="M127 49 Q150 57 173 49" stroke-opacity=".6"/>'
+    + '<path d="M170 100 Q166 86 158 76" stroke-opacity=".7"/>'
+    + '</g></svg>';
+  var FIGURE_FRONT = '<svg viewBox="0 0 300 120" preserveAspectRatio="xMidYMax meet" aria-hidden="true">'
+    + '<g fill="none" stroke="#6B7478" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'
+    + '<path d="M106 120 C109 93 127 77 150 77 C173 77 191 93 194 120" fill="#F3EEE4"/>'
+    + '<circle cx="150" cy="46" r="24" fill="#FBF8F1"/><circle cx="150.8" cy="45.4" r="24.6" stroke-opacity=".3"/>'
+    + '<path d="M150 23 L150 69" stroke-opacity=".6"/><path d="M126 45 Q150 53 174 45" stroke-opacity=".6"/>'
+    + '<path d="M140 58 Q150 64 160 58" stroke-opacity=".7"/>'
+    + '</g></svg>';
   var previews = Array.prototype.slice.call(document.querySelectorAll(".bubble-preview"));
   function renderPreview(box, animate) {
     var dialogue = box.getAttribute("data-kind") === "dialogue";
+    var reader = box.getAttribute("data-kind") === "reader";
     var items;
-    if (dialogue) {
+    if (reader) {
+      items = [{ text: bubbleText(fieldValue(box.getAttribute("data-source"))), cls: "" }];
+    } else if (dialogue) {
       // 並びは flex の row-reverse なので、1つ目が右（相手）、2つ目が左（あなた）
       items = [
         { text: bubbleText(fieldValue("turning_other_line")), cls: "" },
@@ -1300,7 +1482,9 @@
     box.setAttribute("data-key", key);
     var art = dialogue
       ? '<span class="bp-figures">' + FIGURES + '</span><span class="bp-who left">あなた</span><span class="bp-who right">' + esc(speaker) + "</span>"
-      : '<span class="bp-art" aria-hidden="true"></span>';
+      : reader
+        ? '<span class="bp-figures">' + FIGURE_ONE + '</span><span class="bp-who center">読者</span>'
+        : '<span class="bp-art" aria-hidden="true"></span>';
     box.innerHTML = '<p class="bp-cap">' + box.getAttribute("data-cap") + "</p>"
       + '<div class="bp-panel">' + art + items.map(function (it) {
         var pop = animate && prevKey === null ? " pop" : "";
@@ -1308,10 +1492,24 @@
       }).join("") + "</div>"
       + '<p class="bp-note">※ 実際の絵と文字は、制作時に整えます</p>';
   }
+  var ctaPreview = document.getElementById("ctaPreview");
+  function renderCta() {
+    if (!ctaPreview) return;
+    var cta = (fieldValue("cta") || "").trim();
+    ctaPreview.hidden = !cta;
+    if (!cta) { ctaPreview.innerHTML = ""; return; }
+    var who = [(fieldValue("title") || "").trim(), (fieldValue("name") || "").trim()].filter(Boolean).join(" ");
+    ctaPreview.innerHTML = '<p class="bp-cap">最後のページでは、こんなふうに案内します（イメージ）</p>'
+      + '<div class="cta-page"><span class="bp-figures">' + FIGURE_FRONT + "</span>"
+      + '<div class="cta-box">' + esc(cta) + "</div>"
+      + (who ? '<p class="cta-name">' + esc(who) + "</p>" : "") + "</div>"
+      + '<p class="bp-note">※ 実際の絵と文字は、制作時に整えます</p>';
+  }
   var previewTimer = null;
   form.addEventListener("input", function (event) {
     var name = event.target && event.target.name;
-    if (["turning_speaker", "turning_other_line", "turning_self_line", "past_self_message"].indexOf(name) < 0) return;
+    if (name === "cta" || name === "name" || name === "title") { renderCta(); return; }
+    if (["turning_speaker", "turning_other_line", "turning_self_line", "past_self_message", "customer_problem_scene"].indexOf(name) < 0) return;
     clearTimeout(previewTimer);
     previewTimer = setTimeout(function () { previews.forEach(function (b) { renderPreview(b, true); }); }, 250);
   });
@@ -1433,6 +1631,9 @@
     form.reset();
     updateConditionalSections();
     previews.forEach(function (b) { renderPreview(b, false); });
+    renderCta();
+    document.querySelectorAll(".need-notice").forEach(function (n) { n.remove(); });
+    document.querySelectorAll("[data-warned]").forEach(function (c) { c.removeAttribute("data-warned"); });
     resetPaging();
     flashSavebar("下書きを消しました");
     window.scrollTo(0, 0);
@@ -1441,6 +1642,7 @@
   restore();
   updateConditionalSections();
   previews.forEach(function (b) { renderPreview(b, false); });
+  renderCta();
   startPaging();
 })();
 </script>
