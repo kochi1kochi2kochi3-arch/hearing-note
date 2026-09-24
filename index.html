@@ -441,25 +441,41 @@
   .bubble-preview { margin: 10px 0 4px; }
   .bubble-preview .bp-cap { font-size: 12px; font-weight: 700; color: var(--accent-deep); margin: 0 0 6px; }
   .bubble-preview .bp-panel {
-    position: relative; min-height: 236px; padding: 16px 14px 22px; border: 2px solid var(--ink); background-color: #FFFEFB;
-    background-image: radial-gradient(rgba(38,52,59,.12) 1px, transparent 1px); background-size: 6px 6px;
-    display: flex; flex-direction: row-reverse; justify-content: flex-start; align-items: flex-start; gap: 16px;
+    position: relative; overflow: hidden; border: 2px solid var(--ink); background: #FFFEFB;
+    /* 上は紙（吹き出しの場所）、下に挿絵。padding の % は幅基準なので、絵の高さと一緒に伸び縮みする */
+    padding: 14px 14px calc(var(--art-pad, 44%) - 34px);
+    display: flex; flex-direction: row-reverse; justify-content: space-around; align-items: flex-start; gap: 10px;
     box-shadow: 4px 4px 0 rgba(38,52,59,.10);
   }
+  .bubble-preview .bp-art {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 0; aspect-ratio: var(--art-ratio, 450 / 202);
+    background: var(--art) center / cover no-repeat;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 34%); mask-image: linear-gradient(to bottom, transparent 0, #000 34%);
+  }
+  .bubble-preview[data-source="turning_dialogue"] .bp-panel { --art: url("decor/bubble-talk-v1.jpg"); --art-ratio: 450 / 202; --art-pad: 44%; }
+  .bubble-preview[data-source="past_self_message"] .bp-panel { --art: url("decor/bubble-past-v1.jpg"); --art-ratio: 435 / 180; --art-pad: 41%; justify-content: flex-start; padding-right: 22px; }
   .bubble-preview .bubble {
-    position: relative; writing-mode: vertical-rl; text-orientation: mixed;
+    position: relative; z-index: 1; writing-mode: vertical-rl; text-orientation: mixed; white-space: pre-line;
     max-height: 196px; padding: 16px 11px; background: #fff; border: 2px solid var(--ink);
     border-radius: 50% / 34%; font-size: 14px; font-weight: 600; line-height: 1.55; letter-spacing: .04em; color: var(--ink);
+    box-shadow: 2px 2px 0 rgba(38,52,59,.08);
   }
+  /* しっぽ: 1つ目（右・相手の言葉）は右下の人物へ、2つ目（左・あなたの返事）は左下の人物へ */
   .bubble-preview .bubble::after {
-    content: ""; position: absolute; left: -9px; bottom: 16px; width: 14px; height: 14px; background: #fff;
-    border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink); transform: skewY(28deg) rotate(12deg);
+    content: ""; position: absolute; bottom: -13px; right: 34%; width: 14px; height: 16px; background: #fff;
+    border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); transform: skewX(-24deg) rotate(8deg);
   }
-  .bubble-preview .bubble.thought { border-radius: 42%; border-style: solid; background: #FFF8E9; }
-  .bubble-preview .bubble.thought::after { display: none; }
-  .bubble-preview .bp-note { position: absolute; right: 8px; bottom: 3px; font-size: 10px; color: var(--ink-soft); }
-  @media (prefers-reduced-motion: no-preference) {
-    .bubble-preview .bubble.pop { animation: bubble-pop .32s cubic-bezier(.2,.9,.25,1.25) both; }
+  .bubble-preview .bubble + .bubble::after { right: auto; left: 34%; transform: skewX(24deg) rotate(-8deg); border-right: 0; border-left: 2px solid var(--ink); }
+  .bubble-preview .bubble.thought { border-radius: 44%; background: #FFF8E9; }
+  .bubble-preview .bubble.thought::after,
+  .bubble-preview .bubble.thought::before {
+    content: ""; position: absolute; border: 2px solid var(--ink); border-radius: 50%; background: #FFF8E9; transform: none;
+  }
+  .bubble-preview .bubble.thought::after { width: 14px; height: 14px; bottom: -20px; left: 18%; right: auto; }
+  .bubble-preview .bubble.thought::before { width: 8px; height: 8px; bottom: -34px; left: 6%; }
+  .bubble-preview .bp-note {
+    position: absolute; right: 6px; bottom: 4px; z-index: 1; font-size: 10px; color: var(--ink-soft);
+    background: rgba(255,254,251,.85); padding: 0 5px;
   }
   @keyframes bubble-pop { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: scale(1); } }
 
@@ -662,7 +678,7 @@
     <label class="q">それはいつ頃ですか？<span class="hint">ざっくりでOK。例: 5年前、下の子が生まれた頃</span><input type="text" name="turning_when"></label>
     <label class="q">その瞬間を、場面で教えてください<span class="hint">どこにいて、誰と一緒で、何をしていましたか？ 目に入っていたものや、体の感じ（足が止まった・涙が出た など）も、書けるだけどうぞ。例: 金曜の夜、会社帰りの駅の改札を出たところで、足が止まって動けなくなった</span><textarea name="turning_scene"></textarea></label>
     <label class="q">そのとき、誰かに言われた一言と、あなたが返した一言は？<span class="hint">例: 夫に「しばらく休みなよ」と言われて、私は「でも…」としか言えなかった。正確でなくて大丈夫です。誰とも話していなければ、心の中でつぶやいた言葉でも</span><span class="why">→ 漫画のセリフのいちばん大事な材料になります</span><textarea class="short" name="turning_dialogue"></textarea></label>
-    <div class="bubble-preview" data-source="turning_dialogue" data-cap="あなたの言葉は、漫画ではこんな吹き出しになります（イメージ）" hidden></div>
+    <div class="bubble-preview" data-source="turning_dialogue" data-cap="あなたの言葉は、漫画ではこんな吹き出しになります（イメージ）。改行したところで、吹き出しの中も改行されます" hidden></div>
     <label class="q">そのあと、自分で決めて最初にしたことは？<span class="hint">例: 次の日、上司に休職の相談をした／資格の資料を取り寄せた</span><textarea class="short" name="turning_words"></textarea></label>
 
     <p class="q3-head">② 抜け出せた理由<span class="why">→ 漫画の中心になり、読者が持ち帰れるヒントになります</span></p>
@@ -1211,11 +1227,23 @@
 
   // ===== 3章: 書いた言葉が吹き出しになる =====
   function bubbleTexts(value) {
-    var v = (value || "").trim();
+    var v = (value || "").replace(/\r/g, "").trim();
     if (!v) return [];
     var quoted = v.match(/「[^」]+」/g);
-    var parts = quoted ? quoted.map(function (q) { return q.slice(1, -1); }) : [v.split(/\n/)[0]];
-    return parts.slice(0, 2).map(function (t) { t = t.trim(); return t.length > 30 ? t.slice(0, 29) + "…" : t; });
+    var parts = quoted ? quoted.map(function (q) { return q.slice(1, -1); }) : [v];
+    return parts.slice(0, 2).map(function (t) {
+      t = t.replace(/[ \t　]+\n/g, "\n").replace(/\n{2,}/g, "\n").trim();
+      // 自分で改行していなければ、「、」のあとで改行する（漫画の吹き出しの区切り方）
+      if (t.indexOf("\n") < 0) t = t.replace(/、(?=.)/g, "、\n");
+      // 長すぎると吹き出しが絵を覆うので、改行を除いて40字で切る
+      var count = 0, out = "";
+      for (var i = 0; i < t.length; i++) {
+        if (t[i] !== "\n") count++;
+        if (count > 40) { out += "…"; break; }
+        out += t[i];
+      }
+      return out;
+    });
   }
   var previews = Array.prototype.slice.call(document.querySelectorAll(".bubble-preview"));
   function renderPreview(box, animate) {
@@ -1229,7 +1257,7 @@
     box.setAttribute("data-key", key);
     var kind = box.getAttribute("data-kind") === "thought" ? " thought" : "";
     box.innerHTML = '<p class="bp-cap">' + box.getAttribute("data-cap") + "</p>"
-      + '<div class="bp-panel">' + texts.map(function (t) {
+      + '<div class="bp-panel"><span class="bp-art" aria-hidden="true"></span>' + texts.map(function (t) {
         var span = document.createElement("span"); span.textContent = t;
         return '<span class="bubble' + kind + (animate && isNew ? " pop" : "") + '">' + span.innerHTML + "</span>";
       }).join("") + '<span class="bp-note">実際の絵と文字は、制作時に整えます</span></div>';
