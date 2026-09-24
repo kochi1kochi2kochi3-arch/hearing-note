@@ -443,7 +443,7 @@
   .bubble-preview .bp-panel {
     position: relative; overflow: hidden; border: 2px solid var(--ink); background: #FFFEFB;
     /* 上は紙（吹き出しの場所）、下に挿絵。padding の % は幅基準なので、絵の高さと一緒に伸び縮みする */
-    padding: 14px 14px calc(var(--art-pad, 44%) - 34px);
+    padding: 14px 14px calc(var(--art-pad, 44%) + 4px);
     display: flex; flex-direction: row-reverse; justify-content: space-around; align-items: flex-start; gap: 10px;
     box-shadow: 4px 4px 0 rgba(38,52,59,.10);
   }
@@ -452,30 +452,47 @@
     background: var(--art) center / cover no-repeat;
     -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 34%); mask-image: linear-gradient(to bottom, transparent 0, #000 34%);
   }
-  .bubble-preview[data-source="turning_dialogue"] .bp-panel { --art: url("decor/bubble-talk-v1.jpg"); --art-ratio: 450 / 202; --art-pad: 44%; }
+  .bubble-preview[data-kind="dialogue"] .bp-panel { --art-pad: 43.4%; justify-content: space-between; padding-left: 8%; padding-right: 8%; }
   .bubble-preview[data-source="past_self_message"] .bp-panel { --art: url("decor/bubble-past-v1.jpg"); --art-ratio: 435 / 180; --art-pad: 41%; justify-content: flex-start; padding-right: 22px; }
+  /* ネーム（下書き）風の人物。性別が出ないよう、丸い頭と顔の向きの線だけで描く */
+  .bubble-preview .bp-figures { position: absolute; left: 0; right: 0; bottom: 0; z-index: 0; aspect-ratio: 300 / 130; }
+  .bubble-preview .bp-figures svg { display: block; width: 100%; height: 100%; }
+  .bubble-preview .bp-who {
+    position: absolute; bottom: 6px; z-index: 2; transform: translateX(-50%);
+    font-size: 11px; font-weight: 700; color: #fff; background: var(--ink); padding: 0 7px; border-radius: 3px; white-space: nowrap;
+    max-width: 44%; overflow: hidden; text-overflow: ellipsis;
+  }
+  .bubble-preview .bp-who.left { left: 29.3%; }
+  .bubble-preview .bp-who.right { left: 70.7%; }
   .bubble-preview .bubble {
     position: relative; z-index: 1; writing-mode: vertical-rl; text-orientation: mixed; white-space: pre-line;
-    max-height: 196px; padding: 16px 11px; background: #fff; border: 2px solid var(--ink);
-    border-radius: 50% / 34%; font-size: 14px; font-weight: 600; line-height: 1.55; letter-spacing: .04em; color: var(--ink);
-    box-shadow: 2px 2px 0 rgba(38,52,59,.08);
+    max-height: 184px; padding: 24px 17px; background: #fff; border: 2px solid var(--ink);
+    border-radius: 50%; font-size: 14px; font-weight: 600; line-height: 1.6; letter-spacing: .04em; color: var(--ink);
   }
-  /* しっぽ: 1つ目（右・相手の言葉）は右下の人物へ、2つ目（左・あなたの返事）は左下の人物へ */
+  .bubble-preview .bubble.is-empty { visibility: hidden; }
+  /* しっぽ: 枠線の三角（before）の上に白い三角（after）を重ね、吹き出しの枠線を切る */
+  .bubble-preview .bubble::before,
   .bubble-preview .bubble::after {
-    content: ""; position: absolute; bottom: -13px; right: 34%; width: 14px; height: 16px; background: #fff;
-    border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); transform: skewX(-24deg) rotate(8deg);
+    content: ""; position: absolute; left: 50%; clip-path: polygon(0 0, 100% 0, 42% 100%);
   }
-  .bubble-preview .bubble + .bubble::after { right: auto; left: 34%; transform: skewX(24deg) rotate(-8deg); border-right: 0; border-left: 2px solid var(--ink); }
-  .bubble-preview .bubble.thought { border-radius: 44%; background: #FFF8E9; }
-  .bubble-preview .bubble.thought::after,
-  .bubble-preview .bubble.thought::before {
-    content: ""; position: absolute; border: 2px solid var(--ink); border-radius: 50%; background: #FFF8E9; transform: none;
-  }
-  .bubble-preview .bubble.thought::after { width: 14px; height: 14px; bottom: -20px; left: 18%; right: auto; }
-  .bubble-preview .bubble.thought::before { width: 8px; height: 8px; bottom: -34px; left: 6%; }
-  .bubble-preview .bp-note {
-    position: absolute; right: 6px; bottom: 4px; z-index: 1; font-size: 10px; color: var(--ink-soft);
-    background: rgba(255,254,251,.85); padding: 0 5px;
+  .bubble-preview .bubble::before { width: 20px; height: 20px; bottom: -18px; margin-left: -8px; background: var(--ink); }
+  .bubble-preview .bubble::after { width: 13px; height: 15px; bottom: -13px; margin-left: -4px; background: #fff; }
+  .bubble-preview .bubble.to-left::before, .bubble-preview .bubble.to-left::after { clip-path: polygon(0 0, 100% 0, 58% 100%); }
+  .bubble-preview .bubble.to-left::before { margin-left: -12px; }
+  .bubble-preview .bubble.to-left::after { margin-left: -9px; }
+  /* 心の声: しっぽの代わりに小さな丸 */
+  .bubble-preview .bubble.thought { background: #FFF8E9; }
+  .bubble-preview .bubble.thought::before,
+  .bubble-preview .bubble.thought::after { clip-path: none; border: 2px solid var(--ink); border-radius: 50%; background: #FFF8E9; }
+  .bubble-preview .bubble.thought::before { width: 14px; height: 14px; bottom: -20px; left: 30%; margin-left: 0; }
+  .bubble-preview .bubble.thought::after { width: 8px; height: 8px; bottom: -34px; left: 18%; margin-left: 0; }
+  .bubble-preview .bp-note { margin: 5px 0 0; font-size: 11px; color: var(--ink-soft); text-align: right; }
+  .q-group { font-weight: 700; font-size: 15px; margin: 18px 0 6px; }
+  .q-group .hint { font-weight: 400; font-size: 12.5px; color: var(--ink-soft); display: block; }
+  .dialogue-pair { border-left: 3px solid var(--accent-soft); padding-left: 12px; }
+  .dialogue-pair label.q { font-size: 14px; margin-top: 10px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .bubble-preview .bubble.pop { animation: bubble-pop .32s cubic-bezier(.2,.9,.25,1.25) both; }
   }
   @keyframes bubble-pop { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: scale(1); } }
 
@@ -677,8 +694,13 @@
     <label class="q">今の仕事を始める「きっかけ」になった出来事は何ですか？（1つだけ）<span class="badge needed">制作に必要</span><textarea class="short" name="turning_what"></textarea></label>
     <label class="q">それはいつ頃ですか？<span class="hint">ざっくりでOK。例: 5年前、下の子が生まれた頃</span><input type="text" name="turning_when"></label>
     <label class="q">その瞬間を、場面で教えてください<span class="hint">どこにいて、誰と一緒で、何をしていましたか？ 目に入っていたものや、体の感じ（足が止まった・涙が出た など）も、書けるだけどうぞ。例: 金曜の夜、会社帰りの駅の改札を出たところで、足が止まって動けなくなった</span><textarea name="turning_scene"></textarea></label>
-    <label class="q">そのとき、誰かに言われた一言と、あなたが返した一言は？<span class="hint">例: 夫に「しばらく休みなよ」と言われて、私は「でも…」としか言えなかった。正確でなくて大丈夫です。誰とも話していなければ、心の中でつぶやいた言葉でも</span><span class="why">→ 漫画のセリフのいちばん大事な材料になります</span><textarea class="short" name="turning_dialogue"></textarea></label>
-    <div class="bubble-preview" data-source="turning_dialogue" data-cap="あなたの言葉は、漫画ではこんな吹き出しになります（イメージ）。改行したところで、吹き出しの中も改行されます" hidden></div>
+    <div class="q-group">そのとき、誰かに言われた一言と、あなたが返した一言は？<span class="hint">正確でなくて大丈夫です。誰とも話していなければ、「言った人」「その人の言葉」は空けたまま、心の中でつぶやいた言葉を「あなた」の欄にどうぞ</span><span class="why">→ 漫画のセリフのいちばん大事な材料になります</span></div>
+    <div class="dialogue-pair">
+      <label class="q">言った人<input type="text" name="turning_speaker" placeholder="例: 夫、妻、上司、母、友人"></label>
+      <label class="q">その人の言葉<textarea class="short" name="turning_other_line" placeholder="例: しばらく休みなよ"></textarea></label>
+      <label class="q">あなたが返した言葉（言えなかった言葉・心の中の声でも）<textarea class="short" name="turning_self_line" placeholder="例: でも、まだがんばれるから"></textarea></label>
+    </div>
+    <div class="bubble-preview" data-kind="dialogue" data-cap="あなたの言葉は、漫画ではこんな吹き出しになります（イメージ）。改行したところで、吹き出しの中も改行されます" hidden></div>
     <label class="q">そのあと、自分で決めて最初にしたことは？<span class="hint">例: 次の日、上司に休職の相談をした／資格の資料を取り寄せた</span><textarea class="short" name="turning_words"></textarea></label>
 
     <p class="q3-head">② 抜け出せた理由<span class="why">→ 漫画の中心になり、読者が持ち帰れるヒントになります</span></p>
@@ -1226,46 +1248,70 @@
   });
 
   // ===== 3章: 書いた言葉が吹き出しになる =====
-  function bubbleTexts(value) {
-    var v = (value || "").replace(/\r/g, "").trim();
-    if (!v) return [];
-    var quoted = v.match(/「[^」]+」/g);
-    var parts = quoted ? quoted.map(function (q) { return q.slice(1, -1); }) : [v];
-    return parts.slice(0, 2).map(function (t) {
-      t = t.replace(/[ \t　]+\n/g, "\n").replace(/\n{2,}/g, "\n").trim();
-      // 自分で改行していなければ、「、」のあとで改行する（漫画の吹き出しの区切り方）
-      if (t.indexOf("\n") < 0) t = t.replace(/、(?=.)/g, "、\n");
-      // 長すぎると吹き出しが絵を覆うので、改行を除いて40字で切る
-      var count = 0, out = "";
-      for (var i = 0; i < t.length; i++) {
-        if (t[i] !== "\n") count++;
-        if (count > 40) { out += "…"; break; }
-        out += t[i];
-      }
-      return out;
-    });
+  function bubbleText(value) {
+    var t = (value || "").replace(/\r/g, "").trim().replace(/^[「『"]+|[」』"]+$/g, "");
+    t = t.replace(/[ \t　]+\n/g, "\n").replace(/\n{2,}/g, "\n").trim();
+    if (!t) return "";
+    // 自分で改行していなければ、「、」のあとで改行する（漫画の吹き出しの区切り方）
+    if (t.indexOf("\n") < 0) t = t.replace(/、(?=.)/g, "、\n");
+    // 長すぎると吹き出しが人物を覆うので、改行を除いて36字で切る
+    var count = 0, out = "";
+    for (var i = 0; i < t.length; i++) {
+      if (t[i] !== "\n") count++;
+      if (count > 36) { out += "…"; break; }
+      out += t[i];
+    }
+    return out;
   }
+  function fieldValue(name) { var el = form.querySelector('[name="' + name + '"]'); return el ? el.value : ""; }
+  function esc(t) { var span = document.createElement("span"); span.textContent = t; return span.innerHTML; }
+  // ネーム風の二人（左=あなた・右を向く／右=相手・左を向く）
+  var FIGURES = '<svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMax meet" aria-hidden="true">'
+    + '<g fill="none" stroke="#6B7478" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'
+    + '<path d="M8 113 L292 113" stroke-opacity=".55"/><path d="M14 118 L286 118" stroke-opacity=".3"/>'
+    + '<path d="M50 113 C52 90 66 79 88 79 C110 79 124 90 127 113" fill="#F3EEE4"/>'
+    + '<circle cx="88" cy="52" r="22" fill="#FBF8F1"/><circle cx="88.8" cy="51.4" r="22.6" stroke-opacity=".3"/>'
+    + '<path d="M97 31 Q108 52 97 73" stroke-opacity=".6"/><path d="M67 50 Q88 58 110 50" stroke-opacity=".6"/>'
+    + '<path d="M173 113 C176 88 191 76 212 76 C234 76 249 88 252 113" fill="#F3EEE4"/>'
+    + '<circle cx="212" cy="48" r="23" fill="#FBF8F1"/><circle cx="211.2" cy="47.4" r="23.6" stroke-opacity=".3"/>'
+    + '<path d="M203 26 Q191 48 203 71" stroke-opacity=".6"/><path d="M189 46 Q212 54 235 46" stroke-opacity=".6"/>'
+    + '<path d="M186 97 Q170 101 158 94" /><path d="M158 94 L152 90 M158 94 L151 95" stroke-opacity=".7"/>'
+    + '</g></svg>';
   var previews = Array.prototype.slice.call(document.querySelectorAll(".bubble-preview"));
   function renderPreview(box, animate) {
-    var field = form.querySelector('[name="' + box.getAttribute("data-source") + '"]');
-    var texts = bubbleTexts(field && field.value);
-    box.hidden = texts.length === 0;
-    if (!texts.length) { box.innerHTML = ""; box.removeAttribute("data-key"); return; }
-    var key = texts.join("|");
+    var dialogue = box.getAttribute("data-kind") === "dialogue";
+    var items;
+    if (dialogue) {
+      // 並びは flex の row-reverse なので、1つ目が右（相手）、2つ目が左（あなた）
+      items = [
+        { text: bubbleText(fieldValue("turning_other_line")), cls: "" },
+        { text: bubbleText(fieldValue("turning_self_line")), cls: " to-left" }
+      ];
+    } else {
+      items = [{ text: bubbleText(fieldValue(box.getAttribute("data-source"))), cls: " thought" }];
+    }
+    var any = items.some(function (it) { return it.text; });
+    var speaker = (fieldValue("turning_speaker") || "").trim() || "相手";
+    box.hidden = !any;
+    if (!any) { box.innerHTML = ""; box.removeAttribute("data-key"); return; }
+    var key = items.map(function (it) { return it.text; }).join("|") + (dialogue ? "|" + speaker : "");
     if (box.getAttribute("data-key") === key) return;
-    var isNew = box.getAttribute("data-key") === null || box.querySelectorAll(".bubble").length !== texts.length;
+    var prevKey = box.getAttribute("data-key");
     box.setAttribute("data-key", key);
-    var kind = box.getAttribute("data-kind") === "thought" ? " thought" : "";
+    var art = dialogue
+      ? '<span class="bp-figures">' + FIGURES + '</span><span class="bp-who left">あなた</span><span class="bp-who right">' + esc(speaker) + "</span>"
+      : '<span class="bp-art" aria-hidden="true"></span>';
     box.innerHTML = '<p class="bp-cap">' + box.getAttribute("data-cap") + "</p>"
-      + '<div class="bp-panel"><span class="bp-art" aria-hidden="true"></span>' + texts.map(function (t) {
-        var span = document.createElement("span"); span.textContent = t;
-        return '<span class="bubble' + kind + (animate && isNew ? " pop" : "") + '">' + span.innerHTML + "</span>";
-      }).join("") + '<span class="bp-note">実際の絵と文字は、制作時に整えます</span></div>';
+      + '<div class="bp-panel">' + art + items.map(function (it) {
+        var pop = animate && prevKey === null ? " pop" : "";
+        return '<span class="bubble' + it.cls + (it.text ? pop : " is-empty") + '">' + esc(it.text || "　") + "</span>";
+      }).join("") + "</div>"
+      + '<p class="bp-note">※ 実際の絵と文字は、制作時に整えます</p>';
   }
   var previewTimer = null;
   form.addEventListener("input", function (event) {
     var name = event.target && event.target.name;
-    if (name !== "turning_dialogue" && name !== "past_self_message") return;
+    if (["turning_speaker", "turning_other_line", "turning_self_line", "past_self_message"].indexOf(name) < 0) return;
     clearTimeout(previewTimer);
     previewTimer = setTimeout(function () { previews.forEach(function (b) { renderPreview(b, true); }); }, 250);
   });
@@ -1301,7 +1347,7 @@
     ["成果・お客様の言葉の掲載許可", "quote_publish_permission"], ["Instagram", "insta"],
     ["Threads", "threads"], ["その他の発信ページ", "main_profile_url"],
     ["■ 3. あなたの物語", null],
-    ["①転機: きっかけになった出来事", "turning_what"], ["①転機: いつ頃", "turning_when"], ["①転機: その瞬間の場面", "turning_scene"], ["①転機: 言われた一言と返した一言", "turning_dialogue"], ["①転機: 最初の行動", "turning_words"],
+    ["①転機: きっかけになった出来事", "turning_what"], ["①転機: いつ頃", "turning_when"], ["①転機: その瞬間の場面", "turning_scene"], ["①転機: 言った人", "turning_speaker"], ["①転機: その人の言葉", "turning_other_line"], ["①転機: あなたが返した言葉", "turning_self_line"], ["①転機: 最初の行動", "turning_words"],
     ["②抜け出せた理由（気づいたこと・変えたこと）", "way_out"], ["②あの頃の自分への一言", "past_self_message"],
     ["③転機の前: 悩んでいたこと", "before_pain"], ["③転機の前: その頃の毎日", "before_days"], ["③転機の前: つらかった一言", "before_words"],
     ["ほかの方の言葉をセリフに使う許可", "others_words_permission"],
